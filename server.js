@@ -141,7 +141,11 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 UX/UI Designer Portfolio server running on http://localhost:${PORT}`);
-});
+// Start Server (local environment)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 UX/UI Designer Portfolio server running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
