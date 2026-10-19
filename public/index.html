@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สายธาร อาร์ตชมพู (Sai Tara) — Mid-Level UX/UI Designer & Researcher ✨</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="พอร์ตโฟลิโอส่วนตัวของ สายธาร อาร์ตชมพู Mid-Level UX/UI Designer & Researcher สไตล์น่ารัก เป็นมิตร พร้อมแนวคิด Fast-Track สำหรับ Recruiter และ Product Manager">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+
+  <!-- Google Fonts: Prompt, Kanit, Plus Jakarta Sans, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Blobs -->
+  <div class="bg-ambient">
+    <div class="ambient-blob-1"></div>
+    <div class="ambient-blob-2"></div>
+  </div>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#hero" class="brand-logo" aria-label="กลับสู่หน้าหลัก">
+        <span class="logo-badge">ST ✨</span>
+        <div class="brand-info">
+          <span class="brand-name dynamic-name">สายธาร อาร์ตชมพู</span>
+          <span class="brand-title">Mid-Level UX/UI Designer</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#resume" class="nav-link">Resume</a></li>
+          <li><a href="#work" class="nav-link">Work</a></li>
+          <li><a href="#process" class="nav-link">UX Process</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Live MongoDB Indicator -->
+        <div class="db-pill" id="dbStatusPill" title="เชื่อมต่อกับฐานข้อมูล MongoDB Atlas เรียบร้อยแล้ว">
+          <span class="status-dot"></span> MongoDB ออนไลน์ ✨
+        </div>
+
+        <!-- Quick Copy Email Button with 3D feel -->
+        <button class="btn btn-copy-email" onclick="copyEmailToClipboard(this)" title="คลิกเพื่อคัดลอกอีเมล">
+          📋 คัดลอกอีเมล
+        </button>
+
+        <!-- Fast Resume Preview Trigger -->
+        <button class="btn btn-3d-primary" onclick="openResumeModal()">
+          📄 ดู Resume
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION (Natia Inspired Style) -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="natia-hero-wrap">
+          
+          <!-- Left Column: Intro & Call-to-actions -->
+          <div class="natia-hero-content">
+            <span class="hero-expert-tag">The Best Designer Expert</span>
+            
+            <h1 class="hero-title-natia">
+              Hi, i'm <span class="highlight-name">Saitarn</span><br>
+              Professional<br>
+              UI/UX Designer
+            </h1>
+            
+            <p class="hero-desc-natia">
+              I have been working, i am proficient in ui design user experience, researcher
+            </p>
+            
+            <div class="hero-buttons-natia">
+              <a href="#contact" class="btn btn-natia-primary">Contact Me</a>
+              <a href="#resume" class="btn btn-natia-outline">Profile</a>
+            </div>
+          </div>
+
+          <!-- Right Column: Avatar Photo & Floating Badges -->
+          <div class="natia-hero-image-wrap">
+            <div class="hero-avatar-glow"></div>
+            
+            <div class="hero-avatar-card">
+              <img src="/assets/saitarn.jpg" alt="Saitarn - Professional UI/UX Designer" class="hero-avatar-img">
+            </div>
+
+            <!-- Floating Badge: Experience -->
+            <div class="floating-card-exp">
+              <div class="floating-exp-num">3.5+</div>
+              <div class="floating-exp-text">Years<br>Experience</div>
+            </div>
+
+            <!-- Floating Badge: Real Customer -->
+            <div class="floating-card-customers">
+              <div class="floating-customers-title">Real Customer</div>
+              <div class="avatar-stack">
+                <span class="avatar-item" style="display:inline-flex;align-items:center;justify-content:center;background:#3b82f6;color:#fff;font-size:0.72rem;font-weight:700;">UX</span>
+                <span class="avatar-item" style="display:inline-flex;align-items:center;justify-content:center;background:#ec4899;color:#fff;font-size:0.72rem;font-weight:700;">PM</span>
+                <span class="avatar-item" style="display:inline-flex;align-items:center;justify-content:center;background:#10b981;color:#fff;font-size:0.72rem;font-weight:700;">DEV</span>
+                <span class="avatar-item" style="display:inline-flex;align-items:center;justify-content:center;background:#f59e0b;color:#fff;font-size:0.72rem;font-weight:700;">CEO</span>
+                <span class="avatar-item" style="display:inline-flex;align-items:center;justify-content:center;background:#8b5cf6;color:#fff;font-size:0.68rem;font-weight:700;">4.9★</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK & CASE STUDIES (Matias Style Grid in Thai) -->
+    <section class="container" id="work" style="padding: 3rem 0 5rem;">
+      <div class="section-head">
+        <span class="section-tag">✦ ผลงานเด่นและ Case Studies</span>
+        <h2 class="section-title">Case Studies คัดสรรพิเศษ ✨</h2>
+        <p class="section-desc">
+          สแกน <strong>สรุปโปรเจกต์ด่วนใน 60 วินาที</strong> หรือคลิกดู <strong>UX Process</strong> ฉบับเจาะลึก ที่เปิดเผยทั้งวิธีคิด, User Flow, ดีไซน์จริง และผลลัพธ์ทางธุรกิจ (Business Impact)
+        </p>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-category="all">ทั้งหมด (All)</button>
+        <button class="filter-btn" data-category="mobile">📱 แอปพลิเคชันมือถือ</button>
+        <button class="filter-btn" data-category="saas">💻 B2B SaaS & Design System</button>
+        <button class="filter-btn" data-category="ecommerce">🛍️ อีคอมเมิร์ซ & การชำระเงิน</button>
+      </div>
+
+      <!-- Projects Grid (Loaded from MongoDB Atlas) -->
+      <div class="projects-grid" id="projectsContainer">
+        <!-- Rendered by app.js -->
+      </div>
+    </section>
+
+
+    <!-- UX PROCESS & METHODOLOGY (How I Think & Solve in Thai) -->
+    <section class="process-section" id="process">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-tag">✦ ขั้นตอนการทำงานที่รอบคอบ</span>
+          <h2 class="section-title">กระบวนการคิดและแก้ปัญหา (UX Process) 🧠</h2>
+          <p class="section-desc">
+            ฉันไม่ได้ออกแบบตามความรู้สึกหรือความชอบส่วนตัว แต่เริ่มต้นจากการรับฟังปัญหาของผู้ใช้จริง วางโครงสร้างข้อมูล และวัดผลลัพธ์อย่างมีหลักการ
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <!-- Step 1 -->
+          <div class="process-card">
+            <span class="process-step-num">ขั้นตอนที่ 01</span>
+            <h3 class="process-card-title">ค้นหา & เข้าอกเข้าใจ (Discover)</h3>
+            <p class="process-desc">
+              เจาะลึกปัญหาที่ซ่อนอยู่ด้วยการสัมภาษณ์ผู้ใช้งาน สังเกตพฤติกรรมจริง และวิเคราะห์ข้อมูลตัวเลขเชิงปริมาณ
+            </p>
+            <ul class="process-methods">
+              <li>การสัมภาษณ์ผู้ใช้ (User Interviews)</li>
+              <li>การลงพื้นที่สังเกตการณ์ (Shadowing)</li>
+              <li>ประเมินเกณฑ์การใช้งาน (Heuristic Audit)</li>
+              <li>วิเคราะห์จุดหลุดจากกรวยการใช้งาน (Drop-off Funnel)</li>
+            </ul>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-card">
+            <span class="process-step-num">ขั้นตอนที่ 02</span>
+            <h3 class="process-card-title">นิยามปัญหา & วางผัง (Define & IA)</h3>
+            <p class="process-desc">
+              สรุปปัญหาที่แท้จริงให้ชัดเจน สร้าง User Persona และจัดระเบียบโครงสร้างข้อมูลไม่ให้มีทางตัน
+            </p>
+            <ul class="process-methods">
+              <li>สร้างตัวแทนผู้ใช้ (Data-Backed Persona)</li>
+              <li>สถาปัตยกรรมข้อมูล (Information Architecture)</li>
+              <li>ผังเส้นทางการใช้งาน (User Flow Mapping)</li>
+              <li>ระบุเป้าหมายผู้ใช้ (Jobs-to-be-Done)</li>
+            </ul>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-card">
+            <span class="process-step-num">ขั้นตอนที่ 03</span>
+            <h3 class="process-card-title">ออกแบบ & วนซ้ำ (Design & Test)</h3>
+            <p class="process-desc">
+              ขึ้นโครงร่าง Wireframe ร่างแบบรวดเร็ว แปลงเป็น Prototype บน Figma และนำไปทดสอบกับผู้ใช้จริง
+            </p>
+            <ul class="process-methods">
+              <li>ร่างแบบเร็ว (Low-fi Wireframing)</li>
+              <li>โปรโตไทป์จำลอง (Figma Smart Animate)</li>
+              <li>การทดสอบความง่าย (Usability Testing via Maze)</li>
+              <li>ไมโครอินเทอร์แอคชัน 3D แสนน่ารัก</li>
+            </ul>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="process-card">
+            <span class="process-step-num">ขั้นตอนที่ 04</span>
+            <h3 class="process-card-title">ส่งมอบ & ขยายผล (Deliver & Scale)</h3>
+            <p class="process-desc">
+              ส่งมอบไฟล์ให้ทีม Engineer อย่างไร้รอยต่อด้วย Design Tokens ตรวจสอบ Accessibility และวัดผลหลังเปิดตัว
+            </p>
+            <ul class="process-methods">
+              <li>ระบบดีไซน์โทเค็น (Figma Design Tokens)</li>
+              <li>เอกสารคู่มือร่วมกับทีม Dev (Storybook)</li>
+              <li>ตรวจสอบมาตรฐานเข้าถึงง่าย (WCAG 2.1 AA)</li>
+              <li>วัดผล Conversion & ติดตามคะแนน CSAT</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NATIA RESUME SECTION (About Me, Experience, Education, Skills) -->
+    <section class="resume-section-natia" id="resume">
+      <div class="container">
+        
+        <div class="resume-header-center">
+          <span class="resume-badge-oval">RESUME</span>
+          <h2 class="resume-title-natia">My Resume</h2>
+        </div>
+
+        <!-- Capsule Tab Buttons -->
+        <div class="resume-tab-capsule">
+          <button type="button" class="resume-tab-btn active" data-tab="about" onclick="switchResumeTab('about')">
+            <span>👤</span> About Me
+          </button>
+          <button type="button" class="resume-tab-btn" data-tab="experience" onclick="switchResumeTab('experience')">
+            <span>💼</span> Experience
+          </button>
+          <button type="button" class="resume-tab-btn" data-tab="education" onclick="switchResumeTab('education')">
+            <span>🎓</span> Education
+          </button>
+          <button type="button" class="resume-tab-btn" data-tab="skills" onclick="switchResumeTab('skills')">
+            <span>🛠️</span> Skills
+          </button>
+        </div>
+
+        <!-- Tab 1: About Me (Image 3) -->
+        <div class="resume-tab-pane active" id="tab-about">
+          <div class="resume-about-grid">
+            <div class="about-info-col">
+              <h3 class="about-role-title">UI/UX Designer & Researcher</h3>
+              <p class="about-bio-text">
+                Mid-Level UX/UI Designer & Researcher with over 3.5 years of hands-on experience crafting high-impact digital products. Dedicated to solving complex user problems through deep qualitative research, rapid interactive prototyping, scalable design systems, and data-driven iterations that deliver measurable business impact.
+              </p>
+
+              <div class="about-info-table">
+                <div class="info-item">
+                  <span class="info-label">Name :</span>
+                  <span class="info-val">Saitarn Artchompoo</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Nationality :</span>
+                  <span class="info-val">Thai</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Phone :</span>
+                  <span class="info-val">+66 82 345 6789</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Email :</span>
+                  <span class="info-val">saitara.ux@gmail.com</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Experience :</span>
+                  <span class="info-val">3.5+ Years</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Freelance :</span>
+                  <span class="info-val" style="color: #4ade80; font-weight: 600;">● Available</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Language :</span>
+                  <span class="info-val">Thai, English</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Skype :</span>
+                  <span class="info-val">saitarn.designer</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                <a href="#contact" class="btn btn-natia-primary">Hire Me</a>
+                <button class="btn btn-natia-outline" onclick="openResumeModal()">Download CV</button>
+              </div>
+            </div>
+
+            <div class="about-photo-col">
+              <div class="about-photo-card">
+                <img src="/assets/saitarn.jpg" alt="Saitarn Artchompoo">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Experience (Image 4) -->
+        <div class="resume-tab-pane" id="tab-experience">
+          <div class="resume-cards-grid">
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2023 - Present</div>
+              <h3 class="card-item-title">Mid-Level UX/UI Designer</h3>
+              <div class="card-item-subtitle">OmniTech Solutions (Bangkok, Hybrid)</div>
+              <p class="card-item-desc">
+                Led end-to-end product design for Mobile Wallet & Enterprise SaaS platforms. Built and governed multi-brand Figma Design Tokens for a team of 8 engineers. Conducted 40+ moderated usability tests with 3 PMs, reducing KYC onboarding drop-off by 42%.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2021 - 2023</div>
+              <h3 class="card-item-title">Associate UX/UI Designer</h3>
+              <div class="card-item-subtitle">CreativePulse Digital Studio (Bangkok)</div>
+              <p class="card-item-desc">
+                Designed cross-platform web and mobile solutions for 12+ enterprise clients. Conducted qualitative discovery interviews, heuristic evaluations, and interactive Framer prototypes, driving a +28% increase in checkout conversions.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2020 - 2021</div>
+              <h3 class="card-item-title">Junior UX Researcher & UI Designer</h3>
+              <div class="card-item-subtitle">TechNova Innovation Lab</div>
+              <p class="card-item-desc">
+                Conducted user shadowing sessions and card sorting workshops. Built wireframes and accessible UI components meeting WCAG 2.1 AA standards. Prepared comprehensive developer handoff documentation.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2019 - 2020</div>
+              <h3 class="card-item-title">Design Intern & Visual Specialist</h3>
+              <div class="card-item-subtitle">Studio Pixelcraft</div>
+              <p class="card-item-desc">
+                Created responsive landing pages, branding guidelines, and interactive micro-animations. Collaborated closely with frontend engineers to guarantee pixel-perfect UI execution.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Education (Image 5) -->
+        <div class="resume-tab-pane" id="tab-education">
+          <div class="resume-cards-grid">
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2023 - 2024</div>
+              <h3 class="card-item-title">Google UX Design Professional Certificate</h3>
+              <div class="card-item-subtitle">Google / Coursera</div>
+              <p class="card-item-desc">
+                Rigorous 7-course certification covering foundational UX research, wireframing, high-fidelity Figma prototyping, inclusive design practices, and end-to-end usability testing.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2022 - 2023</div>
+              <h3 class="card-item-title">Advanced Design Systems Specialization</h3>
+              <div class="card-item-subtitle">Interaction Design Foundation (IxDF)</div>
+              <p class="card-item-desc">
+                Specialized training in Figma Variables, design tokens architecture, component governance, multi-brand theming, atomic design methodology, and developer handoff alignment.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2017 - 2021</div>
+              <h3 class="card-item-title">B.Sc. in Computer Science & Digital Media</h3>
+              <div class="card-item-subtitle">Thammasat University (First Class Honors)</div>
+              <p class="card-item-desc">
+                Graduated with First Class Honors. Core curriculum focused on Human-Computer Interaction (HCI), frontend engineering, database architectures, and digital product lifecycle management.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📅 2021</div>
+              <h3 class="card-item-title">Human-Centered Design (HCD) Certification</h3>
+              <div class="card-item-subtitle">IDEO U</div>
+              <p class="card-item-desc">
+                Field immersion training in empathy mapping, problem framing, iterative prototyping, qualitative insight synthesis, and translating customer pain points into business opportunities.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Skills -->
+        <div class="resume-tab-pane" id="tab-skills">
+          <div class="resume-cards-grid">
+            <div class="resume-card-item">
+              <div class="card-date-badge">🧠 Strategy & Research</div>
+              <h3 class="card-item-title">UX Strategy & Discovery</h3>
+              <div class="card-item-subtitle">Qualitative & Quantitative Insights</div>
+              <p class="card-item-desc">
+                User Interviews, Usability Testing (Maze), Card Sorting, Information Architecture, Heuristic Evaluation, User Journey Maps, A/B Testing, Jobs-to-be-Done (JTBD), Drop-off Funnel Analysis.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">🎨 Craftsmanship & System</div>
+              <h3 class="card-item-title">UI Craft & Design Systems</h3>
+              <div class="card-item-subtitle">Pixel-Perfect & Scalable Architecture</div>
+              <p class="card-item-desc">
+                Figma Variables & Tokens, Responsive Auto-Layout, Component Libraries, Micro-Interactions, WCAG 2.1 AA Accessibility, Multi-Theme Design (Dark/Light), Developer Handoff Specs.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">🛠️ Prototyping & Tools</div>
+              <h3 class="card-item-title">Design & Dev Stack</h3>
+              <div class="card-item-subtitle">Industry-Standard Workflow</div>
+              <p class="card-item-desc">
+                Figma (Advanced), FigJam, Framer, Webflow, ProtoPie, HTML5/CSS3, Tailwind, Zeroheight, Storybook, Jira & 2-Week Agile Sprints.
+              </p>
+            </div>
+
+            <div class="resume-card-item">
+              <div class="card-date-badge">📈 Product & Impact</div>
+              <h3 class="card-item-title">Business & Conversion Impact</h3>
+              <div class="card-item-subtitle">Driving Real Results</div>
+              <p class="card-item-desc">
+                Google Analytics 4, Hotjar Heatmaps, Conversion Rate Optimization (CRO), Fast-Track Recruiter Architecture, Cross-Functional Leadership, Design QA.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS / PEER SOCIAL PROOF -->
+    <section class="container" style="padding: 4rem 0 5rem;">
+      <div class="section-head">
+        <span class="section-tag">✦ เสียงตอบรับจากเพื่อนร่วมทีม</span>
+        <h2 class="section-title">ความประทับใจจาก Product Team 💖</h2>
+      </div>
+
+      <div class="bento-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="bento-card">
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.25rem;">
+            "สายธารเป็นดีไซเนอร์ที่คุยเรื่อง Business Goal ได้คล่องพอๆ กับการจัด Auto-layout ใน Figma งาน KYC ที่เธอทำช่วยลดคนหลุดโฟลว์ไปได้ครึ่งต่อครึ่งตั้งแต่วันแรกที่ปล่อยแอปเลยครับ"
+          </p>
+          <div>
+            <strong style="color: var(--text-main); font-size: 0.95rem; display: block;">คุณกร ส.</strong>
+            <span style="font-size: 0.82rem; color: var(--accent-mint);">Senior Product Manager, FinTech</span>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.25rem;">
+            "ทำงานกับสายธารแล้วทีมโปรแกรมเมอร์แฮปปี้มาก ไฟล์ดีไซน์มีระบุ Edge cases ครบ สเปกปุ่มชัดเจน ทำให้เขียนโค้ดต่อได้เร็วขึ้น 2 เท่า ไม่ต้องคอยทักถามซ้ำซาก"
+          </p>
+          <div>
+            <strong style="color: var(--text-main); font-size: 0.95rem; display: block;">คุณธนวัฒน์ พ.</strong>
+            <span style="font-size: 0.82rem; color: var(--accent-sky);">Lead Front-End Engineer</span>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.25rem;">
+            "แม้ตำแหน่งจะเป็น Mid-Level แต่วิธีการพรีเซนต์และกระบวนการคิดมีวุฒิภาวะระดับ Senior สไลด์สรุปผลวิจัยผู้ใช้ของเธอมีข้อมูลที่หนักแน่น ชัดเจน และน่ารักน่าฟังเสมอ"
+          </p>
+          <div>
+            <strong style="color: var(--text-main); font-size: 0.95rem; display: block;">คุณอนัญญา ว.</strong>
+            <span style="font-size: 0.82rem; color: var(--accent-lavender);">Head of Product Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION (บันทึกลง MongoDB Atlas จริง) -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="contact-layout">
+          
+          <!-- Contact Left Panel -->
+          <div class="contact-info-panel">
+            <span class="section-tag">✦ มาร่วมงานกันนะคะ</span>
+            <h2 class="section-title" style="margin-top: 8px; margin-bottom: 1rem;">
+              พร้อมคุยเรื่องโอกาสและโปรเจกต์ใหม่เสมอค่ะ 💖
+            </h2>
+            <p class="section-desc" style="margin-bottom: 1.5rem;">
+              หากคุณเป็น Hiring Manager ที่มองหา Mid-Level Designer ไฟแรง, เป็น Recruiter ที่อยากนัดพูดคุย หรือทีมที่อยากปรึกษาเรื่อง UX Audit สามารถทักทายเข้ามาได้เลยนะคะ
+            </p>
+
+            <div class="contact-quick-box">
+              <span style="font-size: 0.84rem; font-weight: 700; color: var(--text-dim); display: block; margin-bottom: 8px;">
+                อีเมลติดต่อโดยตรง (คลิกเพื่อคัดลอก)
+              </span>
+              <button class="copy-email-hero-btn" onclick="copyEmailToClipboard(this)">
+                <span class="dynamic-email">saitara.ux@gmail.com</span>
+                <span>📋 คัดลอก</span>
+              </button>
+
+              <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 14px;">
+                📍 อาศัยอยู่ในกรุงเทพฯ • 🌐 พร้อมทำงานทางไกล (Remote / Hybrid) ทั่วโลก
+              </div>
+
+              <!-- Quick View Recruiter Messages in MongoDB -->
+              <button class="btn btn-3d-secondary" onclick="openMessagesModal()" style="width: 100%; font-size: 0.88rem;">
+                📥 ดูข้อความที่ส่งเข้ามา (ดึงสดจาก MongoDB Atlas)
+              </button>
+            </div>
+
+            <div class="social-links">
+              <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">in</a>
+              <a href="https://dribbble.com" target="_blank" rel="noopener" class="social-icon-btn" title="Dribbble">🏀</a>
+              <a href="https://behance.net" target="_blank" rel="noopener" class="social-icon-btn" title="Behance">Bē</a>
+              <a href="https://github.com" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub">🐙</a>
+            </div>
+          </div>
+
+          <!-- Contact Right Form (Connected to MongoDB) -->
+          <div class="contact-form-card">
+            <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;">
+              ส่งข้อความหาฉัน ✨
+            </h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              ข้อความของคุณจะถูกจัดเก็บเข้าฐานข้อมูล MongoDB Atlas และแจ้งเตือนถึงฉันโดยตรงค่ะ
+            </p>
+
+            <form id="contactForm">
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label class="form-label" for="contactName">ชื่อของคุณ *</label>
+                  <input type="text" id="contactName" class="form-control" placeholder="เช่น คุณวิภาวี / John" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contactEmail">อีเมลสำหรับติดต่อกลับ *</label>
+                  <input type="email" id="contactEmail" class="form-control" placeholder="เช่น wipavee@company.com" required>
+                </div>
+              </div>
+
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label class="form-label" for="contactCompany">บริษัท / องค์กรของคุณ</label>
+                  <input type="text" id="contactCompany" class="form-control" placeholder="เช่น TechCorp, Startup Studio">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contactRole">บทบาทของคุณ</label>
+                  <select id="contactRole" class="form-control">
+                    <option value="Recruiter">Recruiter / Talent Acquisition</option>
+                    <option value="Hiring Manager">Hiring Manager / Head of Design</option>
+                    <option value="Product Manager">Product Manager / Founder</option>
+                    <option value="Other">ผู้สนใจร่วมงานทั่วไป</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactSubject">หัวข้อเรื่อง</label>
+                <input type="text" id="contactSubject" class="form-control" placeholder="เช่น ชวนคุยตำแหน่ง Mid-Level UX/UI Designer">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="contactMessage">ข้อความของคุณ *</label>
+                <textarea id="contactMessage" class="form-control" placeholder="พิมพ์ข้อความเกี่ยวกับตำแหน่งงาน หรือโปรเจกต์ที่สนใจได้เลยนะคะ..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-3d-primary" style="width: 100%; padding: 14px; font-size: 1rem;">
+                🚀 ส่งข้อความบันทึกลง MongoDB Atlas
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        © 2026 สายธาร อาร์ตชมพู (Sai Tara) • ออกแบบด้วยใจเพื่อผู้ใช้และทีมงานทุกคน 💖
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <span style="font-size: 0.84rem; color: var(--text-dim);">มาตรฐาน WCAG 2.1 AA</span>
+        <span>•</span>
+        <a href="#hero" style="color: var(--accent-mint); font-weight: 600;">กลับขึ้นด้านบน ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL: Case Study In-Depth Viewer -->
+  <div class="modal-overlay" id="caseStudyModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="caseStudyModalTitle" style="font-size: 1.25rem; font-weight: 700; color: var(--text-main);">
+          เคสสตัดดี้ฉบับเต็ม
+        </h3>
+        <button class="modal-close-btn" onclick="closeAllModals()" aria-label="ปิดหน้าต่าง">✕</button>
+      </div>
+      <div class="modal-content-body" id="caseStudyModalBody">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Fast Resume Preview -->
+  <div class="modal-overlay" id="resumeModal">
+    <div class="modal-container" style="max-width: 780px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);">
+          📄 เรซูเม่ฉบับย่อ — สายธาร อาร์ตชมพู
+        </h3>
+        <button class="modal-close-btn" onclick="closeAllModals()" aria-label="ปิดหน้าต่าง">✕</button>
+      </div>
+      <div class="modal-content-body" style="background: #0d121f;">
+        
+        <div style="border-bottom: 2px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+          <h2 style="font-size: 1.6rem; font-weight: 800; color: #fff;">สายธาร อาร์ตชมพู (Sai Tara)</h2>
+          <div style="font-size: 1rem; color: #4ade80; font-weight: 600; margin-top: 4px;">
+            Mid-Level UX/UI Designer & Researcher
+          </div>
+          <div style="display: flex; gap: 14px; font-size: 0.86rem; color: var(--text-muted); margin-top: 8px; flex-wrap: wrap;">
+            <span>📍 กรุงเทพฯ, ประเทศไทย (พร้อมทำงาน Remote / Hybrid)</span>
+            <span>✉️ saitara.ux@gmail.com</span>
+            <span>📞 +66 82 345 6789</span>
+            <span>🌐 linkedin.com/in/saitara-ux</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <h4 style="font-size: 0.95rem; color: #4ade80; font-weight: 700; margin-bottom: 6px;">
+            บทสรุปทางวิชาชีพ (Professional Summary)
+          </h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            ดีไซเนอร์ระดับ Mid-Level ประสบการณ์ 3.5+ ปี เชี่ยวชาญการออกแบบโปรดักต์ครบวงจรตั้งแต่การวิจัยสัมภาษณ์ผู้ใช้ การวางสถาปัตยกรรมข้อมูล จนถึงการสร้างระบบ Figma Design System ที่ส่งต่อทีม Developer ได้อย่างไร้รอยต่อ ช่วยเพิ่มอัตรา Conversion ให้กับผลิตภัณฑ์เฉลี่ย +38% และลดปัญหาผู้ใช้เลิกใช้งานกลางคันได้ถึง 45%
+          </p>
+        </div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <h4 style="font-size: 0.95rem; color: #4ade80; font-weight: 700; margin-bottom: 8px;">
+            ประวัติการทำงาน (Work Experience)
+          </h4>
+          
+          <div style="margin-bottom: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.92rem; font-weight: 700;">
+              <span>Mid-Level UX/UI Designer • OmniTech Solutions</span>
+              <span style="color: var(--accent-mint);">2566 - ปัจจุบัน</span>
+            </div>
+            <ul style="padding-left: 18px; font-size: 0.86rem; color: var(--text-muted); margin-top: 4px; line-height: 1.55;">
+              <li>นำการออกแบบระบบ KYC Mobile Wallet ส่งผลให้อัตราเปิดบัญชีสำเร็จพุ่งจาก 54% สู่ 92.4%</li>
+              <li>สร้าง Tokenized Design System ใน Figma ครอบคลุม 14 โมดูลแดชบอร์ด ช่วยให้ทีม Dev ส่งงานไวขึ้น 2.4 เท่า</li>
+              <li>ทำงานร่วมกับ 3 PMs และ 8 วิศวกรซอฟต์แวร์ในรูปแบบ 2-Week Agile Sprints</li>
+            </ul>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.92rem; font-weight: 700;">
+              <span>Associate UX/UI Designer • CreativePulse Studio</span>
+              <span style="color: var(--accent-mint);">2564 - 2566</span>
+            </div>
+            <ul style="padding-left: 18px; font-size: 0.86rem; color: var(--text-muted); margin-top: 4px; line-height: 1.55;">
+              <li>สัมภาษณ์ผู้ใช้งานกว่า 35 ครั้ง และประเมิน Heuristic Evaluation สำหรับแอปอีคอมเมิร์ซชั้นนำ</li>
+              <li>ออกแบบหน้าชำระเงิน One-Page ลดเวลาสั่งซื้อเหลือ 45 วินาที และดันยอดขายเพิ่มขึ้น 28%</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <h4 style="font-size: 0.95rem; color: #4ade80; font-weight: 700; margin-bottom: 6px;">
+            ทักษะสำคัญและเครื่องมือ (Skills & Tools)
+          </h4>
+          <p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.6;">
+            <strong>UX:</strong> User Research, Heuristic Audits, Journey Mapping, Information Architecture, Usability Testing (Maze), Personas.<br>
+            <strong>UI:</strong> Design Systems, Component Tokens, Interactive Prototyping, Auto-layout, WCAG 2.1 AA Accessibility.<br>
+            <strong>Tools:</strong> Figma, FigJam, Framer, Webflow, Miro, ProtoPie, Jira, HTML/CSS.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-3d-primary" onclick="window.print()">
+            🖨 พิมพ์ / บันทึกเป็น PDF
+          </button>
+          <button class="btn btn-3d-secondary" onclick="copyEmailToClipboard(this)">
+            📋 คัดลอกอีเมลติดต่อ
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Recruiter Messages Viewer (MongoDB Inquiries) -->
+  <div class="modal-overlay" id="messagesModal">
+    <div class="modal-container" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main);">
+          📥 ข้อความที่ส่งเข้ามา (บันทึกใน MongoDB Atlas สดๆ)
+        </h3>
+        <button class="modal-close-btn" onclick="closeAllModals()" aria-label="ปิดหน้าต่าง">✕</button>
+      </div>
+      <div class="modal-content-body">
+        <div id="messagesContainer">
+          <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
