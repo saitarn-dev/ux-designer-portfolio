@@ -18,36 +18,53 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database Connection state tracking
-let isDbConnected = false;
+// Database Connection caching for Serverless (Vercel) & Local
+let cachedDbPromise = null;
 
-mongoose.connect(MONGODB_URI, {
-  serverSelectionTimeoutMS: 5000
-}).then(() => {
-  isDbConnected = true;
+async function connectToDatabase() {
+  if (mongoose.connection.readyState >= 1) {
+    return mongoose.connection;
+  }
+  if (!cachedDbPromise) {
+    cachedDbPromise = mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 8000
+    });
+  }
+  return cachedDbPromise;
+}
+
+// Immediate connection attempt for local environment
+connectToDatabase().then(() => {
   console.log('✅ Connected to MongoDB Atlas successfully.');
 }).catch((err) => {
   console.error('❌ MongoDB Atlas connection error:', err.message);
-  isDbConnected = false;
 });
 
-mongoose.connection.on('disconnected', () => {
-  isDbConnected = false;
-  console.log('⚠️ MongoDB Atlas disconnected.');
-});
-
-mongoose.connection.on('reconnected', () => {
-  isDbConnected = true;
-  console.log('🔄 MongoDB Atlas reconnected.');
+// Auto-connect middleware for API routes on Vercel
+app.use(async (req, res, next) => {
+  if (req.path.startsWith('/api') && req.path !== '/api/health') {
+    try {
+      await connectToDatabase();
+    } catch (err) {
+      console.error('Database connection middleware error:', err);
+    }
+  }
+  next();
 });
 
 // API Routes
 
 // Health Check
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  try {
+    await connectToDatabase();
+  } catch (err) {
+    // handled below via readyState
+  }
+  const isConnected = mongoose.connection.readyState === 1;
   res.json({
     status: 'ok',
-    database: isDbConnected ? 'connected' : 'disconnected',
+    database: isConnected ? 'connected' : 'disconnected',
     timestamp: new Date().toISOString()
   });
 });
