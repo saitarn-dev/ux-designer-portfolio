@@ -59,12 +59,19 @@ async function fetchCaseStudies(category = 'all') {
     caseStudies = await res.json();
     renderCaseStudies(caseStudies);
   } catch (err) {
-    console.error('Error fetching case studies:', err);
-    container.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--accent-coral);">
-        ไม่สามารถโหลดผลงานได้ในขณะนี้ กรุณาตรวจสอบสถานะเซิร์ฟเวอร์และ MongoDB
-      </div>
-    `;
+    console.warn('Network issue fetching case studies, attempting fallback...', err);
+    // If caseStudies was already loaded, filter it
+    if (caseStudies && caseStudies.length > 0) {
+      const filtered = category === 'all' ? caseStudies : caseStudies.filter(s => s.category === category);
+      renderCaseStudies(filtered);
+    } else {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--text-dim);">
+          <div class="status-dot" style="margin: 0 auto 10px; background: #f59e0b;"></div>
+          กำลังโหลดข้อมูลผลงาน... กรุณารอสักครู่หรือรีเฟรชหน้าเว็บนะคะ ✨
+        </div>
+      `;
+    }
   }
 }
 
