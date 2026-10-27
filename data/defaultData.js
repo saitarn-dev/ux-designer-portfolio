@@ -345,54 +345,65 @@ const caseStudiesData = [
 
 const profileData = {
   name: 'สายธาร อาจชมภู (Sai Tara)',
-  roleTitle: 'Mid-Level UX/UI Designer & Researcher',
-  tagline: 'ออกแบบดิจิทัลโปรดักต์ที่ใช้งานง่าย เข้าถึงใจผู้ใช้ ขับเคลื่อนผลลัพธ์ทางธุรกิจ และเป็นมิตรกับทีมเสมอ ✨',
-  location: 'กรุงเทพฯ, ประเทศไทย (พร้อมทำงานแบบ Remote / Hybrid ได้ทั่วโลก)',
-  availability: '🟢 พร้อมรับงานตำแหน่ง Full-time และสัญญาจ้างคุณภาพสูง',
+  roleTitle: 'UI & UX Designer & Developer',
+  tagline: 'ออกแบบดิจิทัลโปรดักต์ที่ใช้งานง่าย เข้าถึงใจผู้ใช้ ขับเคลื่อนผลลัพธ์ทางธุรกิจ และร่วมพัฒนาระบบจริง ✨',
+  location: 'กรุงเทพฯ, ประเทศไทย (พร้อมทำงานแบบ On-site / Remote / Hybrid)',
+  availability: '🟢 พร้อมเปิดรับโอกาสใหม่และร่วมงานโปรเจกต์คุณภาพสูง',
   email: 'saitara.ux@gmail.com',
   phone: '+66 82 345 6789',
   resumeUrl: '/assets/resume-preview.html',
   stats: [
-    { label: 'ประสบการณ์ทำงาน', value: '3.5+ ปี' },
-    { label: 'ผลงานที่ปล่อยสู่ตลาด', value: '18+ ชิ้น' },
-    { label: 'เวลาสแกนเฉลี่ยของ Recruiter', value: '< 2 นาที' },
-    { label: 'คลิกถึงข้อมูลสำคัญ', value: '≤ 3 คลิก' }
+    { label: 'ประสบการณ์ทำงาน', value: '5+ ปี' },
+    { label: 'สถานที่ทำงานปัจจุบัน', value: 'Security Pitch' },
+    { label: 'เครื่องมือออกแบบหลัก', value: 'Figma' },
+    { label: 'สถาบันการศึกษา', value: 'ปัญญาภิวัฒน์ (PIM)' }
   ],
   designPhilosophy: {
-    title: 'แนวคิด "Fast-Track" เพื่อผู้ใช้งานและผู้ตรวจพอร์ต',
-    description: 'เพราะฉันรู้ว่า Recruiter และ Product Manager มีเวลาเฉลี่ยเพียง 2-3 นาที เว็บไซต์นี้จึงถูกสร้างขึ้นเพื่อให้คุณเข้าถึงกระบวนการคิด การทดสอบผู้ใช้ และความประณีตในงาน UI ได้อย่างรวดเร็ว โดยไม่เสียเวลาค้นหา'
+    title: 'แนวคิดการออกแบบที่ขับเคลื่อนธุรกิจและเข้าใจผู้ใช้งานจริง',
+    description: 'เพราะประสบการณ์ผู้ใช้ที่ดีต้องมาพร้อมกับความคุ้มค่าทางธุรกิจ ฉันผสานทักษะด้านการวิจัย การออกแบบ UI ที่ประณีต และความเข้าใจในเชิงเทคนิคการพัฒนาระบบ เพื่อส่งมอบโปรดักต์ที่ตอบโจทย์ทุกคน'
   },
   experiences: [
     {
-      period: '2566 - ปัจจุบัน (Mid-Level)',
-      role: 'Mid-Level UX/UI Designer',
-      company: 'OmniTech Solutions (FinTech & B2B SaaS)',
-      description: 'ดูแลการออกแบบผลิตภัณฑ์แบบ End-to-End ตั้งแต่ค้นคว้าสัมภาษณ์ผู้ใช้ สร้างระบบ Figma Design System จนถึงส่งมอบงานให้ Developer ทำงานร่วมกับ 3 Product Managers และ 8 Software Engineers ช่วยลดอัตราการหลุดจากโฟลว์ลงได้ 42%',
-      skills: ['Figma (Core)', 'Adobe Illustrator (พื้นฐาน)', 'Adobe Premiere Pro (พื้นฐาน)', 'WCAG 2.1 AA', 'Design Sprint']
+      period: '20 ม.ค. 2021 - ปัจจุบัน (5 ปี 9 เดือน)',
+      role: 'UI & UX Designer & Developer',
+      company: 'Security Pitch (งานประจำปัจจุบัน)',
+      description: 'รับผิดชอบการออกแบบและพัฒนาส่วนต่อประสาน (UI) และประสบการณ์ผู้ใช้ (UX) สำหรับแพลตฟอร์มเทคโนโลยีและความปลอดภัย วางรากฐาน Design System และร่วมพัฒนา Front-End',
+      skills: ['Figma (Core)', 'Adobe Illustrator (พื้นฐาน)', 'Adobe Premiere Pro (พื้นฐาน)', 'UI Development', 'Design System', 'Usability Testing']
     },
     {
-      period: '2564 - 2566 (Junior to Mid)',
-      role: 'Associate UX/UI Designer',
-      company: 'CreativePulse Digital Studio',
-      description: 'สัมภาษณ์ผู้ใช้งานกว่า 35 ครั้ง จัดทำ Empathy Map และส่งมอบงาน UI คุณภาพสูงสำหรับแอปอีคอมเมิร์ซและระบบการแพทย์ชั้นนำในเอเชียตะวันออกเฉียงใต้',
-      skills: ['Figma Prototyping', 'Adobe Illustrator (Vector)', 'Information Architecture', 'User Research', 'A/B Testing']
+      period: '19 พ.ย. 2018 - 2 ก.พ. 2019 (2 เดือน)',
+      role: 'นักศึกษาฝึกงาน - Content Online',
+      company: 'กองปราบปราม',
+      description: 'ฝึกปฏิบัติงานด้านการจัดทำคอนเทนต์ออนไลน์ ผลิตสื่อประชาสัมพันธ์ และสร้างสรรค์ภาพกราฟิกเพื่อสื่อสารข้อมูลแก่ประชาชน',
+      skills: ['Content Online', 'Graphic Design', 'Social Media']
+    },
+    {
+      period: '20 พ.ค. 2018 - 3 ส.ค. 2018 (2 เดือน)',
+      role: 'นักศึกษาฝึกงาน',
+      company: 'มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)',
+      description: 'ฝึกประสบการณ์การดำเนินงานโครงการด้านการศึกษา ประสานงานสื่อสาร และร่วมจัดกิจกรรมพัฒนาคุณภาพการศึกษา',
+      skills: ['Project Coordination', 'Communication', 'Documentation']
+    },
+    {
+      period: '19 พ.ย. 2017 - 1 ก.พ. 2018 (2 เดือน)',
+      role: 'นักศึกษาฝึกงาน',
+      company: 'ThaiNews – ไทยนิวส์',
+      description: 'ฝึกปฏิบัติการสร้างสรรค์เนื้อหาข่าวออนไลน์ การออกแบบภาพประกอบกราฟิก และการจัดการสื่อดิจิทัล',
+      skills: ['Online News', 'Digital Media', 'Graphic Assets']
+    },
+    {
+      period: '31 พ.ค. 2017 - 20 ส.ค. 2017 (2 เดือน)',
+      role: 'พนักงานแคชเชียร์และบริการ (Cashier)',
+      company: '7-ELEVEN',
+      description: 'ฝึกทักษะการทำงานบริการหน้าร้านจริง การสื่อสาร และการจัดการระบบงานภายใต้การเรียนรู้แบบ Work-based Learning',
+      skills: ['Customer Service', 'Cashier', 'Work-based Learning']
     }
   ],
   education: [
     {
-      year: '2564',
-      title: 'วิทยาศาสตรบัณฑิต สาขาวิทยาการคอมพิวเตอร์และสื่อดิจิทัล',
-      institution: 'มหาวิทยาลัยธรรมศาสตร์ (เกียรตินิยมอันดับ 1)'
-    },
-    {
-      year: '2566',
-      title: 'Google UX Design Professional Certificate',
-      institution: 'Google Certified UX Practitioner'
-    },
-    {
-      year: '2567',
-      title: 'Advanced Design Systems & Enterprise Tokens',
-      institution: 'Interaction Design Foundation (IxDF)'
+      year: 'สำเร็จการศึกษา',
+      title: 'สถาบันการจัดการปัญญาภิวัฒน์ (PIM)',
+      institution: 'Panyapiwat Institute of Management (การเรียนรู้แบบ Work-based Learning)'
     }
   ],
   socials: {

@@ -118,13 +118,6 @@ function renderCaseStudies(items) {
         </div>
 
         <div class="card-body">
-          <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
-            ${(study.roleTags && study.roleTags.length > 0 ? study.roleTags : ['UX Research', 'UI Design']).map(tag => `
-              <span style="font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); color: #cbd5e1;">
-                ${tag.toLowerCase().includes('research') ? '🔍 ' : '🎨 '}${tag}
-              </span>
-            `).join('')}
-          </div>
           <h3 class="card-title">${study.title}</h3>
           <p class="card-tagline">${study.tagline}</p>
 
