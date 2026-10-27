@@ -1296,37 +1296,20 @@ function toggleMinimap(e) {
 function switchDeckView(mode) {
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
 
-  const simWrap = document.getElementById('localrouteViewWrap');
   const mapWrap = document.getElementById('mapViewWrap');
   const deckWrap = document.getElementById('deckViewWrap');
-
-  const btnSim = document.getElementById('btnSwitchLocalRoute');
   const btnMap = document.getElementById('btnSwitchMap');
   const btnDeck = document.getElementById('btnSwitchDeck');
 
-  if (mode === 'localroute') {
-    if (simWrap) simWrap.style.display = 'block';
-    if (mapWrap) mapWrap.style.display = 'none';
-    if (deckWrap) deckWrap.style.display = 'none';
-
-    if (btnSim) btnSim.classList.add('active');
-    if (btnMap) btnMap.classList.remove('active');
-    if (btnDeck) btnDeck.classList.remove('active');
-  } else if (mode === 'map') {
-    if (simWrap) simWrap.style.display = 'none';
+  if (mode === 'map') {
     if (mapWrap) mapWrap.style.display = 'block';
     if (deckWrap) deckWrap.style.display = 'none';
-
     if (btnMap) btnMap.classList.add('active');
-    if (btnSim) btnSim.classList.remove('active');
     if (btnDeck) btnDeck.classList.remove('active');
   } else {
-    if (simWrap) simWrap.style.display = 'none';
     if (mapWrap) mapWrap.style.display = 'none';
     if (deckWrap) deckWrap.style.display = 'flex';
-
     if (btnDeck) btnDeck.classList.add('active');
-    if (btnSim) btnSim.classList.remove('active');
     if (btnMap) btnMap.classList.remove('active');
   }
 }
@@ -1357,9 +1340,7 @@ function handleHudActionClick() {
   if (!insight) return;
 
   if (insight.slug === 'localroute-transit-travel-hub') {
-    switchDeckView('localroute');
-    const sim = document.getElementById('localrouteViewWrap');
-    if (sim) sim.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    window.open('https://easylocalroutedev.vercel.app/', '_blank');
   } else if (insight.isCareer) {
     switchResumeTab('experience');
     const jobCard = document.querySelector('.featured-current-job');
@@ -1458,3 +1439,75 @@ selectMapLandmark = function(slug, x, y) {
     setTimeout(() => GameAudio.playBoing(), 300);
   }
 };
+
+// ==========================================================
+// REFINED MAP INTERACTION: STATION HUD FOCUSED (NO LEFT DISTRACTION)
+// ==========================================================
+selectMapLandmark = function(slug, x, y) {
+  currentHudSlug = slug;
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  // 1. Move Avatar Pin on SVG map
+  const avatarPin = document.getElementById('mapAvatarPin');
+  if (avatarPin) {
+    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+  }
+
+  const insight = projectInsights[slug] || {
+    title: slug,
+    msg: 'ยินดีต้อนรับสู่สถานีผลงานของสายธารค่ะ!',
+    slug: slug,
+    icon: '📍'
+  };
+
+  // 2. Update Map Station HUD (Center Top of Map - Eye Line of Sight)
+  const hud = document.getElementById('mapStationHud');
+  const hudIcon = document.getElementById('hudStationIcon');
+  const hudTitle = document.getElementById('hudStationTitle');
+  const hudDesc = document.getElementById('hudStationDesc');
+  const hudBtn = document.getElementById('hudActionBtn');
+
+  if (hud) hud.style.display = 'flex';
+  if (hudIcon) hudIcon.textContent = insight.icon || (insight.badge ? insight.badge.split(' ')[0] : '📍');
+  if (hudTitle) hudTitle.textContent = insight.title;
+  if (hudDesc) hudDesc.textContent = insight.msg;
+
+  if (hudBtn) {
+    if (insight.slug === 'localroute-transit-travel-hub') {
+      hudBtn.textContent = '🚀 เปิดแอป LocalRoute (Live Vercel) ➔';
+    } else if (insight.isCareer) {
+      hudBtn.textContent = '🏢 ดูประวัติ Security Pitch ➔';
+    } else if (insight.isEducation) {
+      hudBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
+    } else if (insight.isInternship) {
+      hudBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
+    } else {
+      hudBtn.textContent = '📖 เปิดเคสสตัดดี้ฉบับเต็ม ➔';
+    }
+  }
+
+  // 3. DO NOT force open bottom-left chibiBubble! Keep it hidden to prevent eye fatigue
+  const bubble = document.getElementById('chibiBubble');
+  if (bubble) bubble.style.display = 'none';
+
+  if (typeof GameAudio !== 'undefined') {
+    setTimeout(() => GameAudio.playBoing(), 250);
+  }
+};
+
+function openLiveAppModal() {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const modal = document.getElementById('liveAppModal');
+  if (modal) {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeLiveAppModal() {
+  const modal = document.getElementById('liveAppModal');
+  if (modal) {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}

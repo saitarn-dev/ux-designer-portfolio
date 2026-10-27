@@ -225,98 +225,14 @@
           <!-- 4 Tilted Fanned Cards -->
           <!-- Deck & Map View Switcher -->
           <div class="deck-view-switcher">
-            <button type="button" class="view-switch-btn active" id="btnSwitchLocalRoute" onclick="switchDeckView('localroute')">
-              📱 ทดลองเล่นแอปจริง (LocalRoute Live Simulator)
+            <button type="button" class="view-switch-btn active" id="btnSwitchDeck" onclick="switchDeckView('deck')">
+              🃏 สำรับการ์ดเคส (Card Deck)
             </button>
             <button type="button" class="view-switch-btn" id="btnSwitchMap" onclick="switchDeckView('map')">
               🗺️ แผนที่เมืองจำลอง (Adventure Map)
             </button>
-            <button type="button" class="view-switch-btn" id="btnSwitchDeck" onclick="switchDeckView('deck')">
-              🃏 สำรับการ์ดเคส (Card Deck)
-            </button>
           </div>
 
-          <!-- 0. LOCALROUTE LIVE INTERACTIVE SIMULATOR (FEATURED APP) -->
-          <div class="live-app-simulator-container" id="localrouteViewWrap">
-            <div class="simulator-card-wrapper">
-              <!-- Simulator Header Toolbar -->
-              <div class="simulator-toolbar">
-                <div class="sim-left-info">
-                  <span class="sim-status-dot"></span>
-                  <strong style="color: #ffffff; font-size: 0.95rem;">LocalRoute — Thailand Local Transit & Travel Hub</strong>
-                  <span class="sim-badge-live">LIVE APP VERCEL</span>
-                </div>
-                <div class="sim-toolbar-actions">
-                  <div class="sim-device-toggles">
-                    <button type="button" class="sim-toggle-btn active" id="btnSimMobile" onclick="setSimDeviceMode('mobile')" title="มุมมองมือถือ">📱 มือถือ</button>
-                    <button type="button" class="sim-toggle-btn" id="btnSimWide" onclick="setSimDeviceMode('wide')" title="มุมมองกว้าง">💻 จอกว้าง</button>
-                  </div>
-                  <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" class="sim-open-external-btn" title="เปิดแอปเต็มในแท็บใหม่">
-                    ↗ เปิดแอปในแท็บใหม่
-                  </a>
-                </div>
-              </div>
-
-              <!-- Device Frame Mockup -->
-              <div class="device-mockup-stage" id="deviceMockupStage">
-                <div class="phone-device-frame" id="phoneDeviceFrame">
-                  <!-- Phone Speaker & Camera Notch -->
-                  <div class="phone-notch">
-                    <span class="notch-speaker"></span>
-                    <span class="notch-lens"></span>
-                  </div>
-                  
-                  <!-- Interactive Embedded Live IFrame -->
-                  <div class="phone-screen-viewport">
-                    <iframe 
-                      src="https://easylocalroutedev.vercel.app/" 
-                      id="localRouteIframe"
-                      class="localroute-live-frame" 
-                      title="LocalRoute Transit & Travel Hub Live Interactive Demo"
-                      loading="lazy"
-                      allow="geolocation"
-                    ></iframe>
-                  </div>
-
-                  <!-- Phone Home Indicator Bar -->
-                  <div class="phone-home-indicator"></div>
-                </div>
-
-                <!-- Live Quick Fact Cards Beside Mockup -->
-                <div class="sim-side-highlights">
-                  <div class="sim-highlight-card">
-                    <div class="sim-hl-icon">🚊</div>
-                    <div class="sim-hl-content">
-                      <strong style="color: #4ade80;">แอปพลิเคชันจริง ใช้งานได้ 100%</strong>
-                      <p>ทดลองจิ้มเลือกเส้นทางรถสองแถวแดง, ดูแผนที่ Leaflet, เช็กราคา หรือกดแปลภาษาได้โดยตรงในกรอบนี้เลยค่ะ!</p>
-                    </div>
-                  </div>
-
-                  <div class="sim-highlight-card">
-                    <div class="sim-hl-icon">⚡</div>
-                    <div class="sim-hl-content">
-                      <strong style="color: #38bdf8;">UX Research & Metrics</strong>
-                      <p>ลดเวลาตัดสินใจเลือกพาหนะลง <strong>70%</strong> พร้อมระบบ Wake-Up Alert เตือนกันตกรถ 100%</p>
-                    </div>
-                  </div>
-
-                  <div class="sim-highlight-card">
-                    <div class="sim-hl-icon">🛠️</div>
-                    <div class="sim-hl-content">
-                      <strong style="color: #facc15;">Tech Stack & Design</strong>
-                      <p>Figma Design System • Leaflet.js • Tailwind CSS • Vercel Deployment • Geolocation API</p>
-                    </div>
-                  </div>
-
-                  <button type="button" class="btn btn-3d-primary" onclick="openCaseStudyModal('localroute-transit-travel-hub')" style="width: 100%; margin-top: 8px;">
-                    📖 อ่าน Case Study LocalRoute ฉบับเจาะลึก ➔
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- 1. ADVENTURE TOWN MAP VIEW (DEFAULT ACTIVE) -->
           <div class="adventure-town-map-container" id="mapViewWrap" style="display: none;">
             <!-- Map Floating Toolbar -->
             <div class="map-floating-bar">
@@ -598,7 +514,7 @@
           </div>
 
           <!-- 2. CARD DECK VIEW (HIDDEN BY DEFAULT) -->
-          <div class="fanned-cards-wrap" id="deckViewWrap" style="display: none;">
+          <div class="fanned-cards-wrap" id="deckViewWrap" style="display: flex;">
             
             <!-- Card 1 (-10deg) -->
             <div class="fan-card-item" onclick="walkCharacterToProject('flowpay-fintech-onboarding', this)">
@@ -693,6 +609,101 @@
         </p>
       </div>
 
+      <!-- FEATURED FLAGSHIP CASE STUDY: LOCALROUTE -->
+      <div class="flagship-project-banner">
+        <div class="flagship-banner-glow"></div>
+        <div class="flagship-banner-grid">
+          <div class="flagship-info-col">
+            <div class="flagship-badge-row">
+              <span class="flagship-pill-live"><span class="status-dot-pulse"></span> LIVE PWA APPLICATION</span>
+              <span class="flagship-pill-cat">🗺️ Transit & TravelTech</span>
+            </div>
+            
+            <h3 class="flagship-title">LocalRoute — Thailand Local Transit & Travel Hub</h3>
+            <p class="flagship-tagline">
+              แอปพลิเคชันนำทางระบบขนส่งท้องถิ่นไทย (รถสองแถวแดง & MRT/BTS) ออกแบบ UX ให้คนไทยและนักท่องเที่ยวต่างชาติเดินทางได้อย่างมั่นใจ ปลอดภัย และไม่โดนโก่งราคา
+            </p>
+
+            <!-- Metrics Bento Strip -->
+            <div class="flagship-metrics-grid">
+              <div class="flagship-metric-card">
+                <span class="fm-num">-70%</span>
+                <span class="fm-label">เวลาตัดสินใจพาหนะ</span>
+                <span class="fm-sub">เปรียบเทียบเวลา vs ราคา</span>
+              </div>
+              <div class="flagship-metric-card">
+                <span class="fm-num">96%</span>
+                <span class="fm-label">ความมั่นใจความปลอดภัย</span>
+                <span class="fm-sub">Safe Ride Share & โทรฉุกเฉิน</span>
+              </div>
+              <div class="flagship-metric-card">
+                <span class="fm-num">100%</span>
+                <span class="fm-label">Wake-Up Alert</span>
+                <span class="fm-sub">เตือนกันตกรถก่อนถึง</span>
+              </div>
+              <div class="flagship-metric-card">
+                <span class="fm-num">TH / EN</span>
+                <span class="fm-label">ระบบแปลและออกเสียง</span>
+                <span class="fm-sub">สื่อสารคนขับรถได้ทันที</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flagship-actions-row">
+              <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-3d-primary" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                🚀 เปิดใช้งานแอปจริง (Live Vercel) ➔
+              </a>
+              <button type="button" class="btn btn-3d-secondary" onclick="openLiveAppModal()" style="border-color: #10b981; color: #4ade80;">
+                📱 ทดลองเล่นแอป (Live Demo Modal)
+              </button>
+              <button type="button" class="btn btn-3d-secondary" onclick="openCaseStudyModal('localroute-transit-travel-hub')">
+                📖 ส่องกระบวนการคิด UX Process
+              </button>
+            </div>
+          </div>
+
+          <!-- Visual Showcase Mockup Column -->
+          <div class="flagship-visual-col">
+            <div class="flagship-device-card">
+              <div class="flagship-browser-bar">
+                <div class="browser-dots">
+                  <span class="b-dot red"></span>
+                  <span class="b-dot yellow"></span>
+                  <span class="b-dot green"></span>
+                </div>
+                <div class="browser-url">easylocalroutedev.vercel.app</div>
+                <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" class="browser-newtab" title="เปิดในแท็บใหม่">↗</a>
+              </div>
+              <div class="flagship-visual-content">
+                <div class="screen-preview-grid">
+                  <div class="screen-shot-card">
+                    <span class="ss-tag">🗺️ Interactive Map</span>
+                    <strong style="color:#fff; font-size: 0.9rem;">Leaflet GPS & สองแถวแดง</strong>
+                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">ระบบคำนวณและแสดงแนวเส้นทางรถสองแถวแดงเชียงใหม่ พร้อมจุดขึ้น-ลง</p>
+                  </div>
+                  <div class="screen-shot-card">
+                    <span class="ss-tag">📊 Compare Modal</span>
+                    <strong style="color:#fff; font-size: 0.9rem;">เวลา vs ราคา 4 ตัวเลือก</strong>
+                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">กราฟวิเคราะห์ราคาสองแถว, MRT/BTS, Grab/Taxi และเหมารถรายวัน</p>
+                  </div>
+                  <div class="screen-shot-card">
+                    <span class="ss-tag">🗣️ Audio Phrasebook</span>
+                    <strong style="color:#fff; font-size: 0.9rem;">ออกเสียงภาษาไทยให้นักท่องเที่ยว</strong>
+                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">"ผ่านประตูท่าแพไหมครับ", "จอดตรงนี้ด้วยครับ" กดฟังเสียงได้ทันที</p>
+                  </div>
+                  <div class="screen-shot-card">
+                    <span class="ss-tag">🚨 Offline Support</span>
+                    <strong style="color:#fff; font-size: 0.9rem;">เบอร์โทรฉุกเฉินไม่ต้องใช้เน็ต</strong>
+                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">ตำรวจท่องเที่ยวเชียงใหม่, รายงานโดนโก่งราคา และแชร์พิกัดปลอดภัย</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
       <!-- Category Filter Pills -->
       <div class="filter-bar">
         <button class="filter-btn active" data-category="all">ทั้งหมด</button>
@@ -1274,6 +1285,37 @@
     </div>
   </footer>
 
+  <!-- MODAL: Clean Fullscreen Live App Simulator -->
+  <div class="modal-overlay" id="liveAppModal">
+    <div class="modal-container" style="max-width: 980px; height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header" style="background: #0f172a; border-bottom: 1.5px solid rgba(16, 185, 129, 0.4);">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="status-dot-pulse"></span>
+          <h3 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 0;">
+            LocalRoute Live Interactive App Demo
+          </h3>
+          <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); color: #4ade80;">100% LIVE PWA</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" style="color: #facc15; font-size: 0.84rem; font-weight: 700; text-decoration: underline;">
+            เปิดเต็มจอในแท็บใหม่ ➔
+          </a>
+          <button class="modal-close-btn" onclick="closeLiveAppModal()" aria-label="ปิดหน้าต่าง">✕</button>
+        </div>
+      </div>
+      <div class="modal-content-body" style="padding: 0; flex: 1; background: #000; overflow: hidden;">
+        <iframe 
+          src="https://easylocalroutedev.vercel.app/" 
+          id="modalLiveIframe"
+          style="width: 100%; height: 100%; border: none;" 
+          title="LocalRoute Live Application" 
+          loading="lazy" 
+          allow="geolocation"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL: Case Study In-Depth Viewer -->
   <div class="modal-overlay" id="caseStudyModal">
     <div class="modal-container">
@@ -1512,7 +1554,7 @@
   <!-- INTERACTIVE CHIBI CHARACTER COMPANION (ไกด์สายธารจิ๋ว) -->
   <div class="chibi-companion" id="chibiCompanion" title="คลิกเพื่อทักทายไกด์สายธาร!">
     <!-- Chibi Close/Minimize Pill Button -->
-    <button type="button" class="chibi-close-pill" onclick="toggleChibiCompanion(false)" title="ซ่อนไกด์สายธาร">✕</button>
+    
 
     <!-- Speech Dialogue Bubble -->
     <div class="chibi-bubble" id="chibiBubble" style="display: none;">
@@ -1576,10 +1618,7 @@
         </svg>
       </div>
 
-      <!-- Character Status Tag -->
-      <div class="chibi-name-tag">
-        <span class="status-dot-pulse"></span> ไกด์สายธาร
-      </div>
+      
     </div>
   </div>
 

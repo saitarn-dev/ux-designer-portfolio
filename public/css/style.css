@@ -4142,3 +4142,217 @@ textarea.form-control {
 .chibi-minimized-pill {
   display: none; /* Never show when companion is visible */
 }
+
+/* ==========================================================
+   FLAGSHIP PROJECT SHOWCASE BANNER STYLES
+   ========================================================== */
+.flagship-project-banner {
+  background: linear-gradient(145deg, #0d182b 0%, #070e1a 100%);
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  border-radius: 28px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(16, 185, 129, 0.15);
+}
+
+.flagship-banner-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.flagship-banner-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.flagship-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.flagship-pill-live {
+  background: rgba(16, 185, 129, 0.18);
+  color: #4ade80;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.flagship-pill-cat {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.flagship-title {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.flagship-tagline {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.flagship-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 1.75rem;
+}
+
+.flagship-metric-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+}
+
+.flagship-metric-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+}
+
+.fm-num {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: #4ade80;
+  display: block;
+  line-height: 1.1;
+}
+
+.fm-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-top: 4px;
+  display: block;
+}
+
+.fm-sub {
+  font-size: 0.72rem;
+  color: #64748b;
+  display: block;
+}
+
+.flagship-actions-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Device Browser Mockup Card */
+.flagship-device-card {
+  background: #090e17;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.flagship-browser-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #111a2e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.b-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.b-dot.red { background: #ef4444; }
+.b-dot.yellow { background: #f59e0b; }
+.b-dot.green { background: #10b981; }
+
+.browser-url {
+  font-size: 0.76rem;
+  font-family: monospace;
+  color: #94a3b8;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px 12px;
+  border-radius: 6px;
+}
+
+.browser-newtab {
+  color: #facc15;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.flagship-visual-content {
+  padding: 16px;
+  background: linear-gradient(180deg, #080d16 0%, #05080f 100%);
+}
+
+.screen-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.screen-shot-card {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  transition: all 0.2s ease;
+}
+
+.screen-shot-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(15, 23, 42, 1);
+}
+
+.ss-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #4ade80;
+  display: block;
+  margin-bottom: 2px;
+}
+
+@media (max-width: 900px) {
+  .flagship-banner-grid {
+    grid-template-columns: 1fr;
+  }
+}
