@@ -245,22 +245,6 @@
               </div>
             </div>
 
-            <!-- Station HUD Info Drawer (Appears upon selecting a landmark) -->
-            <div class="map-station-hud" id="mapStationHud">
-              <div class="station-hud-left">
-                <span class="station-hud-icon" id="hudStationIcon">🛡️</span>
-                <div>
-                  <h4 class="station-hud-title" id="hudStationTitle">Security Pitch HQ (ฐานปฏิบัติการหลัก 5+ ปี)</h4>
-                  <p class="station-hud-desc" id="hudStationDesc">ดูแลงาน UX/UI และ Front-End แพลตฟอร์ม Privacy & Cybersecurity SaaS มากว่า 5 ปี 9 เดือน</p>
-                </div>
-              </div>
-              <div class="station-hud-actions" id="hudStationActions">
-                <button type="button" class="station-hud-action-btn" id="hudActionBtn" onclick="handleHudActionClick()">
-                  🏢 ดูประวัติการทำงาน ➔
-                </button>
-              </div>
-            </div>
-
             <!-- SVG Town Map Viewport -->
             <div class="map-svg-viewport">
               <svg viewBox="0 0 1000 660" class="town-map-svg" id="townMapSvg" xmlns="http://www.w3.org/2000/svg">
@@ -511,6 +495,22 @@
                 </g>
               </svg>
             </div>
+
+            <!-- Station HUD Info Drawer (Docked at Bottom of Map for direct line-of-sight) -->
+            <div class="map-station-hud" id="mapStationHud">
+              <div class="station-hud-left">
+                <span class="station-hud-icon" id="hudStationIcon">🛡️</span>
+                <div>
+                  <h4 class="station-hud-title" id="hudStationTitle">Security Pitch HQ (ฐานปฏิบัติการหลัก 5+ ปี)</h4>
+                  <p class="station-hud-desc" id="hudStationDesc">ดูแลงาน UX/UI และ Front-End แพลตฟอร์ม Privacy & Cybersecurity SaaS มากว่า 5 ปี 9 เดือน</p>
+                </div>
+              </div>
+              <div class="station-hud-actions" id="hudStationActions">
+                <button type="button" class="station-hud-action-btn" id="hudActionBtn" onclick="handleHudActionClick()">
+                  🏢 ดูประวัติการทำงาน ➔
+                </button>
+              </div>
+            </div>
           </div>
 
           <!-- 2. CARD DECK VIEW (HIDDEN BY DEFAULT) -->
@@ -676,28 +676,133 @@
               </div>
               <div class="flagship-visual-content">
                 <div class="screen-preview-grid">
-                  <div class="screen-shot-card">
-                    <span class="ss-tag">🗺️ Interactive Map</span>
-                    <strong style="color:#fff; font-size: 0.9rem;">Leaflet GPS & สองแถวแดง</strong>
-                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">ระบบคำนวณและแสดงแนวเส้นทางรถสองแถวแดงเชียงใหม่ พร้อมจุดขึ้น-ลง</p>
+                  <!-- MOCKUP 1: INTERACTIVE MAP (LEAFLET + สองแถวแดง) -->
+                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองเล่นใน Live Demo Modal">
+                    <div class="ss-card-header">
+                      <span class="ss-tag">🗺️ Interactive Map (Leaflet)</span>
+                      <span class="ss-click-hint">ลองเล่นสด ➔</span>
+                    </div>
+                    <div class="mini-ui-canvas map-canvas">
+                      <svg viewBox="0 0 340 100" class="mini-map-svg" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="340" height="100" fill="#090f1d" rx="6"/>
+                        <!-- Chiang Mai Moat / Streets -->
+                        <path d="M0,28 L340,28 M0,68 L340,68 M65,0 L65,100 M175,0 L175,100 M270,0 L270,100" stroke="#1e293b" stroke-width="1.8"/>
+                        <rect x="75" y="34" width="90" height="28" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                        <text x="120" y="52" fill="#64748b" font-size="8.5" text-anchor="middle" font-weight="700">คูเมืองเชียงใหม่</text>
+                        <!-- Songthaew Red Transit Line -->
+                        <path d="M18,78 Q100,75 135,46 T285,20" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        <path d="M18,78 Q100,75 135,46 T285,20" fill="none" stroke="#facc15" stroke-width="1.8" stroke-dasharray="4,4"/>
+                        <!-- Waypoint 1: Tha Phae Gate -->
+                        <circle cx="18" cy="78" r="6" fill="#10b981" stroke="#ffffff" stroke-width="1.8"/>
+                        <text x="30" y="81" fill="#4ade80" font-size="8.5" font-weight="800">📍 ประตูท่าแพ (จุดขึ้น)</text>
+                        <!-- Moving Songthaew Bus -->
+                        <g transform="translate(132, 40)">
+                          <rect x="-9" y="-6" width="18" height="12" rx="3" fill="#dc2626" stroke="#ffffff" stroke-width="1.2"/>
+                          <text x="0" y="3" font-size="7.5" text-anchor="middle">🚊</text>
+                        </g>
+                        <!-- Waypoint 2: Nimman -->
+                        <circle cx="285" cy="20" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.8"/>
+                        <text x="240" y="17" fill="#fbbf24" font-size="8.5" font-weight="800">🏁 นิมมาน</text>
+                      </svg>
+                      <div class="mini-ui-hud-pill">
+                        <span>🚊 สองแถวสายรอบเวียง</span>
+                        <strong style="color: #4ade80;">30฿</strong>
+                        <span style="color: #94a3b8; font-size: 0.68rem;">รอ 3-5 นาที</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="screen-shot-card">
-                    <span class="ss-tag">📊 Compare Modal</span>
-                    <strong style="color:#fff; font-size: 0.9rem;">เวลา vs ราคา 4 ตัวเลือก</strong>
-                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">กราฟวิเคราะห์ราคาสองแถว, MRT/BTS, Grab/Taxi และเหมารถรายวัน</p>
+
+                  <!-- MOCKUP 2: TRANSPORT COMPARE MODAL -->
+                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองเปรียบเทียบในแอปจริง">
+                    <div class="ss-card-header">
+                      <span class="ss-tag">📊 Compare Modal (เวลา vs ราคา)</span>
+                      <span class="ss-click-hint">4 ตัวเลือก ➔</span>
+                    </div>
+                    <div class="mini-ui-canvas compare-canvas">
+                      <div class="compare-row best-value">
+                        <span class="cmp-mode">🔴 สองแถวแดง</span>
+                        <div class="cmp-bar-wrap">
+                          <div class="cmp-bar red-bar" style="width: 25%;"></div>
+                        </div>
+                        <span class="cmp-price">30฿</span>
+                        <span class="cmp-time">22 น.</span>
+                        <span class="cmp-badge">★ คุ้มสุด</span>
+                      </div>
+                      <div class="compare-row">
+                        <span class="cmp-mode">🟡 Grab / Taxi</span>
+                        <div class="cmp-bar-wrap">
+                          <div class="cmp-bar yellow-bar" style="width: 72%;"></div>
+                        </div>
+                        <span class="cmp-price">160฿</span>
+                        <span class="cmp-time">15 น.</span>
+                        <span class="cmp-sub">ไว</span>
+                      </div>
+                      <div class="compare-row">
+                        <span class="cmp-mode">🔵 เหมารถทั้งวัน</span>
+                        <div class="cmp-bar-wrap">
+                          <div class="cmp-bar blue-bar" style="width: 95%;"></div>
+                        </div>
+                        <span class="cmp-price">800฿</span>
+                        <span class="cmp-time">ทั้งวัน</span>
+                        <span class="cmp-sub">อิสระ</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="screen-shot-card">
-                    <span class="ss-tag">🗣️ Audio Phrasebook</span>
-                    <strong style="color:#fff; font-size: 0.9rem;">ออกเสียงภาษาไทยให้นักท่องเที่ยว</strong>
-                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">"ผ่านประตูท่าแพไหมครับ", "จอดตรงนี้ด้วยครับ" กดฟังเสียงได้ทันที</p>
+
+                  <!-- MOCKUP 3: VOICE AUDIO PHRASEBOOK -->
+                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองฟังเสียงในแอปจริง">
+                    <div class="ss-card-header">
+                      <span class="ss-tag">🗣️ Audio Phrasebook (ช่วยสื่อสาร)</span>
+                      <span class="ss-click-hint">แตะฟังเสียง ➔</span>
+                    </div>
+                    <div class="mini-ui-canvas audio-canvas">
+                      <div class="audio-phrase-box">
+                        <div class="audio-phrase-thai">"ผ่านประตูท่าแพไหมครับ?"</div>
+                        <div class="audio-phrase-en">Does this go to Tha Phae Gate?</div>
+                      </div>
+                      <div class="audio-controls-row">
+                        <div class="audio-play-pill">
+                          <span class="audio-icon-pulse">🔊</span>
+                          <span style="font-size:0.75rem; font-weight:700;">กดฟังสำเนียงไทย</span>
+                          <div class="audio-waves">
+                            <span class="wave-bar w1"></span>
+                            <span class="wave-bar w2"></span>
+                            <span class="wave-bar w3"></span>
+                            <span class="wave-bar w4"></span>
+                          </div>
+                        </div>
+                        <div class="audio-lang-switch">
+                          <span class="lang-tag active">TH</span>
+                          <span class="lang-tag">EN</span>
+                          <span class="lang-tag">中文</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="screen-shot-card">
-                    <span class="ss-tag">🚨 Offline Support</span>
-                    <strong style="color:#fff; font-size: 0.9rem;">เบอร์โทรฉุกเฉินไม่ต้องใช้เน็ต</strong>
-                    <p style="font-size:0.78rem; color:#94a3b8; margin-top:4px;">ตำรวจท่องเที่ยวเชียงใหม่, รายงานโดนโก่งราคา และแชร์พิกัดปลอดภัย</p>
+
+                  <!-- MOCKUP 4: OFFLINE SOS & SAFE RIDE SHARE -->
+                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองดูระบบความปลอดภัย">
+                    <div class="ss-card-header">
+                      <span class="ss-tag">🚨 Offline Support & SOS</span>
+                      <span class="ss-click-hint">ปลอดภัย ➔</span>
+                    </div>
+                    <div class="mini-ui-canvas sos-canvas">
+                      <div class="sos-status-strip">
+                        <span class="sos-dot-live"></span>
+                        <span style="font-size:0.75rem; font-weight:700; color:#4ade80;">GPS Safe Mode ทำงานแม้ออฟไลน์ ไม่ต้องต่อเน็ต</span>
+                      </div>
+                      <div class="sos-quick-grid">
+                        <div class="sos-btn-item sos-call">
+                          <span>📞 ตำรวจท่องเที่ยว 1155</span>
+                        </div>
+                        <div class="sos-btn-item sos-share">
+                          <span>🛡️ แชร์พิกัดสดให้ครอบครัว</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </div></div>
             </div>
           </div>
         </div>
@@ -1570,7 +1675,8 @@
     </div>
 
     <!-- Character Avatar Sprite -->
-    <div class="chibi-sprite-wrap" id="chibiSpriteWrap" onclick="pokeChibi()">
+    <button type="button" class="chibi-close-pill" onclick="dismissChibiCompanion(event)" title="ย่อไกด์สายธาร">✕ ย่อไกด์</button>
+      <div class="chibi-sprite-wrap" id="chibiSpriteWrap" onclick="pokeChibi()">
       <!-- Dust puff when running -->
       <div class="chibi-dust-puff" id="chibiDustPuff">💨</div>
       
@@ -1623,7 +1729,7 @@
   </div>
 
   <!-- MINIMIZED CHIBI COMPANION PILL (WHEN HIDDEN) -->
-  <button type="button" class="chibi-minimized-pill" id="chibiMinimizedPill" onclick="toggleChibiCompanion(true)" style="display: none;" title="คลิกเพื่อเปิดไกด์สายธาร">
+  <button type="button" class="chibi-minimized-pill" id="chibiMinimizedPill" onclick="restoreChibiCompanion(event)" style="display: none;" title="คลิกเพื่อเปิดไกด์สายธาร">
     <span class="pill-chibi-icon">🏃‍♀️</span>
     <span class="pill-chibi-text">ไกด์สายธาร</span>
     <span class="pill-sparkle">✨</span>

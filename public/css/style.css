@@ -4072,13 +4072,23 @@ textarea.form-control {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  background: #111c30;
-  border-bottom: 2px solid rgba(250, 204, 21, 0.3);
+  padding: 14px 24px;
+  background: #0f172a;
+  border-top: 2px solid rgba(250, 204, 21, 0.4);
+  border-bottom: none;
+  border-radius: 0 0 20px 20px;
   color: #ffffff;
   flex-wrap: wrap;
   gap: 12px;
-  animation: hudSlideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
+  animation: hudSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 20;
+}
+
+@keyframes hudSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes hudSlideDown {
@@ -4354,5 +4364,312 @@ textarea.form-control {
 @media (max-width: 900px) {
   .flagship-banner-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================
+   FLAGSHIP SHOWCASE: RICH INTERACTIVE UI MOCKUPS
+   ========================================================== */
+.interactive-preview-card {
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.interactive-preview-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.6);
+  background: rgba(15, 23, 42, 1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(16, 185, 129, 0.2);
+}
+
+.ss-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ss-click-hint {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #4ade80;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.interactive-preview-card:hover .ss-click-hint {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.mini-ui-canvas {
+  background: rgba(8, 13, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Map Canvas Mini Hud */
+.mini-map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+}
+
+.mini-ui-hud-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #e2e8f0;
+  margin-top: 6px;
+}
+
+/* Compare Canvas */
+.compare-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.compare-row {
+  display: grid;
+  grid-template-columns: 88px 1fr 38px 46px 48px;
+  align-items: center;
+  font-size: 0.74rem;
+  gap: 6px;
+}
+
+.cmp-mode {
+  font-weight: 700;
+  color: #f1f5f9;
+  white-space: nowrap;
+}
+
+.cmp-bar-wrap {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  height: 7px;
+  overflow: hidden;
+}
+
+.cmp-bar {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.red-bar { background: linear-gradient(90deg, #ef4444, #f87171); }
+.yellow-bar { background: linear-gradient(90deg, #eab308, #facc15); }
+.blue-bar { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+
+.cmp-price {
+  font-weight: 800;
+  color: #ffffff;
+  text-align: right;
+}
+
+.cmp-time {
+  color: #94a3b8;
+  font-size: 0.7rem;
+  text-align: right;
+}
+
+.cmp-badge {
+  background: rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #4ade80;
+  padding: 1px 4px;
+  border-radius: 4px;
+  font-size: 0.64rem;
+  font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cmp-sub {
+  color: #64748b;
+  font-size: 0.65rem;
+  text-align: center;
+}
+
+/* Audio Canvas */
+.audio-phrase-box {
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-left: 3px solid #facc15;
+}
+
+.audio-phrase-thai {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #facc15;
+}
+
+.audio-phrase-en {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.audio-controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.audio-play-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  color: #4ade80;
+}
+
+.audio-waves {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+
+.wave-bar {
+  width: 2.5px;
+  background: #4ade80;
+  border-radius: 1px;
+  animation: waveMotion 0.8s infinite ease-in-out alternate;
+}
+
+.w1 { height: 4px; animation-delay: 0.1s; }
+.w2 { height: 11px; animation-delay: 0.3s; }
+.w3 { height: 7px; animation-delay: 0.2s; }
+.w4 { height: 12px; animation-delay: 0.4s; }
+
+@keyframes waveMotion {
+  from { transform: scaleY(0.4); }
+  to { transform: scaleY(1); }
+}
+
+.audio-lang-switch {
+  display: flex;
+  gap: 4px;
+}
+
+.lang-tag {
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+}
+
+.lang-tag.active {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+/* SOS Canvas */
+.sos-status-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 7px;
+}
+
+.sos-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulseGreen 1.8s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.sos-quick-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.sos-btn-item {
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sos-call {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+.sos-share {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #7dd3fc;
+}
+
+/* Chibi Companion Dismiss Button */
+.chibi-close-pill {
+  position: absolute;
+  top: -14px;
+  right: -6px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1.5px solid #facc15;
+  color: #facc15;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  z-index: 10001;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.chibi-close-pill:hover {
+  background: #facc15;
+  color: #0f172a;
+  transform: scale(1.06);
+}
+
+@media (max-width: 640px) {
+  .map-station-hud {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .station-hud-action-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  .compare-row {
+    grid-template-columns: 78px 1fr 32px 38px 40px;
+    font-size: 0.68rem;
   }
 }

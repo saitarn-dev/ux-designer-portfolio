@@ -80,7 +80,10 @@ function renderCaseStudies(items) {
   const container = document.getElementById('projectsContainer');
   if (!container) return;
 
-  if (items.length === 0) {
+  // Filter out localroute from standard grid cards because it has its own dedicated Flagship Bento Showcase!
+  const gridItems = items.filter(study => study.slug !== 'localroute-transit-travel-hub');
+
+  if (gridItems.length === 0) {
     container.innerHTML = `
       <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--text-dim);">
         ยังไม่มีผลงานในหมวดหมู่นี้ค่ะ ✨
@@ -89,7 +92,7 @@ function renderCaseStudies(items) {
     return;
   }
 
-  container.innerHTML = items.map((study) => {
+  container.innerHTML = gridItems.map((study) => {
     const topMetric = study.keyMetrics && study.keyMetrics[0] ? study.keyMetrics[0] : null;
     const secondMetric = study.keyMetrics && study.keyMetrics[1] ? study.keyMetrics[1] : null;
 
@@ -511,13 +514,24 @@ function switchResumeTab(tabName) {
 
 // Event Listeners setup
 function setupEventListeners() {
-  // Category filter tabs
+  // Category filter tabs with Flagship Showcase Coordination
   const filterBtns = document.querySelectorAll('.filter-btn');
+  const flagshipBanner = document.querySelector('.flagship-project-banner');
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const cat = btn.getAttribute('data-category');
+
+      // Coordinate Flagship Banner visibility with selected category
+      if (flagshipBanner) {
+        if (cat === 'all' || cat === 'mobile') {
+          flagshipBanner.style.display = 'block';
+        } else {
+          flagshipBanner.style.display = 'none';
+        }
+      }
+
       fetchCaseStudies(cat);
     });
   });
@@ -977,70 +991,70 @@ const chibiQuotes = [
 ];
 let chibiQuoteIdx = 0;
 
-function walkCharacterToProject(slug, targetElement) {
+// Persistent Chibi states
+let isChibiCompanionMinimized = false;
+let isChibiBubbleDismissed = false;
+
+function dismissChibiCompanion(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  isChibiCompanionMinimized = true;
+  isChibiBubbleDismissed = true;
+
   const companion = document.getElementById('chibiCompanion');
+  const pill = document.getElementById('chibiMinimizedPill');
   const bubble = document.getElementById('chibiBubble');
-  const bubbleText = document.getElementById('chibiBubbleText');
-  const bubbleActions = document.getElementById('chibiBubbleActions');
-  const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
-  const dust = document.getElementById('chibiDustPuff');
 
-  if (!companion || !targetElement) return;
+  if (bubble) bubble.style.display = 'none';
+  if (companion) companion.style.display = 'none';
+  if (pill) pill.style.display = 'inline-flex';
+}
 
-  GameAudio.playPop();
+function restoreChibiCompanion(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  isChibiCompanionMinimized = false;
+  isChibiBubbleDismissed = false;
 
-  // Highlight target card
-  document.querySelectorAll('.project-card-highlighted').forEach(c => c.classList.remove('project-card-highlighted'));
-  targetElement.classList.add('project-card-highlighted');
+  const companion = document.getElementById('chibiCompanion');
+  const pill = document.getElementById('chibiMinimizedPill');
 
-  // Trigger running animation
-  companion.classList.add('is-running');
-  if (dust) dust.style.opacity = '1';
+  if (pill) pill.style.display = 'none';
+  if (companion) {
+    companion.style.display = 'flex';
+    companion.style.position = 'fixed';
+    companion.style.bottom = '24px';
+    companion.style.left = '28px';
+    companion.style.top = 'auto';
+    companion.style.right = 'auto';
+  }
+  pokeChibi();
+}
 
-  // Calculate card position
-  const rect = targetElement.getBoundingClientRect();
-  const cardCenterX = rect.left + window.scrollX;
-  const cardCenterY = rect.top + window.scrollY;
+function toggleChibiCompanion(show) {
+  if (typeof show === 'undefined') {
+    const companion = document.getElementById('chibiCompanion');
+    show = companion && companion.style.display === 'none';
+  }
+  if (show) {
+    restoreChibiCompanion();
+  } else {
+    dismissChibiCompanion();
+  }
+}
 
-  // Smooth scroll
-  targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-  // Move companion to stand alongside the card
-  companion.style.position = 'absolute';
-  companion.style.left = Math.max(16, (cardCenterX - 85)) + 'px';
-  companion.style.top = (cardCenterY + 45) + 'px';
-  companion.style.bottom = 'auto';
-  companion.style.right = 'auto';
-
-  setTimeout(() => {
-    companion.classList.remove('is-running');
-    if (dust) dust.style.opacity = '0';
-    GameAudio.playBoing();
-
-    const insight = projectInsights[slug] || {
-      msg: 'ผลงานชิ้นนี้สายธารให้ความสำคัญกับ User Experience และ Business Value ค่ะ!',
-      slug: slug
-    };
-
-    if (bubbleText) bubbleText.textContent = insight.msg;
-    if (bubbleActions) bubbleActions.style.display = 'block';
-    if (deepDiveBtn) {
-      deepDiveBtn.onclick = (e) => {
-        e.stopPropagation();
-        openCaseStudyModal(insight.slug);
-      };
-    }
-    if (bubble) {
-      bubble.style.display = 'block';
-      bubble.classList.remove('pop');
-      void bubble.offsetWidth;
-      bubble.classList.add('pop');
-    }
-  }, 650);
+function closeChibiBubble(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  isChibiBubbleDismissed = true;
+  const bubble = document.getElementById('chibiBubble');
+  if (bubble) bubble.style.display = 'none';
 }
 
 function pokeChibi() {
-  GameAudio.playBoing();
+  if (typeof GameAudio !== 'undefined') GameAudio.playBoing();
+  isChibiBubbleDismissed = false;
+
   const sprite = document.getElementById('chibiSpriteWrap');
   const bubble = document.getElementById('chibiBubble');
   const textEl = document.getElementById('chibiBubbleText');
@@ -1065,234 +1079,90 @@ function pokeChibi() {
 }
 
 function summonChibiCompanion() {
-  GameAudio.playPop();
-  const companion = document.getElementById('chibiCompanion');
-  if (!companion) return;
-
-  // Reset companion to fixed bottom-left
-  companion.style.position = 'fixed';
-  companion.style.bottom = '24px';
-  companion.style.left = '28px';
-  companion.style.top = 'auto';
-  companion.style.right = 'auto';
-
-  pokeChibi();
+  restoreChibiCompanion();
 }
 
-function toggleMobileNav() {
-  const menu = document.getElementById('mainNavMenu');
-  if (menu) {
-    menu.classList.toggle('open');
-    GameAudio.playPop();
+function walkCharacterToProject(slug, targetElement) {
+  if (isChibiCompanionMinimized) {
+    // If minimized, smooth scroll and highlight without popping character
+    document.querySelectorAll('.project-card-highlighted').forEach(c => c.classList.remove('project-card-highlighted'));
+    targetElement.classList.add('project-card-highlighted');
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
   }
-}
-
-
-// ==========================================
-// ADVENTURE TOWN MAP CONTROLLERS
-// ==========================================
-function switchDeckView(mode) {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-
-  const mapWrap = document.getElementById('mapViewWrap');
-  const deckWrap = document.getElementById('deckViewWrap');
-  const btnMap = document.getElementById('btnSwitchMap');
-  const btnDeck = document.getElementById('btnSwitchDeck');
-
-  if (mode === 'map') {
-    if (mapWrap) mapWrap.style.display = 'block';
-    if (deckWrap) deckWrap.style.display = 'none';
-    if (btnMap) btnMap.classList.add('active');
-    if (btnDeck) btnDeck.classList.remove('active');
-  } else {
-    if (mapWrap) mapWrap.style.display = 'none';
-    if (deckWrap) deckWrap.style.display = 'flex';
-    if (btnDeck) btnDeck.classList.add('active');
-    if (btnMap) btnMap.classList.remove('active');
-  }
-}
-
-function selectMapLandmark(slug, x, y) {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-
-  // Move Avatar Pin on SVG map
-  const avatarPin = document.getElementById('mapAvatarPin');
-  if (avatarPin) {
-    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
-  }
-
-  const insight = projectInsights[slug] || {
-    title: slug,
-    msg: 'ยินดีต้อนรับสู่หมุดผลงานของสายธารค่ะ!',
-    slug: slug
-  };
 
   const companion = document.getElementById('chibiCompanion');
   const bubble = document.getElementById('chibiBubble');
   const bubbleText = document.getElementById('chibiBubbleText');
   const bubbleActions = document.getElementById('chibiBubbleActions');
   const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
+  const dust = document.getElementById('chibiDustPuff');
 
-  if (bubbleText) bubbleText.textContent = insight.msg;
-  
-  if (insight.isCareer) {
+  if (!companion || !targetElement) return;
+
+  isChibiBubbleDismissed = false; // Explicit user request to walk with character
+  if (companion.style.display === 'none') {
+    companion.style.display = 'flex';
+  }
+
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  document.querySelectorAll('.project-card-highlighted').forEach(c => c.classList.remove('project-card-highlighted'));
+  targetElement.classList.add('project-card-highlighted');
+
+  companion.classList.add('is-running');
+  if (dust) dust.style.opacity = '1';
+
+  targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const rect = targetElement.getBoundingClientRect();
+  const cardCenterX = rect.left + window.scrollX;
+  const cardCenterY = rect.top + window.scrollY;
+
+  companion.style.position = 'absolute';
+  companion.style.left = Math.max(16, (cardCenterX - 85)) + 'px';
+  companion.style.top = (cardCenterY + 45) + 'px';
+  companion.style.bottom = 'auto';
+  companion.style.right = 'auto';
+
+  setTimeout(() => {
+    companion.classList.remove('is-running');
+    if (dust) dust.style.opacity = '0';
+    if (typeof GameAudio !== 'undefined') GameAudio.playBoing();
+
+    const insight = projectInsights[slug] || {
+      msg: 'ผลงานชิ้นนี้สายธารให้ความสำคัญกับ User Experience และ Business Value ค่ะ!',
+      slug: slug
+    };
+
+    if (bubbleText) bubbleText.textContent = insight.msg;
     if (bubbleActions) bubbleActions.style.display = 'block';
     if (deepDiveBtn) {
-      deepDiveBtn.textContent = '🏢 ดูประวัติการทำงาน Security Pitch ➔';
-      deepDiveBtn.onclick = (e) => {
-        e.stopPropagation();
-        switchResumeTab('experience');
-        const jobCard = document.querySelector('.featured-current-job');
-        if (jobCard) jobCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      };
-    }
-  } else if (insight.isEducation) {
-    if (bubbleActions) bubbleActions.style.display = 'block';
-    if (deepDiveBtn) {
-      deepDiveBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
-      deepDiveBtn.onclick = (e) => {
-        e.stopPropagation();
-        switchResumeTab('education');
-        const resumeSec = document.getElementById('resume');
-        if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      };
-    }
-  } else if (insight.isInternship) {
-    if (bubbleActions) bubbleActions.style.display = 'block';
-    if (deepDiveBtn) {
-      deepDiveBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
-      deepDiveBtn.onclick = (e) => {
-        e.stopPropagation();
-        switchResumeTab('experience');
-        const resumeSec = document.getElementById('resume');
-        if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      };
-    }
-  } else {
-    // Case Study Project
-    if (bubbleActions) bubbleActions.style.display = 'block';
-    if (deepDiveBtn) {
-      deepDiveBtn.textContent = '📖 อ่านเคสสตัดดี้ฉบับเต็ม ➔';
       deepDiveBtn.onclick = (e) => {
         e.stopPropagation();
         openCaseStudyModal(insight.slug);
       };
     }
-  }
-
-  if (bubble) {
-    bubble.style.display = 'block';
-    bubble.classList.remove('pop');
-    void bubble.offsetWidth;
-    bubble.classList.add('pop');
-  }
-
-  if (typeof GameAudio !== 'undefined') {
-    setTimeout(() => GameAudio.playBoing(), 300);
-  }
-}
-
-function walkMapToCoord(x, y) {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-
-  const avatarPin = document.getElementById('mapAvatarPin');
-  if (avatarPin) {
-    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
-  }
-
-  const bubble = document.getElementById('chibiBubble');
-  const bubbleText = document.getElementById('chibiBubbleText');
-  const bubbleActions = document.getElementById('chibiBubbleActions');
-
-  if (bubbleText) bubbleText.textContent = 'เดินมาถึงจุดแวะพักตรวจเช็ก UX Flow แล้วค่ะ! 🌟 คลิกที่ตึกรอบข้างเพื่อเดินทางต่อนะคะ';
-  if (bubbleActions) bubbleActions.style.display = 'none';
-
-  if (bubble) {
-    bubble.style.display = 'block';
-    bubble.classList.remove('pop');
-    void bubble.offsetWidth;
-    bubble.classList.add('pop');
-  }
-}
-
-function resetMapCharacter() {
-  selectMapLandmark('security-pitch', 480, 150);
-}
-
-// ==========================================================
-// CHIBI COMPANION SHOW / HIDE TOGGLE SYSTEM
-// ==========================================================
-function toggleChibiCompanion(show) {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-  const companion = document.getElementById('chibiCompanion');
-  const pill = document.getElementById('chibiMinimizedPill');
-
-  if (typeof show === 'undefined') {
-    // If not specified, toggle current state
-    show = companion && companion.style.display === 'none';
-  }
-
-  if (show) {
-    if (companion) {
-      companion.style.display = 'flex';
-      companion.style.opacity = '1';
+    if (bubble && !isChibiBubbleDismissed) {
+      bubble.style.display = 'block';
+      bubble.classList.remove('pop');
+      void bubble.offsetWidth;
+      bubble.classList.add('pop');
     }
-    if (pill) pill.style.display = 'none';
-    pokeChibi();
-  } else {
-    if (companion) {
-      companion.style.display = 'none';
-    }
-    if (pill) pill.style.display = 'inline-flex';
+  }, 650);
+}
+
+function toggleMobileNav() {
+  const menu = document.getElementById('mainNavMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+    if (typeof GameAudio !== 'undefined') GameAudio.playPop();
   }
 }
 
-function closeChibiBubble(e) {
-  if (e) e.stopPropagation();
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-  const bubble = document.getElementById('chibiBubble');
-  if (bubble) bubble.style.display = 'none';
-}
-
-// Override summonChibiCompanion to toggle
-function summonChibiCompanion() {
-  const companion = document.getElementById('chibiCompanion');
-  if (!companion || companion.style.display === 'none') {
-    toggleChibiCompanion(true);
-  } else {
-    pokeChibi();
-  }
-}
-
-// ==========================================================
-// ADVENTURE MINIMAP REOPEN FIX
-// ==========================================================
-function handleMinimapContainerClick(e) {
-  const minimap = document.getElementById('adventureMinimap');
-  // If clicked while collapsed, expand it!
-  if (minimap && minimap.classList.contains('collapsed')) {
-    toggleMinimap(e);
-  }
-}
-
-// Enhanced toggleMinimap with sound & clean icon state
-function toggleMinimap(e) {
-  if (e) e.stopPropagation();
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-  const minimap = document.getElementById('adventureMinimap');
-  const icon = document.getElementById('minimapToggleIcon');
-  if (!minimap) return;
-
-  const isNowCollapsed = minimap.classList.toggle('collapsed');
-  if (icon) {
-    icon.textContent = isNowCollapsed ? '🗺️' : '−';
-  }
-  minimap.setAttribute('title', isNowCollapsed ? 'คลิกเพื่อเปิดแผนที่ทัวร์ 🗺️' : 'ย่อแผนที่');
-}
-
-// ==========================================================
-// 3-WAY VIEW SWITCHER (LOCALROUTE SIMULATOR / MAP / DECK)
-// ==========================================================
+// ==========================================
+// ADVENTURE TOWN MAP & DECK VIEW SWITCHER
+// ==========================================
 function switchDeckView(mode) {
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
 
@@ -1300,6 +1170,16 @@ function switchDeckView(mode) {
   const deckWrap = document.getElementById('deckViewWrap');
   const btnMap = document.getElementById('btnSwitchMap');
   const btnDeck = document.getElementById('btnSwitchDeck');
+  const companion = document.getElementById('chibiCompanion');
+
+  // Ensure companion docks cleanly at bottom-left
+  if (companion && !isChibiCompanionMinimized) {
+    companion.style.position = 'fixed';
+    companion.style.bottom = '24px';
+    companion.style.left = '28px';
+    companion.style.top = 'auto';
+    companion.style.right = 'auto';
+  }
 
   if (mode === 'map') {
     if (mapWrap) mapWrap.style.display = 'block';
@@ -1311,23 +1191,6 @@ function switchDeckView(mode) {
     if (deckWrap) deckWrap.style.display = 'flex';
     if (btnDeck) btnDeck.classList.add('active');
     if (btnMap) btnMap.classList.remove('active');
-  }
-}
-
-function setSimDeviceMode(mode) {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-  const frame = document.getElementById('phoneDeviceFrame');
-  const btnMobile = document.getElementById('btnSimMobile');
-  const btnWide = document.getElementById('btnSimWide');
-
-  if (mode === 'wide') {
-    if (frame) frame.classList.add('wide-mode');
-    if (btnWide) btnWide.classList.add('active');
-    if (btnMobile) btnMobile.classList.remove('active');
-  } else {
-    if (frame) frame.classList.remove('wide-mode');
-    if (btnMobile) btnMobile.classList.add('active');
-    if (btnWide) btnWide.classList.remove('active');
   }
 }
 
@@ -1358,21 +1221,7 @@ function handleHudActionClick() {
   }
 }
 
-// Expand projectInsights with LocalRoute
-if (typeof projectInsights !== 'undefined') {
-  projectInsights['localroute-transit-travel-hub'] = {
-    title: 'LocalRoute Transit & Travel Hub',
-    badge: '🗺️ แอปแผนที่ขนส่งไทย / Live Vercel',
-    msg: 'ยินดีต้อนรับสู่สถานี LocalRoute! 🚊 แอปนำทางรถสองแถวแดง & ขนส่งสาธารณะไทย พร้อมแผนที่ Leaflet และตัวช่วยนักท่องเที่ยว ลองเล่นแอปจริงได้เลยนะคะ!',
-    slug: 'localroute-transit-travel-hub',
-    icon: '🚊',
-    actionText: '🎮 สลับไปเล่นแอปตัวเต็ม ➔'
-  };
-}
-
-// Enhanced selectMapLandmark to update Map Avatar + Station HUD
-const originalSelectMapLandmark = selectMapLandmark;
-selectMapLandmark = function(slug, x, y) {
+function selectMapLandmark(slug, x, y) {
   currentHudSlug = slug;
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
 
@@ -1389,78 +1238,7 @@ selectMapLandmark = function(slug, x, y) {
     icon: '📍'
   };
 
-  // 2. Update Map Station HUD
-  const hudIcon = document.getElementById('hudStationIcon');
-  const hudTitle = document.getElementById('hudStationTitle');
-  const hudDesc = document.getElementById('hudStationDesc');
-  const hudBtn = document.getElementById('hudActionBtn');
-
-  if (hudIcon) hudIcon.textContent = insight.icon || (insight.badge ? insight.badge.split(' ')[0] : '📍');
-  if (hudTitle) hudTitle.textContent = insight.title;
-  if (hudDesc) hudDesc.textContent = insight.msg;
-
-  if (hudBtn) {
-    if (insight.slug === 'localroute-transit-travel-hub') {
-      hudBtn.textContent = '🎮 สลับไปเล่นแอปตัวเต็ม ➔';
-    } else if (insight.isCareer) {
-      hudBtn.textContent = '🏢 ดูประวัติ Security Pitch ➔';
-    } else if (insight.isEducation) {
-      hudBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
-    } else if (insight.isInternship) {
-      hudBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
-    } else {
-      hudBtn.textContent = '📖 เปิดเคสสตัดดี้ฉบับเต็ม ➔';
-    }
-  }
-
-  // 3. Update Chibi Companion Bubble
-  const bubble = document.getElementById('chibiBubble');
-  const bubbleText = document.getElementById('chibiBubbleText');
-  const bubbleActions = document.getElementById('chibiBubbleActions');
-  const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
-
-  if (bubbleText) bubbleText.textContent = insight.msg;
-  if (bubbleActions) bubbleActions.style.display = 'block';
-  if (deepDiveBtn) {
-    deepDiveBtn.onclick = (e) => {
-      e.stopPropagation();
-      handleHudActionClick();
-    };
-  }
-
-  if (bubble) {
-    bubble.style.display = 'block';
-    bubble.classList.remove('pop');
-    void bubble.offsetWidth;
-    bubble.classList.add('pop');
-  }
-
-  if (typeof GameAudio !== 'undefined') {
-    setTimeout(() => GameAudio.playBoing(), 300);
-  }
-};
-
-// ==========================================================
-// REFINED MAP INTERACTION: STATION HUD FOCUSED (NO LEFT DISTRACTION)
-// ==========================================================
-selectMapLandmark = function(slug, x, y) {
-  currentHudSlug = slug;
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-
-  // 1. Move Avatar Pin on SVG map
-  const avatarPin = document.getElementById('mapAvatarPin');
-  if (avatarPin) {
-    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
-  }
-
-  const insight = projectInsights[slug] || {
-    title: slug,
-    msg: 'ยินดีต้อนรับสู่สถานีผลงานของสายธารค่ะ!',
-    slug: slug,
-    icon: '📍'
-  };
-
-  // 2. Update Map Station HUD (Center Top of Map - Eye Line of Sight)
+  // 2. Update Map Station HUD (Docked at Bottom of Map for direct line-of-sight)
   const hud = document.getElementById('mapStationHud');
   const hudIcon = document.getElementById('hudStationIcon');
   const hudTitle = document.getElementById('hudStationTitle');
@@ -1473,6 +1251,7 @@ selectMapLandmark = function(slug, x, y) {
   if (hudDesc) hudDesc.textContent = insight.msg;
 
   if (hudBtn) {
+    hudBtn.onclick = handleHudActionClick;
     if (insight.slug === 'localroute-transit-travel-hub') {
       hudBtn.textContent = '🚀 เปิดแอป LocalRoute (Live Vercel) ➔';
     } else if (insight.isCareer) {
@@ -1486,15 +1265,73 @@ selectMapLandmark = function(slug, x, y) {
     }
   }
 
-  // 3. DO NOT force open bottom-left chibiBubble! Keep it hidden to prevent eye fatigue
+  // 3. Keep bottom-left bubble hidden during map interactions so gaze stays on the map
   const bubble = document.getElementById('chibiBubble');
   if (bubble) bubble.style.display = 'none';
 
   if (typeof GameAudio !== 'undefined') {
     setTimeout(() => GameAudio.playBoing(), 250);
   }
-};
+}
 
+function walkMapToCoord(x, y) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  const avatarPin = document.getElementById('mapAvatarPin');
+  if (avatarPin) {
+    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+  }
+
+  const hud = document.getElementById('mapStationHud');
+  const hudIcon = document.getElementById('hudStationIcon');
+  const hudTitle = document.getElementById('hudStationTitle');
+  const hudDesc = document.getElementById('hudStationDesc');
+  const hudBtn = document.getElementById('hudActionBtn');
+
+  if (hud) hud.style.display = 'flex';
+  if (hudIcon) hudIcon.textContent = '⭐';
+  if (hudTitle) hudTitle.textContent = 'จุดพักตรวจเช็ก UX Flow & Design Tokens';
+  if (hudDesc) hudDesc.textContent = 'เดินมาถึงจุดแวะพักตรวจเช็ก UX Flow แล้วค่ะ! คลิกที่ตึกหรือสถานีรอบข้างเพื่อเดินทางต่อนะคะ';
+  if (hudBtn) {
+    hudBtn.textContent = '🏠 กลับฐานทัพ Security Pitch';
+    hudBtn.onclick = resetMapCharacter;
+  }
+
+  const bubble = document.getElementById('chibiBubble');
+  if (bubble) bubble.style.display = 'none';
+}
+
+function resetMapCharacter() {
+  selectMapLandmark('security-pitch', 480, 195);
+}
+
+// ==========================================
+// ADVENTURE MINIMAP TOGGLE
+// ==========================================
+function handleMinimapContainerClick(e) {
+  const minimap = document.getElementById('adventureMinimap');
+  if (minimap && minimap.classList.contains('collapsed')) {
+    toggleMinimap(e);
+  }
+}
+
+function toggleMinimap(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const minimap = document.getElementById('adventureMinimap');
+  const icon = document.getElementById('minimapToggleIcon');
+  if (!minimap) return;
+
+  const isNowCollapsed = minimap.classList.toggle('collapsed');
+  if (icon) {
+    icon.textContent = isNowCollapsed ? '🗺️' : '−';
+  }
+  minimap.setAttribute('title', isNowCollapsed ? 'คลิกเพื่อเปิดแผนที่ทัวร์ 🗺️' : 'ย่อแผนที่');
+}
+
+// ==========================================
+// LIVE APP DEMO MODAL CONTROLLERS
+// ==========================================
 function openLiveAppModal() {
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
   const modal = document.getElementById('liveAppModal');
@@ -1510,4 +1347,16 @@ function closeLiveAppModal() {
     modal.classList.remove('open');
     document.body.style.overflow = '';
   }
+}
+
+// Ensure LocalRoute metadata is present in projectInsights
+if (typeof projectInsights !== 'undefined') {
+  projectInsights['localroute-transit-travel-hub'] = {
+    title: 'LocalRoute Transit & Travel Hub',
+    badge: '🗺️ แอปแผนที่ขนส่งไทย / Live Vercel',
+    msg: 'ยินดีต้อนรับสู่สถานี LocalRoute! 🚊 แอปนำทางรถสองแถวแดง & ขนส่งสาธารณะไทย พร้อมแผนที่ Leaflet และตัวช่วยนักท่องเที่ยว ลองเล่นแอปจริงได้เลยนะคะ!',
+    slug: 'localroute-transit-travel-hub',
+    icon: '🚊',
+    actionText: '🚀 เปิดแอป LocalRoute (Live Vercel) ➔'
+  };
 }
