@@ -4071,36 +4071,58 @@ textarea.form-control {
 /* Map Station HUD Drawer */
 .map-station-hud {
   position: absolute;
-  bottom: 14px;
-  left: 16px;
-  right: 16px;
+  bottom: 16px;
+  right: 20px;
+  left: auto;
+  width: auto;
+  max-width: 440px;
   z-index: 50;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 22px 14px 20px;
-  background: rgba(15, 23, 42, 0.95);
+  flex-direction: column;
+  padding: 14px 18px 14px 16px;
+  background: rgba(15, 23, 42, 0.96);
   backdrop-filter: blur(14px);
   border: 2px solid #facc15;
   border-radius: 18px;
   color: #ffffff;
-  flex-wrap: wrap;
-  gap: 12px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(250, 204, 21, 0.35);
   animation: hudPopUp 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.25s ease;
 }
 
 @keyframes hudPopUp {
-  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  from { opacity: 0; transform: translateY(18px) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+.station-hud-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.station-hud-toggle-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.station-hud-toggle-btn:hover {
+  background: #facc15;
+  color: #0f172a;
+}
+
 .station-hud-close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: #94a3b8;
@@ -4109,7 +4131,7 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   transition: all 0.2s ease;
   line-height: 1;
@@ -4118,9 +4140,26 @@ textarea.form-control {
 .station-hud-close-btn:hover {
   background: #f43f5e;
   color: #ffffff;
-  transform: scale(1.1);
 }
-  to { opacity: 1; transform: translateY(0); }
+
+.station-hud-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Collapsed compact state */
+.map-station-hud.collapsed {
+  padding: 8px 14px;
+  max-width: 280px;
+}
+
+.map-station-hud.collapsed .station-hud-body {
+  display: none;
+}
+to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes hudSlideDown {
@@ -4981,5 +5020,277 @@ textarea.form-control {
     left: 10px;
     right: 10px;
     padding: 12px 14px;
+  }
+}
+
+
+/* ==========================================================
+   DEDICATED FULL-TIME SHOWCASE: SECURITY PITCH (TAB 2)
+   ========================================================== */
+.single-company-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
+
+.sc-header-card {
+  background: linear-gradient(145deg, #131c2e 0%, #0c1322 100%);
+  border: 2px solid rgba(250, 204, 21, 0.35);
+  border-radius: 20px;
+  padding: 28px 32px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(250, 204, 21, 0.1);
+}
+
+.sc-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.sc-badge-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.sc-status-pill {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sc-tenure-pill {
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  color: #facc15;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.sc-company-name {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.sc-role-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-top: 4px;
+}
+
+.sc-impact-summary-badge {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1.5px solid rgba(250, 204, 21, 0.4);
+  padding: 12px 18px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.sis-number {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #facc15;
+  line-height: 1;
+}
+
+.sis-label {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 700;
+  margin-top: 4px;
+  display: block;
+  line-height: 1.3;
+}
+
+.sc-lead-desc {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+
+.sc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.sc-metric-box {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-align: center;
+}
+
+.sc-m-val {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #facc15;
+}
+
+.sc-m-lbl {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+  display: block;
+  line-height: 1.3;
+}
+
+.sc-pillars-head {
+  margin-top: 10px;
+}
+
+.sc-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.sc-pillar-card {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px 22px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.sc-pillar-card:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  background: #151e30;
+}
+
+.pillar-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.pillar-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+
+.pillar-desc {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.pillar-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pillar-tags span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.sc-philosophy-quote {
+  background: rgba(15, 23, 42, 0.75);
+  border-left: 4px solid #facc15;
+  border-radius: 0 14px 14px 0;
+  padding: 16px 22px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.quote-symbol {
+  font-size: 2.5rem;
+  color: #facc15;
+  line-height: 1;
+  font-family: serif;
+}
+
+.sc-philosophy-quote p {
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ==========================================================
+   DRAGGABLE CHIBI COMPANION ENHANCEMENTS
+   ========================================================== */
+.chibi-companion {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.chibi-companion.is-dragging {
+  cursor: grabbing !important;
+}
+
+.chibi-drag-pill {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid #facc15;
+  color: #facc15;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.chibi-companion:hover .chibi-drag-pill {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .sc-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sc-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .map-station-hud {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
   }
 }

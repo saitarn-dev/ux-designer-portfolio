@@ -160,6 +160,7 @@ function renderCaseStudies(items) {
 // Open In-Depth Case Study Modal
 function openCaseStudyModal(slug) {
   if (typeof GameAudio !== 'undefined') GameAudio.playChime();
+  if (typeof closeChibiBubble === 'function') closeChibiBubble();
   const study = caseStudies.find(s => s.slug === slug);
   if (!study) return;
 
@@ -944,8 +945,8 @@ const projectInsights = {
   },
   'pim-education': {
     title: 'สถาบันการจัดการปัญญาภิวัฒน์ (PIM)',
-    badge: '🎓 ปริญญาตรีเกียรตินิยมอันดับ 1',
-    msg: 'สถานี PIM Academy! 🎓 สายธารจบปริญญาตรีเกียรตินิยมอันดับ 1 ทุนการศึกษาเต็มจำนวน พร้อมฝึกงานจริงแบบ Work-based Learning ค่ะ!',
+    badge: '🎓 ปริญญาตรีอันดับ 1',
+    msg: 'สถานี PIM Academy! 🎓 สายธารจบปริญญาตรีอันดับ 1 ทุนการศึกษาเต็มจำนวน พร้อมฝึกงานจริงแบบ Work-based Learning ค่ะ!',
     slug: 'pim-education',
     isEducation: true
   },
@@ -1209,7 +1210,29 @@ function switchDeckView(mode) {
   }
 }
 
+
+function toggleMapStationHud(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const hud = document.getElementById('mapStationHud');
+  const btn = document.getElementById('stationHudToggleBtn');
+  if (!hud) return;
+
+  const isCollapsed = hud.classList.toggle('collapsed');
+  if (btn) {
+    btn.textContent = isCollapsed ? '▴ ขยาย' : '▾ ย่อ';
+    btn.setAttribute('title', isCollapsed ? 'คลิกเพื่อขยายแถบสถานี' : 'คลิกเพื่อย่อแถบสถานี');
+  }
+}
+
 function closeMapStationHud(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const hud = document.getElementById('mapStationHud');
+  if (hud) hud.style.display = 'none';
+}
+
+function _oldCloseHud(e) {
   if (e) e.stopPropagation();
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
   const hud = document.getElementById('mapStationHud');
@@ -1366,6 +1389,7 @@ function toggleMinimap(e) {
 // ==========================================
 function openLiveAppModal() {
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  if (typeof closeChibiBubble === 'function') closeChibiBubble();
   const modal = document.getElementById('liveAppModal');
   if (modal) {
     modal.classList.add('open');
@@ -1391,4 +1415,109 @@ if (typeof projectInsights !== 'undefined') {
     icon: '🚊',
     actionText: '🚀 เปิดแอป LocalRoute (Live Vercel) ➔'
   };
+}
+
+
+// ==========================================
+// DRAGGABLE CHIBI COMPANION (DRAG & DROP ANYWHERE)
+// ==========================================
+let isChibiDragging = false;
+let didChibiDragMove = false;
+
+function initDraggableChibi() {
+  const companion = document.getElementById('chibiCompanion');
+  if (!companion) return;
+
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+
+  function onDragStart(e) {
+    // Don't drag if user clicked a button or close icon
+    if (e.target.closest('button') || e.target.closest('a')) return;
+
+    isChibiDragging = true;
+    didChibiDragMove = false;
+
+    const pointer = e.touches ? e.touches[0] : e;
+    dragStartX = pointer.clientX;
+    dragStartY = pointer.clientY;
+
+    const rect = companion.getBoundingClientRect();
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    companion.classList.add('is-dragging');
+    companion.style.transition = 'none';
+
+    // Lock to fixed positioning
+    companion.style.position = 'fixed';
+    companion.style.left = initialLeft + 'px';
+    companion.style.top = initialTop + 'px';
+    companion.style.bottom = 'auto';
+    companion.style.right = 'auto';
+
+    window.addEventListener('pointermove', onDragMove, { passive: false });
+    window.addEventListener('pointerup', onDragEnd);
+    window.addEventListener('touchmove', onDragMove, { passive: false });
+    window.addEventListener('touchend', onDragEnd);
+  }
+
+  function onDragMove(e) {
+    if (!isChibiDragging) return;
+    const pointer = e.touches ? e.touches[0] : e;
+    const deltaX = pointer.clientX - dragStartX;
+    const deltaY = pointer.clientY - dragStartY;
+
+    if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+      didChibiDragMove = true;
+      if (e.cancelable) e.preventDefault();
+    }
+
+    let newLeft = initialLeft + deltaX;
+    let newTop = initialTop + deltaY;
+
+    // Viewport boundaries
+    const compW = companion.offsetWidth || 75;
+    const compH = companion.offsetHeight || 95;
+    newLeft = Math.max(8, Math.min(window.innerWidth - compW - 8, newLeft));
+    newTop = Math.max(8, Math.min(window.innerHeight - compH - 8, newTop));
+
+    companion.style.left = newLeft + 'px';
+    companion.style.top = newTop + 'px';
+  }
+
+  function onDragEnd() {
+    if (!isChibiDragging) return;
+    isChibiDragging = false;
+    companion.classList.remove('is-dragging');
+    companion.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+
+    window.removeEventListener('pointermove', onDragMove);
+    window.removeEventListener('pointerup', onDragEnd);
+    window.removeEventListener('touchmove', onDragMove);
+    window.removeEventListener('touchend', onDragEnd);
+  }
+
+  companion.addEventListener('pointerdown', onDragStart);
+  companion.addEventListener('touchstart', onDragStart, { passive: true });
+}
+
+// Update pokeChibi so dragging doesn't accidentally trigger bubble
+const originalPokeChibi = pokeChibi;
+pokeChibi = function() {
+  if (didChibiDragMove) {
+    didChibiDragMove = false;
+    return; // Don't pop quote if user was dragging
+  }
+  originalPokeChibi();
+};
+
+
+// Initialize draggable companion on load
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initDraggableChibi);
+} else {
+  initDraggableChibi();
 }

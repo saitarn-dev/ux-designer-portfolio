@@ -175,7 +175,7 @@
           </div>
           <div class="petalyx-ticket-item ticket-notch-card" title="วุฒิการศึกษาระดับปริญญาตรี">
             <span class="petalyx-ticket-label">🎓 Education</span>
-            <div class="petalyx-ticket-val">PIM (เกียรตินิยม)</div>
+            <div class="petalyx-ticket-val">PIM</div>
             <span class="petalyx-ticket-sub">นิเทศศาสตร์ แบรนด์องค์กร</span>
           </div>
           <div class="petalyx-ticket-item ticket-notch-card" title="ทักษะความเชี่ยวชาญหลัก">
@@ -498,18 +498,23 @@
 
             <!-- Station HUD Info Drawer (Docked at Bottom of Map for direct line-of-sight) -->
             <div class="map-station-hud" id="mapStationHud" style="display: none;">
-              <button type="button" class="station-hud-close-btn" onclick="closeMapStationHud(event)" title="ปิดหน้าต่างสถานี">✕</button>
-              <div class="station-hud-left">
-                <span class="station-hud-icon" id="hudStationIcon">🛡️</span>
-                <div>
-                  <h4 class="station-hud-title" id="hudStationTitle">Security Pitch HQ (ฐานปฏิบัติการหลัก 5+ ปี)</h4>
-                  <p class="station-hud-desc" id="hudStationDesc">ดูแลงาน UX/UI และ Front-End แพลตฟอร์ม Privacy & Cybersecurity SaaS มากว่า 5 ปี 9 เดือน</p>
-                </div>
+              <div class="station-hud-controls">
+                <button type="button" class="station-hud-toggle-btn" id="stationHudToggleBtn" onclick="toggleMapStationHud(event)" title="ย่อหรือขยายแถบสถานี">▾ ย่อ</button>
+                <button type="button" class="station-hud-close-btn" onclick="closeMapStationHud(event)" title="ปิดหน้าต่างสถานี">✕</button>
               </div>
-              <div class="station-hud-actions" id="hudStationActions">
-                <button type="button" class="station-hud-action-btn" id="hudActionBtn" onclick="handleHudActionClick()">
-                  🏢 ดูประวัติการทำงาน ➔
-                </button>
+              <div class="station-hud-body" id="stationHudBody">
+                <div class="station-hud-left">
+                  <span class="station-hud-icon" id="hudStationIcon">🛡️</span>
+                  <div>
+                    <h4 class="station-hud-title" id="hudStationTitle">Security Pitch HQ (ฐานปฏิบัติการหลัก 5+ ปี)</h4>
+                    <p class="station-hud-desc" id="hudStationDesc">ดูแลงาน UX/UI และ Front-End แพลตฟอร์ม Privacy & Cybersecurity SaaS มากว่า 5 ปี 9 เดือน</p>
+                  </div>
+                </div>
+                <div class="station-hud-actions" id="hudStationActions">
+                  <button type="button" class="station-hud-action-btn" id="hudActionBtn" onclick="handleHudActionClick()">
+                    🏢 ดูประวัติการทำงาน ➔
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -965,7 +970,7 @@
                 </div>
                 <div class="info-item">
                   <span class="info-label">การศึกษา :</span>
-                  <span class="info-val">ปริญญาตรี (เกียรตินิยม) คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ · PIM</span>
+                  <span class="info-val">ปริญญาตรี คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ · PIM</span>
                 </div>
               </div>
 
@@ -983,58 +988,193 @@
           </div>
         </div>
 
-        <!-- Tab 2: ประสบการณ์ทำงาน -->
+        <!-- Tab 2: ประสบการณ์ทำงาน (Dedicated Full-Time Career Showcase: Security Pitch) -->
         <div class="resume-tab-pane" id="tab-experience">
           
-          <!-- งานประจำปัจจุบัน (Featured Current Job) -->
-          <div class="featured-current-job">
-            <div class="job-header-flex">
-              <div>
-                <div class="job-company-title">
-                  <span>🛡️ Security Pitch</span>
+          <div class="single-company-showcase">
+            <!-- Header Banner -->
+            <div class="sc-header-card">
+              <div class="sc-header-top">
+                <div class="sc-company-info">
+                  <div class="sc-badge-row">
+                    <span class="sc-status-pill"><span class="pulse-dot"></span> งานประจำปัจจุบัน (Full-Time Role)</span>
+                    <span class="sc-tenure-pill">🛡️ 5 ปี 9 เดือน (20 ม.ค. 2021 – ปัจจุบัน)</span>
+                  </div>
+                  <h3 class="sc-company-name">Security Pitch Co., Ltd.</h3>
+                  <div class="sc-role-title">UI & UX Designer & Developer</div>
                 </div>
-                <div class="job-role-subtitle">UI & UX Designer & Developer</div>
+                <div class="sc-impact-summary-badge">
+                  <span class="sis-number">5+</span>
+                  <span class="sis-label">ปีแห่งความเชี่ยวชาญ<br>Cybersecurity & SaaS</span>
+                </div>
               </div>
-              <div class="job-current-badge">
-                <span class="pulse-dot"></span>
-                <span>20 ม.ค. 2021 - ปัจจุบัน · 5 ปี 9 เดือน (งานประจำปัจจุบัน)</span>
+
+              <p class="sc-lead-desc">
+                ตลอดระยะเวลากว่า 5 ปี 9 เดือนที่ <strong>Security Pitch</strong> สายธารได้รับความไว้วางใจให้เป็นผู้ออกแบบประสบการณ์ผู้ใช้ (UX) และส่วนต่อประสาน (UI) หลักของแพลตฟอร์มด้านเทคโนโลยีความปลอดภัยระดับองค์กร (Enterprise Privacy & Cybersecurity SaaS) ควบคู่กับบทบาท Front-End Developer ที่ช่วยเชื่อมโยงงานดีไซน์สู่โค้ดจริงอย่างไร้รอยต่อ
+              </p>
+
+              <!-- Metrics Strip -->
+              <div class="sc-metrics-grid">
+                <div class="sc-metric-box">
+                  <span class="sc-m-val">5+ ปี 9 เดือน</span>
+                  <span class="sc-m-lbl">ความเชี่ยวชาญต่อเนื่อง</span>
+                </div>
+                <div class="sc-metric-box">
+                  <span class="sc-m-val">14+ โมดูล</span>
+                  <span class="sc-m-lbl">ระบบ SaaS ขนาดใหญ่ที่ดูแล</span>
+                </div>
+                <div class="sc-metric-box">
+                  <span class="sc-m-val">2.4x</span>
+                  <span class="sc-m-lbl">Dev ส่งงานไวขึ้นด้วย Design Tokens</span>
+                </div>
+                <div class="sc-metric-box">
+                  <span class="sc-m-val">100%</span>
+                  <span class="sc-m-lbl">ความแม่นยำในการแปลงดีไซน์สู่โค้ด</span>
+                </div>
               </div>
             </div>
 
-            <p style="font-size: 0.94rem; color: #cbd5e1; line-height: 1.65; margin: 0;">
-              รับผิดชอบการออกแบบและพัฒนาส่วนต่อประสาน (UI) และประสบการณ์ผู้ใช้ (UX) สำหรับแพลตฟอร์มด้านเทคโนโลยีและความปลอดภัย วางรากฐาน Design System ร่วมขึ้นโครงสร้าง Front-End และประสานงานร่วมกับทีม Developer ให้โปรดักต์ทำงานได้อย่างสมบูรณ์แบบ
-            </p>
+            <!-- 4 Core Contribution Pillars Bento -->
+            <div class="sc-pillars-head">
+              <span class="section-tag">✦ 4 เสาหลักแห่งผลงานและความเชี่ยวชาญที่ Security Pitch</span>
+            </div>
 
-            <ul class="job-highlights-list">
-              <li>
-                <span class="check-icon">✓</span>
-                <span>ออกแบบ UI/UX แพลตฟอร์มความปลอดภัยให้ใช้งานง่ายและทรงพลัง</span>
-              </li>
-              <li>
-                <span class="check-icon">✓</span>
-                <span>สร้างและดูแล Figma Design Tokens & Component Libraries ร่วมกับทีม Dev</span>
-              </li>
-              <li>
-                <span class="check-icon">✓</span>
-                <span>ทำ UX Research และ Usability Testing ลดจุดติดขัดของผู้ใช้งานจริง</span>
-              </li>
-              <li>
-                <span class="check-icon">✓</span>
-                <span>ร่วมพัฒนาโค้ดหน้าบ้าน (Front-End) ให้ได้ผลงานตรงตามดีไซน์ 100%</span>
-              </li>
-            </ul>
+            <div class="sc-pillars-grid">
+              <!-- Pillar 1 -->
+              <div class="sc-pillar-card">
+                <div class="pillar-icon">🛡️</div>
+                <h4 class="pillar-title">1. Enterprise Privacy & Security SaaS</h4>
+                <p class="pillar-desc">
+                  ออกแบบ UI/UX สำหรับระบบบริหารจัดการ PDPA, Cyber Threat Intelligence และ Compliance Dashboard ที่มีความซับซ้อนของข้อมูลสูง (Data Density) ให้ใช้งานง่าย ลดขั้นตอนการทำงาน และช่วยให้ผู้ดูแลระบบตัดสินใจได้อย่างรวดเร็ว
+                </p>
+                <div class="pillar-tags">
+                  <span>B2B Enterprise SaaS</span>
+                  <span>Data Visualization</span>
+                  <span>Complex Workflows</span>
+                </div>
+              </div>
+
+              <!-- Pillar 2 -->
+              <div class="sc-pillar-card">
+                <div class="pillar-icon">🎨</div>
+                <h4 class="pillar-title">2. Figma Design System Architecture</h4>
+                <p class="pillar-desc">
+                  วางรากฐานและดูแลระบบ Figma Component Libraries, Semantic Variables และ Design Tokens ครอบคลุมกว่า 14 โมดูล พร้อมจัดทำมาตรฐาน Dev Handoff ที่ช่วยให้ทีม Developer พัฒนาหน้าจอได้รวดเร็วและถูกต้องตรงกันทั้งระบบ
+                </p>
+                <div class="pillar-tags">
+                  <span>Design Tokens</span>
+                  <span>Figma Variables</span>
+                  <span>Component Sets</span>
+                </div>
+              </div>
+
+              <!-- Pillar 3 -->
+              <div class="sc-pillar-card">
+                <div class="pillar-icon">💻</div>
+                <h4 class="pillar-title">3. Front-End Development & Code QA</h4>
+                <p class="pillar-desc">
+                  ร่วมขึ้นโครงสร้างโค้ดหน้าบ้าน (HTML5, Modern CSS, JavaScript) และทำงานเคียงข้างวิศวกรซอฟต์แวร์ในการทำ Pixel-Perfect QA เพื่อรับประกันว่างานดีไซน์บน Figma จะถูกแปลงเป็นซอฟต์แวร์ที่ใช้งานได้จริงบน Production อย่างสมบูรณ์แบบ
+                </p>
+                <div class="pillar-tags">
+                  <span>Front-End Dev</span>
+                  <span>HTML5 / CSS3</span>
+                  <span>Dev Mode Handoff</span>
+                </div>
+              </div>
+
+              <!-- Pillar 4 -->
+              <div class="sc-pillar-card">
+                <div class="pillar-icon">🔍</div>
+                <h4 class="pillar-title">4. User Research & Usability Engineering</h4>
+                <p class="pillar-desc">
+                  ทำ Heuristic Evaluation, User Journey Mapping และจัดทำ Usability Testing เพื่อค้นหา Pain Points ของผู้ใช้งานจริง นำข้อมูลเชิงคุณภาพและสถิติมาปรับปรุง Flow ให้กระชับ ลดความผิดพลาด และยกระดับความพึงพอใจของผู้ใช้
+                </p>
+                <div class="pillar-tags">
+                  <span>Usability Testing</span>
+                  <span>Heuristic Audit</span>
+                  <span>User Journey</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Culture / Philosophy Callout -->
+            <div class="sc-philosophy-quote">
+              <span class="quote-symbol">“</span>
+              <p>
+                การได้ทำงานที่ <strong>Security Pitch ต่อเนื่องกว่า 5 ปี 9 เดือน</strong> หล่อหลอมให้สายธารเข้าใจอย่างลึกซึ้งทั้งในมิติของ Product Strategy, พฤติกรรมผู้ใช้ระดับองค์กร และขีดจำกัดทางเทคนิคของทีม Dev จึงสามารถออกแบบสิ่งที่ตอบโจทย์ทางธุรกิจและสร้างประสบการณ์ที่ดีที่สุดให้แก่ผู้ใช้งานได้จริง
+              </p>
+            </div>
           </div>
+        </div>
 
-          <!-- เส้นทางฝึกประสบการณ์วิชาชีพ 4 องค์กร (Career & Internship Journey) -->
-          <div class="internships-sub-header">
-            <span class="tag">🌱 เส้นทางการเติบโตและสั่งสมประสบการณ์</span>
-            <h4>ประวัติการฝึกงานและฝึกปฏิบัติวิชาชีพ 4 องค์กรชั้นนำ (Work-based Learning)</h4>
-            <p style="color: #94a3b8; font-size: 0.88rem; margin: 4px 0 0;">
-              หลักสูตร PIM บ่มเพาะทักษะการทำงานจริงอย่างเข้มข้น ผ่านการฝึกปฏิบัติงานจริงในองค์กรที่หลากหลาย สร้างพื้นฐานความเข้าใจผู้ใช้งานและการสื่อสารอย่างลึกซึ้ง
-            </p>
-          </div>
+        </div>
+        </div>
 
-          <div class="career-journey-timeline">
+        <!-- Tab 3: ประวัติการศึกษา (Education & Academic Background) -->
+        <div class="resume-tab-pane" id="tab-education">
+          <div class="education-showcase-grid">
+            
+            <!-- Degree Card: PIM Faculty of Communication Arts (Honors) -->
+            <div class="education-card-hero">
+              <div class="edu-hero-badge-row">
+                <span class="edu-level-pill">🎓 ปริญญาตรี · นิเทศศาสตรบัณฑิต</span>
+                
+                <span class="edu-wbl-tag">💼 Work-based Learning</span>
+              </div>
+
+              <h3 class="edu-major-title">คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</h3>
+              <div class="edu-institution-name">สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</div>
+
+              <p class="edu-desc-lead">
+                สำเร็จการศึกษาจาก <strong>คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong> โดดเด่นด้วยหลักสูตรการเรียนรู้แบบ <strong>Work-based Learning</strong> ที่ผสานองค์ความรู้ด้าน <strong>การสื่อสารภาพลักษณ์แบรนด์ (Brand Communication)</strong> เข้ากับการปฏิบัติงานจริงใน 4 องค์กรชั้นนำ เป็นรากฐานสำคัญที่ส่งเสริมให้เข้าใจผู้บริโภค พฤติกรรมผู้ใช้ และบริบททางธุรกิจได้อย่างรอบด้าน
+              </p>
+
+              <div class="edu-synergy-header">
+                <span class="synergy-tag">✨ ทำไม "นิเทศศาสตร์ & แบรนด์" จึงเป็นจุดแข็งสำคัญของ UI/UX Designer สายธาร?</span>
+              </div>
+
+              <div class="edu-highlights-grid">
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🎯</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Brand Strategy x User Experience</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เข้าใจหลักจิตวิทยาการสื่อสารแบรนด์ ออกแบบ Product Interface ที่ไม่เพียงแค่สวยงาม แต่ยังสะท้อน DNA และคุณค่าของธุรกิจได้อย่างหนักแน่น</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">✍️</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">UX Copywriting & Tone of Voice</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เชี่ยวชาญการเขียนข้อความในระบบ (Microcopy, Error States, CTA) ให้กระชับ สื่อสารตรงประเด็น และสร้างความรู้สึกเป็นมิตรแก่ผู้ใช้</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🧩</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Design Systems & Brand Consistency</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">นำระเบียบ Brand Guidelines มาพัฒนาระบบ Figma Design Tokens, Color Palettes และ Component Libraries ให้มีความเป็นหนึ่งเดียวกัน 100%</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🤝</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Cross-Functional Alignment</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">สื่อสารแนวคิดดีไซน์ รับฟังโจทย์ธุรกิจจากผู้บริหาร และทำงานประสานความต้องการร่วมกับทีม Developer ได้อย่างราบรื่นไร้รอยต่อ</p>
+                  </div>
+                </div>
+              </div>
+            </d
+
+            <!-- เส้นทางฝึกประสบการณ์วิชาชีพ 4 องค์กรในหลักสูตร Work-based Learning (PIM Journey) -->
+            <div class="internships-sub-header" style="margin-top: 2rem;">
+              <span class="tag">🌱 ประสบการณ์การเรียนรู้และการฝึกงานจริง (Work-based Learning)</span>
+              <h4>เส้นทางฝึกปฏิบัติวิชาชีพ 4 องค์กรชั้นนำ จากรั้ว PIM</h4>
+              <p style="color: #94a3b8; font-size: 0.88rem; margin: 4px 0 0;">
+                หลักสูตร PIM บ่มเพาะทักษะการทำงานจริงอย่างเข้มข้น ผ่านการฝึกปฏิบัติงานจริงในองค์กรที่หลากหลายตั้งแต่ยังเป็นนักศึกษา สร้างพื้นฐานความเข้าใจผู้ใช้งานและการสื่อสารอย่างลึกซึ้ง
+              </p>
+            </div>
+
+            <div class="career-journey-timeline">
             <!-- Milestone 4: กองปราบปราม -->
             <div class="journey-item">
               <div class="journey-node">
@@ -1137,63 +1277,7 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Tab 3: ประวัติการศึกษา (Education & Academic Background) -->
-        <div class="resume-tab-pane" id="tab-education">
-          <div class="education-showcase-grid">
-            
-            <!-- Degree Card: PIM Faculty of Communication Arts (Honors) -->
-            <div class="education-card-hero">
-              <div class="edu-hero-badge-row">
-                <span class="edu-level-pill">🎓 ปริญญาตรี (เกียรตินิยม) · นิเทศศาสตรบัณฑิต</span>
-                <span class="edu-honors-tag">⭐ เกียรตินิยม (Honors Degree)</span>
-                <span class="edu-wbl-tag">💼 Work-based Learning</span>
-              </div>
-
-              <h3 class="edu-major-title">คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</h3>
-              <div class="edu-institution-name">สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</div>
-
-              <p class="edu-desc-lead">
-                สำเร็จการศึกษาด้วย <strong>เกียรตินิยม</strong> โดดเด่นด้วยหลักสูตรการเรียนรู้แบบ <strong>Work-based Learning</strong> ที่ผสานองค์ความรู้ด้าน <strong>การสื่อสารภาพลักษณ์แบรนด์ (Brand Communication)</strong> เข้ากับการปฏิบัติงานจริงใน 4 องค์กรชั้นนำ เป็นรากฐานสำคัญที่ส่งเสริมให้เข้าใจผู้บริโภค พฤติกรรมผู้ใช้ และบริบททางธุรกิจได้อย่างรอบด้าน
-              </p>
-
-              <div class="edu-synergy-header">
-                <span class="synergy-tag">✨ ทำไม "นิเทศศาสตร์ & แบรนด์" จึงเป็นจุดแข็งสำคัญของ UI/UX Designer สายธาร?</span>
-              </div>
-
-              <div class="edu-highlights-grid">
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🎯</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Brand Strategy x User Experience</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เข้าใจหลักจิตวิทยาการสื่อสารแบรนด์ ออกแบบ Product Interface ที่ไม่เพียงแค่สวยงาม แต่ยังสะท้อน DNA และคุณค่าของธุรกิจได้อย่างหนักแน่น</p>
-                  </div>
-                </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">✍️</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">UX Copywriting & Tone of Voice</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เชี่ยวชาญการเขียนข้อความในระบบ (Microcopy, Error States, CTA) ให้กระชับ สื่อสารตรงประเด็น และสร้างความรู้สึกเป็นมิตรแก่ผู้ใช้</p>
-                  </div>
-                </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🧩</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Design Systems & Brand Consistency</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">นำระเบียบ Brand Guidelines มาพัฒนาระบบ Figma Design Tokens, Color Palettes และ Component Libraries ให้มีความเป็นหนึ่งเดียวกัน 100%</p>
-                  </div>
-                </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🤝</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Cross-Functional Alignment</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">สื่อสารแนวคิดดีไซน์ รับฟังโจทย์ธุรกิจจากผู้บริหาร และทำงานประสานความต้องการร่วมกับทีม Developer ได้อย่างราบรื่นไร้รอยต่อ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          iv>
 
             <!-- Specialized Continuous Learning Card -->
             <div class="education-card-secondary">
@@ -1642,7 +1726,7 @@
             ประวัติการศึกษา (Education)
           </h4>
           <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
-            🎓 <strong>ปริญญาตรี (เกียรตินิยม) คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong><br>สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)<br>
+            🎓 <strong>ปริญญาตรี คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong><br>สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)<br>
             การเรียนรู้แบบบูรณาการร่วมกับการทำงานจริง (Work-based Learning)
           </p>
         </div>
@@ -1783,7 +1867,9 @@
   </div>
 
   <!-- INTERACTIVE CHIBI CHARACTER COMPANION (ไกด์สายธารจิ๋ว) -->
-  <div class="chibi-companion" id="chibiCompanion" title="คลิกเพื่อทักทายไกด์สายธาร!">
+  <div class="chibi-companion" id="chibiCompanion" title="คลิกเพื่อทักทาย หรือลากย้ายตำแหน่งได้ค่ะ!">
+    <!-- Drag Handle Pill -->
+    <div class="chibi-drag-pill" title="คลิกค้างแล้วลากเพื่อย้ายตำแหน่งไกด์ได้ทุกที่">⠿ ลากย้ายได้</div>
     <!-- Chibi Close/Minimize Pill Button -->
     
 
