@@ -1171,27 +1171,49 @@ function switchDeckView(mode) {
   const btnMap = document.getElementById('btnSwitchMap');
   const btnDeck = document.getElementById('btnSwitchDeck');
   const companion = document.getElementById('chibiCompanion');
-
-  // Ensure companion docks cleanly at bottom-left
-  if (companion && !isChibiCompanionMinimized) {
-    companion.style.position = 'fixed';
-    companion.style.bottom = '24px';
-    companion.style.left = '28px';
-    companion.style.top = 'auto';
-    companion.style.right = 'auto';
-  }
+  const pill = document.getElementById('chibiMinimizedPill');
 
   if (mode === 'map') {
     if (mapWrap) mapWrap.style.display = 'block';
     if (deckWrap) deckWrap.style.display = 'none';
     if (btnMap) btnMap.classList.add('active');
     if (btnDeck) btnDeck.classList.remove('active');
+
+    // USER REQUIREMENT: In Map mode, hide bottom-left floating chibi to keep UI clean!
+    if (companion) companion.style.display = 'none';
+    if (pill) pill.style.display = 'none';
+
+    // Ensure map container is smoothly in view
+    setTimeout(() => {
+      if (mapWrap) mapWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
   } else {
     if (mapWrap) mapWrap.style.display = 'none';
     if (deckWrap) deckWrap.style.display = 'flex';
     if (btnDeck) btnDeck.classList.add('active');
     if (btnMap) btnMap.classList.remove('active');
+
+    // Restore companion for Deck view if not dismissed
+    if (!isChibiCompanionMinimized) {
+      if (companion) {
+        companion.style.display = 'flex';
+        companion.style.position = 'fixed';
+        companion.style.bottom = '24px';
+        companion.style.left = '28px';
+        companion.style.top = 'auto';
+        companion.style.right = 'auto';
+      }
+    } else {
+      if (pill) pill.style.display = 'inline-flex';
+    }
   }
+}
+
+function closeMapStationHud(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const hud = document.getElementById('mapStationHud');
+  if (hud) hud.style.display = 'none';
 }
 
 // Global active HUD state
@@ -1238,14 +1260,20 @@ function selectMapLandmark(slug, x, y) {
     icon: '📍'
   };
 
-  // 2. Update Map Station HUD (Docked at Bottom of Map for direct line-of-sight)
+  // 2. Update Map Station HUD (Floating Bottom Sheet Overlay)
   const hud = document.getElementById('mapStationHud');
   const hudIcon = document.getElementById('hudStationIcon');
   const hudTitle = document.getElementById('hudStationTitle');
   const hudDesc = document.getElementById('hudStationDesc');
   const hudBtn = document.getElementById('hudActionBtn');
 
-  if (hud) hud.style.display = 'flex';
+  if (hud) {
+    hud.style.display = 'flex';
+    hud.classList.remove('hud-pulse');
+    void hud.offsetWidth;
+    hud.classList.add('hud-pulse');
+  }
+
   if (hudIcon) hudIcon.textContent = insight.icon || (insight.badge ? insight.badge.split(' ')[0] : '📍');
   if (hudTitle) hudTitle.textContent = insight.title;
   if (hudDesc) hudDesc.textContent = insight.msg;
@@ -1265,8 +1293,12 @@ function selectMapLandmark(slug, x, y) {
     }
   }
 
-  // 3. Keep bottom-left bubble hidden during map interactions so gaze stays on the map
+  // 3. Keep bottom-left floating chibi completely hidden during map tour
+  const companion = document.getElementById('chibiCompanion');
+  const pill = document.getElementById('chibiMinimizedPill');
   const bubble = document.getElementById('chibiBubble');
+  if (companion) companion.style.display = 'none';
+  if (pill) pill.style.display = 'none';
   if (bubble) bubble.style.display = 'none';
 
   if (typeof GameAudio !== 'undefined') {

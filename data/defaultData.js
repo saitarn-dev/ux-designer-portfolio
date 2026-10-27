@@ -437,7 +437,7 @@ const profileData = {
     { label: 'ประสบการณ์ทำงาน', value: '5+ ปี' },
     { label: 'สถานที่ทำงานปัจจุบัน', value: 'Security Pitch' },
     { label: 'เครื่องมือออกแบบหลัก', value: 'Figma' },
-    { label: 'สถาบันการศึกษา', value: 'ปัญญาภิวัฒน์ (PIM)' }
+    { label: 'สถาบันการศึกษา', value: 'ปริญญาตรี (เกียรตินิยม) คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ · PIM' }
   ],
   designPhilosophy: {
     title: 'แนวคิดการออกแบบที่ขับเคลื่อนธุรกิจและเข้าใจผู้ใช้งานจริง',
@@ -482,9 +482,13 @@ const profileData = {
   ],
   education: [
     {
-      year: 'สำเร็จการศึกษา',
+      year: 'สำเร็จการศึกษา (เกียรตินิยม)',
+      degree: 'นิเทศศาสตรบัณฑิต (เกียรตินิยม)',
+      faculty: 'คณะนิเทศศาสตร์',
+      major: 'สาขาการสื่อสารองค์กรและแบรนด์ (Corporate and Brand Communication)',
       title: 'สถาบันการจัดการปัญญาภิวัฒน์ (PIM)',
-      institution: 'Panyapiwat Institute of Management (การเรียนรู้แบบ Work-based Learning)'
+      institution: 'Panyapiwat Institute of Management (การเรียนรู้แบบ Work-based Learning บ่มเพาะทักษะแบรนด์และแก้ปัญหาจริง)',
+      description: 'สำเร็จการศึกษาด้วยเกียรตินิยม โดดเด่นด้านการสื่อสารแบรนด์ Tone of Voice และการประสานงานข้ามสายงาน ผสานการเรียนรู้ผ่านการฝึกงานจริงใน 4 องค์กรชั้นนำ'
     }
   ],
   socials: {

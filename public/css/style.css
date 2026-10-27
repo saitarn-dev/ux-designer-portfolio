@@ -3605,12 +3605,13 @@ textarea.form-control {
   max-width: 1080px;
   margin: 0 auto 2rem;
   background: #e8dfc8;
-  border-radius: 28px;
-  border: 3.5px solid #0f172a;
+  border-radius: 24px;
+  border: 3px solid #0f172a;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(250, 204, 21, 0.12);
   overflow: hidden;
   position: relative;
   transition: all 0.3s ease;
+  max-height: 560px;
 }
 
 .map-floating-bar {
@@ -4069,25 +4070,56 @@ textarea.form-control {
 
 /* Map Station HUD Drawer */
 .map-station-hud {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 24px;
-  background: #0f172a;
-  border-top: 2px solid rgba(250, 204, 21, 0.4);
-  border-bottom: none;
-  border-radius: 0 0 20px 20px;
+  padding: 14px 22px 14px 20px;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(14px);
+  border: 2px solid #facc15;
+  border-radius: 18px;
   color: #ffffff;
   flex-wrap: wrap;
   gap: 12px;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.4);
-  animation: hudSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  z-index: 20;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(250, 204, 21, 0.35);
+  animation: hudPopUp 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes hudSlideUp {
-  from { opacity: 0; transform: translateY(16px); }
+@keyframes hudPopUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.station-hud-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #94a3b8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 800;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.station-hud-close-btn:hover {
+  background: #f43f5e;
+  color: #ffffff;
+  transform: scale(1.1);
+}
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -4671,5 +4703,283 @@ textarea.form-control {
   .compare-row {
     grid-template-columns: 78px 1fr 32px 38px 40px;
     font-size: 0.68rem;
+  }
+}
+
+
+/* ==========================================================
+   CAREER JOURNEY TIMELINE (EASY TO READ & HIGH IMPACT)
+   ========================================================== */
+.career-journey-timeline {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+.journey-item {
+  display: flex;
+  gap: 18px;
+  position: relative;
+}
+
+.journey-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 44px;
+}
+
+.journey-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #111827;
+  border: 2px solid #facc15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.25);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.journey-line {
+  width: 3px;
+  background: linear-gradient(180deg, #facc15 0%, rgba(250, 204, 21, 0.25) 100%);
+  flex-grow: 1;
+  margin: 6px 0;
+  border-radius: 2px;
+  min-height: 44px;
+}
+
+.journey-content-card {
+  flex: 1;
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: left;
+}
+
+.journey-content-card:hover {
+  border-color: rgba(250, 204, 21, 0.45);
+  transform: translateX(4px);
+  background: #151d30;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(250, 204, 21, 0.1);
+}
+
+.journey-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.journey-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.journey-role {
+  font-size: 0.88rem;
+  color: #facc15;
+  font-weight: 700;
+  display: block;
+  margin-top: 2px;
+}
+
+.journey-date {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.journey-desc {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+
+.journey-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.journey-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* ==========================================================
+   EDUCATION SHOWCASE (COMMUNICATION ARTS & BRAND STRATEGY)
+   ========================================================== */
+.education-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  text-align: left;
+}
+
+.education-card-hero {
+  background: linear-gradient(145deg, #111b2e 0%, #0c1424 100%);
+  border: 2px solid rgba(250, 204, 21, 0.4);
+  border-radius: 20px;
+  padding: 26px 30px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(250, 204, 21, 0.15);
+  position: relative;
+}
+
+.edu-hero-badge-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.edu-level-pill {
+  background: rgba(250, 204, 21, 0.15);
+  color: #facc15;
+  border: 1.5px solid rgba(250, 204, 21, 0.4);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.edu-honors-tag {
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  color: #0f172a;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
+}
+
+.edu-wbl-tag {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.edu-major-title {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+
+.edu-institution-name {
+  font-size: 0.98rem;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.edu-desc-lead {
+  font-size: 0.94rem;
+  color: #cbd5e1;
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+
+.edu-synergy-header {
+  background: rgba(250, 204, 21, 0.08);
+  border-left: 3px solid #facc15;
+  padding: 8px 14px;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 14px;
+}
+
+.synergy-tag {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #facc15;
+}
+
+.edu-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.edu-point-item {
+  display: flex;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.edu-point-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.education-card-secondary {
+  background: #111827;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px 28px;
+}
+
+.edu-spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.spec-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.spec-list-item strong {
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .edu-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  .map-station-hud {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    right: 10px;
+    padding: 12px 14px;
   }
 }

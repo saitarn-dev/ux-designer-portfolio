@@ -175,8 +175,8 @@
           </div>
           <div class="petalyx-ticket-item ticket-notch-card" title="วุฒิการศึกษาระดับปริญญาตรี">
             <span class="petalyx-ticket-label">🎓 Education</span>
-            <div class="petalyx-ticket-val">PIM</div>
-            <span class="petalyx-ticket-sub">สถาบันการจัดการปัญญาภิวัฒน์</span>
+            <div class="petalyx-ticket-val">PIM (เกียรตินิยม)</div>
+            <span class="petalyx-ticket-sub">นิเทศศาสตร์ แบรนด์องค์กร</span>
           </div>
           <div class="petalyx-ticket-item ticket-notch-card" title="ทักษะความเชี่ยวชาญหลัก">
             <span class="petalyx-ticket-label">⚡ Core Stack</span>
@@ -453,7 +453,7 @@
                   <!-- Compact Pill Label -->
                   <g transform="translate(460, 572)">
                     <rect x="-80" y="-12" width="160" height="24" rx="12" fill="#0f172a" stroke="#f97316" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="10" font-weight="900" fill="#ffffff">🎓 PIM ACADEMY (เกียรตินิยม)</text>
+                    <text x="0" y="4" text-anchor="middle" font-size="9.5" font-weight="900" fill="#ffffff">🎓 PIM (นิเทศศาสตร์ & แบรนด์)</text>
                   </g>
                 </g>
 
@@ -497,7 +497,8 @@
             </div>
 
             <!-- Station HUD Info Drawer (Docked at Bottom of Map for direct line-of-sight) -->
-            <div class="map-station-hud" id="mapStationHud">
+            <div class="map-station-hud" id="mapStationHud" style="display: none;">
+              <button type="button" class="station-hud-close-btn" onclick="closeMapStationHud(event)" title="ปิดหน้าต่างสถานี">✕</button>
               <div class="station-hud-left">
                 <span class="station-hud-icon" id="hudStationIcon">🛡️</span>
                 <div>
@@ -964,7 +965,7 @@
                 </div>
                 <div class="info-item">
                   <span class="info-label">การศึกษา :</span>
-                  <span class="info-val">สถาบันการจัดการปัญญาภิวัฒน์</span>
+                  <span class="info-val">ปริญญาตรี (เกียรตินิยม) คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ · PIM</span>
                 </div>
               </div>
 
@@ -1024,84 +1025,209 @@
             </ul>
           </div>
 
-          <!-- ประวัติการฝึกงานและฝึกปฏิบัติวิชาชีพ -->
+          <!-- เส้นทางฝึกประสบการณ์วิชาชีพ 4 องค์กร (Career & Internship Journey) -->
           <div class="internships-sub-header">
-            <span class="tag">ประวัติการฝึกงาน</span>
-            <h4>ประสบการณ์การฝึกงานและฝึกปฏิบัติวิชาชีพ</h4>
+            <span class="tag">🌱 เส้นทางการเติบโตและสั่งสมประสบการณ์</span>
+            <h4>ประวัติการฝึกงานและฝึกปฏิบัติวิชาชีพ 4 องค์กรชั้นนำ (Work-based Learning)</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; margin: 4px 0 0;">
+              หลักสูตร PIM บ่มเพาะทักษะการทำงานจริงอย่างเข้มข้น ผ่านการฝึกปฏิบัติงานจริงในองค์กรที่หลากหลาย สร้างพื้นฐานความเข้าใจผู้ใช้งานและการสื่อสารอย่างลึกซึ้ง
+            </p>
           </div>
 
-          <div class="resume-cards-grid">
-            <div class="resume-card-item ticket-notch-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
-                <div class="card-date-badge">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 · 2 เดือน</div>
-                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+          <div class="career-journey-timeline">
+            <!-- Milestone 4: กองปราบปราม -->
+            <div class="journey-item">
+              <div class="journey-node">
+                <span class="journey-icon">👮‍♂️</span>
+                <div class="journey-line"></div>
               </div>
-              <h3 class="card-item-title">นักศึกษาฝึกงาน-content Online</h3>
-              <div class="card-item-subtitle">กองปราบปราม</div>
-              <p class="card-item-desc">
-                ฝึกปฏิบัติงานด้านการจัดทำคอนเทนต์ออนไลน์ ผลิตสื่อประชาสัมพันธ์ และสร้างสรรค์ภาพกราฟิกเพื่อสื่อสารข้อมูลแก่ประชาชนอย่างมีประสิทธิภาพ
-              </p>
+              <div class="journey-content-card">
+                <div class="journey-header">
+                  <div>
+                    <h4 class="journey-title">กองปราบปราม (Crime Suppression Division)</h4>
+                    <span class="journey-role">นักศึกษาฝึกงาน — Content Online & สื่อสารประชาสัมพันธ์</span>
+                  </div>
+                  <span class="journey-date">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 (2 เดือน)</span>
+                </div>
+                <p class="journey-desc">
+                  จัดทำคอนเทนต์ออนไลน์ ผลิตสื่ออินโฟกราฟิกและภาพกราฟิกเตือนภัยประชาชน ออกแบบการนำเสนอข้อมูลกฎหมายและข้อมูลสำคัญให้เข้าใจง่าย เข้าถึงประชาชนทุกช่วงวัยอย่างมีประสิทธิภาพ
+                </p>
+                <div class="journey-tags">
+                  <span class="journey-tag">Information Design</span>
+                  <span class="journey-tag">Infographics</span>
+                  <span class="journey-tag">Public Communication</span>
+                  <span class="journey-tag">Content Strategy</span>
+                </div>
+              </div>
             </div>
 
-            <div class="resume-card-item ticket-notch-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
-                <div class="card-date-badge">📅 20 พ.ค. 2018 - 3 ส.ค. 2018 · 2 เดือน</div>
-                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+            <!-- Milestone 3: CONNEXT ED -->
+            <div class="journey-item">
+              <div class="journey-node">
+                <span class="journey-icon">🎓</span>
+                <div class="journey-line"></div>
               </div>
-              <h3 class="card-item-title">นักศึกษาฝึกงาน</h3>
-              <div class="card-item-subtitle">มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)</div>
-              <p class="card-item-desc">
-                ฝึกประสบการณ์การดำเนินงานโครงการด้านการศึกษา ประสานงานสื่อสาร และร่วมจัดกิจกรรมพัฒนาคุณภาพการศึกษาของเยาวชนไทย
-              </p>
+              <div class="journey-content-card">
+                <div class="journey-header">
+                  <div>
+                    <h4 class="journey-title">มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)</h4>
+                    <span class="journey-role">นักศึกษาฝึกงาน — โครงการพัฒนาการศึกษาและการสื่อสารองค์กร</span>
+                  </div>
+                  <span class="journey-date">📅 20 พ.ค. 2018 - 3 ส.ค. 2018 (2 เดือน)</span>
+                </div>
+                <p class="journey-desc">
+                  ร่วมดำเนินงานโครงการด้านการศึกษาระดับประเทศ ประสานงานสื่อสารองค์กรระหว่างภาคีเครือข่ายธุรกิจและโรงเรียน พร้อมจัดทำสื่อสื่อสารความคืบหน้าโครงการเพื่อยกระดับคุณภาพการศึกษาไทย
+                </p>
+                <div class="journey-tags">
+                  <span class="journey-tag">Corporate Communication</span>
+                  <span class="journey-tag">Project Coordination</span>
+                  <span class="journey-tag">Stakeholder Relations</span>
+                  <span class="journey-tag">Brand Materials</span>
+                </div>
+              </div>
             </div>
 
-            <div class="resume-card-item ticket-notch-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
-                <div class="card-date-badge">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 · 2 เดือน</div>
-                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+            <!-- Milestone 2: ThaiNews -->
+            <div class="journey-item">
+              <div class="journey-node">
+                <span class="journey-icon">📰</span>
+                <div class="journey-line"></div>
               </div>
-              <h3 class="card-item-title">นักศึกษาฝึกงาน</h3>
-              <div class="card-item-subtitle">ThaiNews – ไทยนิวส์</div>
-              <p class="card-item-desc">
-                ฝึกปฏิบัติการสร้างสรรค์เนื้อหาข่าวออนไลน์ การออกแบบภาพประกอบกราฟิก และการจัดการสื่อดิจิทัลสำหรับผู้ติดตามข่าวสาร
-              </p>
+              <div class="journey-content-card">
+                <div class="journey-header">
+                  <div>
+                    <h4 class="journey-title">ThaiNews — ไทยนิวส์</h4>
+                    <span class="journey-role">นักศึกษาฝึกงาน — ข่าวออนไลน์และสื่อดิจิทัล</span>
+                  </div>
+                  <span class="journey-date">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 (2 เดือน)</span>
+                </div>
+                <p class="journey-desc">
+                  สร้างสรรค์เนื้อหาข่าวออนไลน์ ออกแบบภาพประกอบและกราฟิกสำหรับสื่อดิจิทัล ฝึกฝนการเล่าเรื่อง (Visual Storytelling) ภายใต้เงื่อนไขเวลาที่กระชับและทันต่อสถานการณ์
+                </p>
+                <div class="journey-tags">
+                  <span class="journey-tag">Digital Media</span>
+                  <span class="journey-tag">Visual Storytelling</span>
+                  <span class="journey-tag">Graphic Production</span>
+                  <span class="journey-tag">Fast Execution</span>
+                </div>
+              </div>
             </div>
 
-            <div class="resume-card-item ticket-notch-card">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
-                <div class="card-date-badge">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 · 2 เดือน</div>
-                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+            <!-- Milestone 1: 7-ELEVEN -->
+            <div class="journey-item">
+              <div class="journey-node">
+                <span class="journey-icon">🏪</span>
               </div>
-              <h3 class="card-item-title">พนักงานแคชเชียร์และบริการ (Cashier)</h3>
-              <div class="card-item-subtitle">7-ELEVEN</div>
-              <p class="card-item-desc">
-                ฝึกการทำงานจริงด้านการบริการลูกค้า การสื่อสาร และการจัดการระบบงานหน้าร้านภายใต้การเรียนรู้แบบ Work-based Learning
-              </p>
+              <div class="journey-content-card">
+                <div class="journey-header">
+                  <div>
+                    <h4 class="journey-title">7-ELEVEN (CP ALL)</h4>
+                    <span class="journey-role">พนักงานบริการลูกค้าและแคชเชียร์ (Work-based Learning)</span>
+                  </div>
+                  <span class="journey-date">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 (2 เดือน)</span>
+                </div>
+                <p class="journey-desc">
+                  เรียนรู้ Customer Journey และพฤติกรรมลูกค้าหน้างานจริง ฝึกฝน Empathy การสื่อสารเพื่อแก้ไขปัญหาเฉพาะหน้า และเข้าใจการทำงานของระบบแคชเชียร์/สต็อกสินค้าหน้าร้านอย่างถ่องแท้
+                </p>
+                <div class="journey-tags">
+                  <span class="journey-tag">Customer Empathy</span>
+                  <span class="journey-tag">Frontline Operations</span>
+                  <span class="journey-tag">Work-Based Learning</span>
+                  <span class="journey-tag">Service Mind</span>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
 
-        <!-- Tab 3: ประวัติการศึกษา -->
+        <!-- Tab 3: ประวัติการศึกษา (Education & Academic Background) -->
         <div class="resume-tab-pane" id="tab-education">
-          <div class="resume-cards-grid">
-            <div class="resume-card-item ticket-notch-card">
-              <div class="card-date-badge">🎓 สถาบันการศึกษาระดับอุดมศึกษา</div>
-              <h3 class="card-item-title">สถาบันการจัดการปัญญาภิวัฒน์</h3>
-              <div class="card-item-subtitle">Panyapiwat Institute of Management (PIM)</div>
-              <p class="card-item-desc">
-                สำเร็จการศึกษาจากสถาบันการจัดการปัญญาภิวัฒน์ โดดเด่นด้วยการเรียนรู้แบบ Work-based Learning ที่ผสานความรู้ทางวิชาการเข้ากับการฝึกปฏิบัติงานจริงในองค์กรธุรกิจชั้นนำ ช่วยเสริมสร้างทั้งทักษะวิชาชีพและการแก้ไขปัญหาหน้างานจริง
+          <div class="education-showcase-grid">
+            
+            <!-- Degree Card: PIM Faculty of Communication Arts (Honors) -->
+            <div class="education-card-hero">
+              <div class="edu-hero-badge-row">
+                <span class="edu-level-pill">🎓 ปริญญาตรี (เกียรตินิยม) · นิเทศศาสตรบัณฑิต</span>
+                <span class="edu-honors-tag">⭐ เกียรตินิยม (Honors Degree)</span>
+                <span class="edu-wbl-tag">💼 Work-based Learning</span>
+              </div>
+
+              <h3 class="edu-major-title">คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</h3>
+              <div class="edu-institution-name">สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</div>
+
+              <p class="edu-desc-lead">
+                สำเร็จการศึกษาด้วย <strong>เกียรตินิยม</strong> โดดเด่นด้วยหลักสูตรการเรียนรู้แบบ <strong>Work-based Learning</strong> ที่ผสานองค์ความรู้ด้าน <strong>การสื่อสารภาพลักษณ์แบรนด์ (Brand Communication)</strong> เข้ากับการปฏิบัติงานจริงใน 4 องค์กรชั้นนำ เป็นรากฐานสำคัญที่ส่งเสริมให้เข้าใจผู้บริโภค พฤติกรรมผู้ใช้ และบริบททางธุรกิจได้อย่างรอบด้าน
               </p>
+
+              <div class="edu-synergy-header">
+                <span class="synergy-tag">✨ ทำไม "นิเทศศาสตร์ & แบรนด์" จึงเป็นจุดแข็งสำคัญของ UI/UX Designer สายธาร?</span>
+              </div>
+
+              <div class="edu-highlights-grid">
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🎯</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Brand Strategy x User Experience</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เข้าใจหลักจิตวิทยาการสื่อสารแบรนด์ ออกแบบ Product Interface ที่ไม่เพียงแค่สวยงาม แต่ยังสะท้อน DNA และคุณค่าของธุรกิจได้อย่างหนักแน่น</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">✍️</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">UX Copywriting & Tone of Voice</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เชี่ยวชาญการเขียนข้อความในระบบ (Microcopy, Error States, CTA) ให้กระชับ สื่อสารตรงประเด็น และสร้างความรู้สึกเป็นมิตรแก่ผู้ใช้</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🧩</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Design Systems & Brand Consistency</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">นำระเบียบ Brand Guidelines มาพัฒนาระบบ Figma Design Tokens, Color Palettes และ Component Libraries ให้มีความเป็นหนึ่งเดียวกัน 100%</p>
+                  </div>
+                </div>
+                <div class="edu-point-item">
+                  <span class="edu-point-icon">🤝</span>
+                  <div>
+                    <strong style="color:#ffffff; font-size:0.92rem;">Cross-Functional Alignment</strong>
+                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">สื่อสารแนวคิดดีไซน์ รับฟังโจทย์ธุรกิจจากผู้บริหาร และทำงานประสานความต้องการร่วมกับทีม Developer ได้อย่างราบรื่นไร้รอยต่อ</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="resume-card-item ticket-notch-card">
-              <div class="card-date-badge">💡 การพัฒนาทักษะวิชาชีพเฉพาะทาง</div>
-              <h3 class="card-item-title">UI/UX Design, Figma & Front-End</h3>
-              <div class="card-item-subtitle">การเรียนรู้และพัฒนาอย่างต่อเนื่อง</div>
-              <p class="card-item-desc">
-                ศึกษาและพัฒนาทักษะเฉพาะทางด้าน User Interface & User Experience Design, การสร้าง Figma Design Tokens, Interactive Prototype และการเขียนโปรแกรม Front-End เพื่อเชื่อมโยงงานออกแบบสู่การเขียนโค้ดจริง
+            <!-- Specialized Continuous Learning Card -->
+            <div class="education-card-secondary">
+              <div class="edu-hero-badge-row">
+                <span class="edu-level-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.35);">⚡ การพัฒนาทักษะวิชาชีพเฉพาะทาง</span>
+                <span class="edu-level-pill" style="background: rgba(16, 185, 129, 0.15); color: #4ade80; border-color: rgba(16, 185, 129, 0.35);">🎨 Professional Specialization</span>
+              </div>
+              <h3 class="edu-major-title" style="font-size: 1.35rem;">UI/UX Design, Figma & Front-End Development</h3>
+              <div class="edu-institution-name">การเรียนรู้และพัฒนาตนเองอย่างต่อเนื่อง (Continuous Professional Growth)</div>
+              
+              <p class="edu-desc-lead">
+                ต่อยอดรากฐานการสื่อสารแบรนด์ สู่การออกแบบผลิตภัณฑ์ดิจิทัลและการเขียนโปรแกรม Front-End เพื่อสร้างประสบการณ์ใช้งานที่สมบูรณ์แบบ:
               </p>
+
+              <div class="edu-spec-list">
+                <div class="spec-list-item">
+                  <span class="check-icon">✓</span>
+                  <div><strong>Human-Centered UX Research:</strong> การวิเคราะห์ User Persona, User Journey, Heuristic Evaluation และ Usability Testing (คะแนน SUS สูง 94/100)</div>
+                </div>
+                <div class="spec-list-item">
+                  <span class="check-icon">✓</span>
+                  <div><strong>Advanced Figma Systems:</strong> เชี่ยวชาญ Auto-Layout, Variables, Responsive Tokens, Component Sets และ Interactive Prototyping</div>
+                </div>
+                <div class="spec-list-item">
+                  <span class="check-icon">✓</span>
+                  <div><strong>Front-End Engineering:</strong> HTML5, CSS3/Tailwind, JavaScript และการประสานงาน Dev Specs Handoff ให้ได้ผลงานจริงตรงตามแบบ</div>
+                </div>
+                <div class="spec-list-item">
+                  <span class="check-icon">✓</span>
+                  <div><strong>Web Accessibility:</strong> ออกแบบให้ทุกคนเข้าถึงได้ตามมาตรฐานสากล WCAG 2.1 AA เพื่อสร้าง Inclusive Digital Experience</div>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
 
@@ -1516,7 +1642,7 @@
             ประวัติการศึกษา (Education)
           </h4>
           <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
-            🎓 <strong>สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</strong><br>
+            🎓 <strong>ปริญญาตรี (เกียรตินิยม) คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong><br>สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)<br>
             การเรียนรู้แบบบูรณาการร่วมกับการทำงานจริง (Work-based Learning)
           </p>
         </div>
