@@ -904,6 +904,27 @@ function endPortfolioTour() {
 // CHIBI COMPANION (WALKING GAME AVATAR TOURS)
 // ==========================================
 const projectInsights = {
+  'security-pitch': {
+    title: 'Security Pitch Co., Ltd.',
+    badge: '🛡️ PDPA & Cybersecurity SaaS (5+ ปี)',
+    msg: 'ยินดีต้อนรับสู่ Security Pitch HQ! 🛡️ ที่นี่คือฐานปฏิบัติการหลัก 5 ปี 9 เดือนของสายธาร ดูแล UX/UI แพลตฟอร์ม Privacy & Security ครบวงจรค่ะ!',
+    slug: 'security-pitch',
+    isCareer: true
+  },
+  'pim-education': {
+    title: 'สถาบันการจัดการปัญญาภิวัฒน์ (PIM)',
+    badge: '🎓 ปริญญาตรีเกียรตินิยมอันดับ 1',
+    msg: 'สถานี PIM Academy! 🎓 สายธารจบปริญญาตรีเกียรตินิยมอันดับ 1 ทุนการศึกษาเต็มจำนวน พร้อมฝึกงานจริงแบบ Work-based Learning ค่ะ!',
+    slug: 'pim-education',
+    isEducation: true
+  },
+  'csd-internship': {
+    title: 'กองบังคับการปราบปราม (CSD)',
+    badge: '👮‍♂️ สื่ออินโฟกราฟิกเตือนภัยสังคม',
+    msg: 'สถานี กองปราบปราม! 👮‍♂️ จุดเริ่มต้นการฝึกงานออกแบบสื่อ Infographic & Motion เพื่อสื่อสารเตือนภัยสังคมให้เข้าใจง่ายค่ะ!',
+    slug: 'csd-internship',
+    isInternship: true
+  },
   'flowpay-fintech-onboarding': {
     title: 'FlowPay FinTech',
     badge: '💳 FinTech / KYC Redesign',
@@ -1049,3 +1070,134 @@ function toggleMobileNav() {
   }
 }
 
+
+// ==========================================
+// ADVENTURE TOWN MAP CONTROLLERS
+// ==========================================
+function switchDeckView(mode) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  const mapWrap = document.getElementById('mapViewWrap');
+  const deckWrap = document.getElementById('deckViewWrap');
+  const btnMap = document.getElementById('btnSwitchMap');
+  const btnDeck = document.getElementById('btnSwitchDeck');
+
+  if (mode === 'map') {
+    if (mapWrap) mapWrap.style.display = 'block';
+    if (deckWrap) deckWrap.style.display = 'none';
+    if (btnMap) btnMap.classList.add('active');
+    if (btnDeck) btnDeck.classList.remove('active');
+  } else {
+    if (mapWrap) mapWrap.style.display = 'none';
+    if (deckWrap) deckWrap.style.display = 'flex';
+    if (btnDeck) btnDeck.classList.add('active');
+    if (btnMap) btnMap.classList.remove('active');
+  }
+}
+
+function selectMapLandmark(slug, x, y) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  // Move Avatar Pin on SVG map
+  const avatarPin = document.getElementById('mapAvatarPin');
+  if (avatarPin) {
+    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+  }
+
+  const insight = projectInsights[slug] || {
+    title: slug,
+    msg: 'ยินดีต้อนรับสู่หมุดผลงานของสายธารค่ะ!',
+    slug: slug
+  };
+
+  const companion = document.getElementById('chibiCompanion');
+  const bubble = document.getElementById('chibiBubble');
+  const bubbleText = document.getElementById('chibiBubbleText');
+  const bubbleActions = document.getElementById('chibiBubbleActions');
+  const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
+
+  if (bubbleText) bubbleText.textContent = insight.msg;
+  
+  if (insight.isCareer) {
+    if (bubbleActions) bubbleActions.style.display = 'block';
+    if (deepDiveBtn) {
+      deepDiveBtn.textContent = '🏢 ดูประวัติการทำงาน Security Pitch ➔';
+      deepDiveBtn.onclick = (e) => {
+        e.stopPropagation();
+        switchResumeTab('experience');
+        const jobCard = document.querySelector('.featured-current-job');
+        if (jobCard) jobCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+    }
+  } else if (insight.isEducation) {
+    if (bubbleActions) bubbleActions.style.display = 'block';
+    if (deepDiveBtn) {
+      deepDiveBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
+      deepDiveBtn.onclick = (e) => {
+        e.stopPropagation();
+        switchResumeTab('education');
+        const resumeSec = document.getElementById('resume');
+        if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+    }
+  } else if (insight.isInternship) {
+    if (bubbleActions) bubbleActions.style.display = 'block';
+    if (deepDiveBtn) {
+      deepDiveBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
+      deepDiveBtn.onclick = (e) => {
+        e.stopPropagation();
+        switchResumeTab('experience');
+        const resumeSec = document.getElementById('resume');
+        if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+    }
+  } else {
+    // Case Study Project
+    if (bubbleActions) bubbleActions.style.display = 'block';
+    if (deepDiveBtn) {
+      deepDiveBtn.textContent = '📖 อ่านเคสสตัดดี้ฉบับเต็ม ➔';
+      deepDiveBtn.onclick = (e) => {
+        e.stopPropagation();
+        openCaseStudyModal(insight.slug);
+      };
+    }
+  }
+
+  if (bubble) {
+    bubble.style.display = 'block';
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+
+  if (typeof GameAudio !== 'undefined') {
+    setTimeout(() => GameAudio.playBoing(), 300);
+  }
+}
+
+function walkMapToCoord(x, y) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  const avatarPin = document.getElementById('mapAvatarPin');
+  if (avatarPin) {
+    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+  }
+
+  const bubble = document.getElementById('chibiBubble');
+  const bubbleText = document.getElementById('chibiBubbleText');
+  const bubbleActions = document.getElementById('chibiBubbleActions');
+
+  if (bubbleText) bubbleText.textContent = 'เดินมาถึงจุดแวะพักตรวจเช็ก UX Flow แล้วค่ะ! 🌟 คลิกที่ตึกรอบข้างเพื่อเดินทางต่อนะคะ';
+  if (bubbleActions) bubbleActions.style.display = 'none';
+
+  if (bubble) {
+    bubble.style.display = 'block';
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+}
+
+function resetMapCharacter() {
+  selectMapLandmark('security-pitch', 480, 150);
+}
