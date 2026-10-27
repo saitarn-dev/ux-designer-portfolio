@@ -900,3 +900,152 @@ function endPortfolioTour() {
   if (container) container.style.display = 'none';
 }
 
+// ==========================================
+// CHIBI COMPANION (WALKING GAME AVATAR TOURS)
+// ==========================================
+const projectInsights = {
+  'flowpay-fintech-onboarding': {
+    title: 'FlowPay FinTech',
+    badge: '💳 FinTech / KYC Redesign',
+    msg: 'สถานี FlowPay FinTech! 💳 โฟลว์นี้สายธารลดขั้นตอน KYC 12 สเต็ปให้เหลือ 4 สเต็ป คนผ่านง่ายขึ้น 38.4% เลยนะคะ!',
+    slug: 'flowpay-fintech-onboarding'
+  },
+  'novacloud-enterprise-saas-design-system': {
+    title: 'NovaCloud SaaS',
+    badge: '💻 B2B SaaS / System',
+    msg: 'สถานี NovaCloud Enterprise! ⚡ ระบบ Design System นี้มี Figma Tokens คลุม 14 โมดูล Dev ส่งงานไวขึ้น 2.4 เท่าค่ะ!',
+    slug: 'novacloud-enterprise-saas-design-system'
+  },
+  'shopvibe-social-commerce-redesign': {
+    title: 'ShopVibe Checkout',
+    badge: '🛍️ Social Commerce / One-Page',
+    msg: 'สถานี ShopVibe! 🛍️ หน้าชำระเงิน One-Page ลดเวลาสั่งซื้อเหลือ 45 วินาที ดันยอดขายและคอนเวอร์ชันโต 28% ค่ะ!',
+    slug: 'shopvibe-social-commerce-redesign'
+  },
+  'medicare-accessible-health-companion': {
+    title: 'MediCare Health',
+    badge: '🩺 HealthTech / Accessibility',
+    msg: 'สถานี MediCare Companion! 🩺 ออกแบบตามมาตรฐาน Accessibility WCAG AAA ผู้สูงอายุใช้งานสะดวก 94% พึงพอใจค่ะ!',
+    slug: 'medicare-accessible-health-companion'
+  }
+};
+
+const chibiQuotes = [
+  "สวัสดีค่า! ฉันชื่อสายธาร เป็น UI/UX Designer & Developer ที่รักการออกแบบโปรดักต์ที่ใช้งานง่ายค่ะ ✨",
+  "ทำงานที่ Security Pitch มา 5 ปี 9 เดือน ทั้งงาน Figma Design Tokens และเขียน Front-End Dev ควบคู่กันค่ะ 🛡️",
+  "Figma คืออาวุธหลักของสายธาร! ตั้งแต่ Auto-Layout, Variables ไปจนถึง Interactive Prototyping 🎨",
+  "คลิกที่การ์ดผลงานใบไหนก็ได้ เดี๋ยวสายธารจะวิ่งไปพาชมและเล่าวิธีคิดให้ฟังนะคะ! 🏃‍♀️💨",
+  "ดีไซน์ที่ดี ไม่ใช่แค่สวย แต่ต้องช่วยแก้ปัญหาและสร้างคุณค่าให้ธุรกิจได้จริงค่ะ 💡"
+];
+let chibiQuoteIdx = 0;
+
+function walkCharacterToProject(slug, targetElement) {
+  const companion = document.getElementById('chibiCompanion');
+  const bubble = document.getElementById('chibiBubble');
+  const bubbleText = document.getElementById('chibiBubbleText');
+  const bubbleActions = document.getElementById('chibiBubbleActions');
+  const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
+  const dust = document.getElementById('chibiDustPuff');
+
+  if (!companion || !targetElement) return;
+
+  GameAudio.playPop();
+
+  // Highlight target card
+  document.querySelectorAll('.project-card-highlighted').forEach(c => c.classList.remove('project-card-highlighted'));
+  targetElement.classList.add('project-card-highlighted');
+
+  // Trigger running animation
+  companion.classList.add('is-running');
+  if (dust) dust.style.opacity = '1';
+
+  // Calculate card position
+  const rect = targetElement.getBoundingClientRect();
+  const cardCenterX = rect.left + window.scrollX;
+  const cardCenterY = rect.top + window.scrollY;
+
+  // Smooth scroll
+  targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Move companion to stand alongside the card
+  companion.style.position = 'absolute';
+  companion.style.left = Math.max(16, (cardCenterX - 85)) + 'px';
+  companion.style.top = (cardCenterY + 45) + 'px';
+  companion.style.bottom = 'auto';
+  companion.style.right = 'auto';
+
+  setTimeout(() => {
+    companion.classList.remove('is-running');
+    if (dust) dust.style.opacity = '0';
+    GameAudio.playBoing();
+
+    const insight = projectInsights[slug] || {
+      msg: 'ผลงานชิ้นนี้สายธารให้ความสำคัญกับ User Experience และ Business Value ค่ะ!',
+      slug: slug
+    };
+
+    if (bubbleText) bubbleText.textContent = insight.msg;
+    if (bubbleActions) bubbleActions.style.display = 'block';
+    if (deepDiveBtn) {
+      deepDiveBtn.onclick = (e) => {
+        e.stopPropagation();
+        openCaseStudyModal(insight.slug);
+      };
+    }
+    if (bubble) {
+      bubble.style.display = 'block';
+      bubble.classList.remove('pop');
+      void bubble.offsetWidth;
+      bubble.classList.add('pop');
+    }
+  }, 650);
+}
+
+function pokeChibi() {
+  GameAudio.playBoing();
+  const sprite = document.getElementById('chibiSpriteWrap');
+  const bubble = document.getElementById('chibiBubble');
+  const textEl = document.getElementById('chibiBubbleText');
+  const actions = document.getElementById('chibiBubbleActions');
+
+  if (sprite) {
+    sprite.classList.remove('spinning');
+    void sprite.offsetWidth;
+    sprite.classList.add('spinning');
+  }
+
+  chibiQuoteIdx = (chibiQuoteIdx + 1) % chibiQuotes.length;
+  if (textEl) textEl.textContent = chibiQuotes[chibiQuoteIdx];
+  if (actions) actions.style.display = 'none';
+
+  if (bubble) {
+    bubble.style.display = 'block';
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+}
+
+function summonChibiCompanion() {
+  GameAudio.playPop();
+  const companion = document.getElementById('chibiCompanion');
+  if (!companion) return;
+
+  // Reset companion to fixed bottom-left
+  companion.style.position = 'fixed';
+  companion.style.bottom = '24px';
+  companion.style.left = '28px';
+  companion.style.top = 'auto';
+  companion.style.right = 'auto';
+
+  pokeChibi();
+}
+
+function toggleMobileNav() {
+  const menu = document.getElementById('mainNavMenu');
+  if (menu) {
+    menu.classList.toggle('open');
+    GameAudio.playPop();
+  }
+}
+

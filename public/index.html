@@ -37,78 +37,49 @@
     </div>
   </div>
 
-  <!-- TOP GAME HUD BAR (Kizupi Inspired Gamified Status) -->
-  <div class="game-hud-bar">
-    <div class="container hud-flex">
-      <div class="hud-stat-group">
-        <span class="hud-badge-lvl">⭐ LV. 5+</span>
-        <div class="hud-hp-box" title="พลังชีวิตดีไซเนอร์">
-          <span class="hud-icon">💖 HP</span>
-          <div class="hud-bar-track"><div class="hud-bar-fill hp" style="width: 100%;"></div></div>
-          <span class="hud-num">100/100</span>
-        </div>
-        <div class="hud-mp-box" title="มานาความคิดสร้างสรรค์">
-          <span class="hud-icon">✨ MP</span>
-          <div class="hud-bar-track"><div class="hud-bar-fill mp" style="width: 100%;"></div></div>
-          <span class="hud-num">999/999</span>
-        </div>
-      </div>
-
-      <div class="hud-center-quest">
-        <span class="quest-label">⚔️ เควสต์ประจำการ:</span>
-        <strong class="quest-target">Security Pitch (5 ปี 9 เดือน)</strong>
-      </div>
-
-      <div class="hud-actions" style="display:flex; align-items:center; gap:8px;">
-        <button type="button" class="sfx-toggle-btn start-tour-btn" onclick="startPortfolioTour()" title="เริ่มทัวร์ชมผลงานแบบมีไกด์นำทาง">
-          <span>🚀 เริ่มทัวร์ชมผลงาน</span>
-        </button>
-        <a href="/petalyx" target="_blank" class="sfx-toggle-btn" title="เปิดดูเดโมหน้าเว็บ Petalyx (Anime-Watercolor SaaS Landing Page)" style="text-decoration:none; color:#2c3a10; background:#e7efcf; border-color:#b4cd52; font-weight:600;">
-          <span>🌸 เดโม Petalyx</span>
-        </a>
-        <button type="button" class="sfx-toggle-btn" id="sfxToggleBtn" onclick="toggleGameSFX()" title="เปิด/ปิดเสียงเอฟเฟกต์เกม">
-          <span id="sfxIcon">🔊</span> <span id="sfxLabel">SFX เปิด</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Header / Navigation -->
-  <header class="site-header">
+  <!-- MASTER GAME & PORTFOLIO HEADER -->
+  <header class="site-header" id="siteHeader">
     <div class="container nav-wrap">
+      <!-- Left: Logo & Gamified Level Pill -->
       <a href="#hero" class="brand-logo" aria-label="กลับสู่หน้าหลัก">
         <span class="logo-badge">ST ✨</span>
         <div class="brand-info">
           <span class="brand-name dynamic-name">สายธาร อาจชมภู</span>
-          <span class="brand-title dynamic-role">UI/UX Designer & Developer</span>
+          <span class="brand-badge-inline">⭐ LV. 5+ UI/UX Designer</span>
         </div>
       </a>
 
-      <nav>
+      <!-- Center: Clean Navigation Links (Never wrap or break) -->
+      <nav class="main-nav-menu" id="mainNavMenu">
         <ul class="nav-links">
           <li><a href="#hero" class="nav-link">หน้าแรก</a></li>
-          <li><a href="#deck" class="nav-link">สำรับการ์ด</a></li>
-          <li><a href="#resume" class="nav-link">ประวัติและเรซูเม่</a></li>
-          <li><a href="#work" class="nav-link">ผลงานและเคสสตัดดี้</a></li>
-          <li><a href="#process" class="nav-link">กระบวนการ UX</a></li>
-          <li><a href="#contact" class="nav-link">ติดต่อเรา</a></li>
+          <li><a href="#deck" class="nav-link">สำรับผลงาน 🃏</a></li>
+          <li><a href="#resume" class="nav-link">ประวัติ & สกิล 🛡️</a></li>
+          <li><a href="#work" class="nav-link">เคสสตัดดี้ 📱</a></li>
+          <li><a href="#contact" class="nav-link">ติดต่อ 📬</a></li>
         </ul>
       </nav>
 
+      <!-- Right: Action Buttons & Sound & Character Summon -->
       <div class="nav-actions">
-        <!-- Live MongoDB Indicator -->
-        <div class="db-pill" id="dbStatusPill" title="เชื่อมต่อกับฐานข้อมูล MongoDB Atlas เรียบร้อยแล้ว">
-          <span class="status-dot"></span> MongoDB ออนไลน์ ✨
-        </div>
-
-        <!-- Quick Copy Email Button with 3D feel -->
-        <button class="btn btn-copy-email" onclick="copyEmailToClipboard(this)" title="คลิกเพื่อคัดลอกอีเมล">
-          📋 คัดลอกอีเมล
+        <!-- Chibi Companion Summon Button -->
+        <button type="button" class="btn btn-chibi-summon" onclick="summonChibiCompanion()" title="เรียกตัวละครสายธารไกด์ทัวร์">
+          <span class="summon-icon">🏃‍♀️</span> <span class="summon-label">ไกด์สายธาร</span>
         </button>
 
-        <!-- Fast Resume Preview Trigger -->
-        <button class="btn btn-3d-primary" onclick="openResumeModal()">
-          📄 ดูเรซูเม่ฉบับย่อ
+        <!-- Sound SFX Toggle -->
+        <button type="button" class="sfx-toggle-btn" id="sfxToggleBtn" onclick="toggleGameSFX()" title="เปิด/ปิดเสียงเอฟเฟกต์">
+          <span id="sfxIcon">🔊</span>
+        </button>
+
+        <!-- Resume Modal Trigger -->
+        <button type="button" class="btn btn-header-resume" onclick="openResumeModal()">
+          📄 เรซูเม่
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileNav()" aria-label="เปิดเมนู">
+          <span></span><span></span><span></span>
         </button>
       </div>
     </div>
@@ -255,62 +226,78 @@
           <div class="fanned-cards-wrap">
             
             <!-- Card 1 (-10deg) -->
-            <div class="fan-card-item" onclick="openCaseStudyModal('flowpay-fintech-onboarding')">
+            <div class="fan-card-item" onclick="walkCharacterToProject('flowpay-fintech-onboarding', this)">
               <div>
                 <span class="fan-card-category">📱 แอปมือถือ / FinTech</span>
                 <h3 class="fan-card-title">FlowPay FinTech</h3>
+                <div class="rpg-card-badge-row">
+                  <span class="rpg-badge rpg-badge-quest">⚔️ เควสต์ SSR</span>
+                  <span class="rpg-badge rpg-badge-exp">🎯 EXP +500</span>
+                </div>
                 <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
-                  รีดีไซน์โฟลว์ยืนยันตัวตน KYC 12 สเต็ปให้เหลือ 4 สเต็ปที่น่ารัก
+                  รีดีไซน์โฟลว์ยืนยันตัวตน KYC 12 สเต็ปให้เหลือ 4 สเต็ปที่เข้าใจง่าย
                 </p>
               </div>
               <div>
                 <div class="fan-card-metric">📈 ผ่าน KYC สำเร็จ +38.4%</div>
-                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+                <button type="button" class="rpg-walk-to-btn">🏃‍♀️ ให้สายธารพาชม ➔</button>
               </div>
             </div>
 
             <!-- Card 2 (-3deg) -->
-            <div class="fan-card-item" onclick="openCaseStudyModal('novacloud-enterprise-saas-design-system')">
+            <div class="fan-card-item" onclick="walkCharacterToProject('novacloud-enterprise-saas-design-system', this)">
               <div>
                 <span class="fan-card-category">💻 B2B SaaS / System</span>
                 <h3 class="fan-card-title">NovaCloud SaaS</h3>
+                <div class="rpg-card-badge-row">
+                  <span class="rpg-badge rpg-badge-quest">⚔️ เควสต์ Boss</span>
+                  <span class="rpg-badge rpg-badge-exp">🎯 EXP +750</span>
+                </div>
                 <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
                   สร้างระบบ Figma Design Tokens ครอบคลุมแดชบอร์ด 14 โมดูล
                 </p>
               </div>
               <div>
                 <div class="fan-card-metric">⚡ Dev ส่งงานไวขึ้น 2.4 เท่า</div>
-                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+                <button type="button" class="rpg-walk-to-btn">🏃‍♀️ ให้สายธารพาชม ➔</button>
               </div>
             </div>
 
             <!-- Card 3 (3deg) -->
-            <div class="fan-card-item" onclick="openCaseStudyModal('shopvibe-social-commerce-redesign')">
+            <div class="fan-card-item" onclick="walkCharacterToProject('shopvibe-social-commerce-redesign', this)">
               <div>
                 <span class="fan-card-category">🛍️ อีคอมเมิร์ซ</span>
                 <h3 class="fan-card-title">ShopVibe Checkout</h3>
+                <div class="rpg-card-badge-row">
+                  <span class="rpg-badge rpg-badge-quest">⚔️ เควสต์ Hard</span>
+                  <span class="rpg-badge rpg-badge-exp">🎯 EXP +450</span>
+                </div>
                 <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
                   หน้าชำระเงิน One-Page ลดเวลาสั่งซื้อเหลือ 45 วินาที
                 </p>
               </div>
               <div>
                 <div class="fan-card-metric">💰 ดันยอดขายเพิ่มขึ้น +28%</div>
-                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+                <button type="button" class="rpg-walk-to-btn">🏃‍♀️ ให้สายธารพาชม ➔</button>
               </div>
             </div>
 
             <!-- Card 4 (10deg) -->
-            <div class="fan-card-item" onclick="openCaseStudyModal('medicare-accessible-health-companion')">
+            <div class="fan-card-item" onclick="walkCharacterToProject('medicare-accessible-health-companion', this)">
               <div>
                 <span class="fan-card-category">💊 สุขภาพ / Inclusive</span>
                 <h3 class="fan-card-title">MediCare Companion</h3>
+                <div class="rpg-card-badge-row">
+                  <span class="rpg-badge rpg-badge-quest">⚔️ เควสต์ Special</span>
+                  <span class="rpg-badge rpg-badge-exp">🎯 EXP +600</span>
+                </div>
                 <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
                   ออกแบบแอปเตือนทานยาสำหรับผู้สูงอายุ มาตรฐาน WCAG 2.1 AA
                 </p>
               </div>
               <div>
                 <div class="fan-card-metric">⭐ คะแนน SUS สูงถึง 94/100</div>
-                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+                <button type="button" class="rpg-walk-to-btn">🏃‍♀️ ให้สายธารพาชม ➔</button>
               </div>
             </div>
 
@@ -1143,6 +1130,75 @@
             สถานีถัดไป ➔
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE CHIBI CHARACTER COMPANION (ไกด์สายธารจิ๋ว) -->
+  <div class="chibi-companion" id="chibiCompanion" title="คลิกเพื่อทักทายไกด์สายธาร!">
+    <!-- Speech Dialogue Bubble -->
+    <div class="chibi-bubble" id="chibiBubble" style="display: none;">
+      <span class="chibi-bubble-tail"></span>
+      <div class="chibi-bubble-text" id="chibiBubbleText">
+        พร้อมลุยทัวร์ผลงานแล้วค่ะ! ลองคลิกที่การ์ดโปรเจกต์ใดก็ได้ เดี๋ยวสายธารจะวิ่งไปพาชมนะคะ ✨
+      </div>
+      <div class="chibi-bubble-actions" id="chibiBubbleActions" style="display: none;">
+        <button type="button" class="chibi-action-btn" id="chibiDeepDiveBtn">ส่องเคสนี้เต็มๆ ➔</button>
+      </div>
+    </div>
+
+    <!-- Character Avatar Sprite -->
+    <div class="chibi-sprite-wrap" id="chibiSpriteWrap" onclick="pokeChibi()">
+      <!-- Dust puff when running -->
+      <div class="chibi-dust-puff" id="chibiDustPuff">💨</div>
+      
+      <!-- SVG Illustrated Chibi Avatar -->
+      <div class="chibi-avatar-art">
+        <svg viewBox="0 0 100 110" class="chibi-svg" style="width:100%; height:100%;">
+          <!-- Shadow -->
+          <ellipse cx="50" cy="102" rx="26" ry="6" fill="rgba(0,0,0,0.35)"/>
+          <!-- Backpack -->
+          <rect x="22" y="52" width="16" height="24" rx="6" fill="#f59e0b" stroke="#0f172a" stroke-width="2.5"/>
+          <!-- Body / Clothes -->
+          <rect x="36" y="50" width="28" height="30" rx="8" fill="#38bdf8" stroke="#0f172a" stroke-width="3"/>
+          <path d="M42 62 L50 72 L58 62" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Designer Stylus / Pen in Hand -->
+          <rect x="18" y="60" width="6" height="26" rx="2" fill="#facc15" stroke="#0f172a" stroke-width="2" transform="rotate(-25 18 60)"/>
+          <polygon points="17,86 21,92 25,85" fill="#ef4444" stroke="#0f172a" stroke-width="1.5"/>
+          <!-- Legs & Shoes -->
+          <rect x="39" y="78" width="8" height="18" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="2.5"/>
+          <rect x="53" y="78" width="8" height="18" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="2.5"/>
+          <ellipse cx="43" cy="98" rx="7" ry="4" fill="#f43f5e" stroke="#0f172a" stroke-width="2"/>
+          <ellipse cx="57" cy="98" rx="7" ry="4" fill="#f43f5e" stroke="#0f172a" stroke-width="2"/>
+          <!-- Head / Hair Back -->
+          <circle cx="50" cy="36" r="26" fill="#1e1b4b"/>
+          <!-- Face -->
+          <circle cx="50" cy="38" r="21" fill="#fed7aa"/>
+          <!-- Hair Bangs / Front -->
+          <path d="M26 34 C 26 18, 74 18, 74 34 C 70 26, 62 25, 54 28 C 46 25, 34 26, 26 34 Z" fill="#1e1b4b"/>
+          <!-- Cute Hair Bun -->
+          <circle cx="50" cy="12" r="9" fill="#1e1b4b"/>
+          <circle cx="50" cy="12" r="6" fill="#ec4899"/>
+          <!-- Eyes with anime sparkle -->
+          <ellipse cx="42" cy="38" rx="3.5" ry="5" fill="#0f172a"/>
+          <circle cx="43" cy="36.5" r="1.5" fill="#fff"/>
+          <ellipse cx="58" cy="38" rx="3.5" ry="5" fill="#0f172a"/>
+          <circle cx="59" cy="36.5" r="1.5" fill="#fff"/>
+          <!-- Blush cheeks -->
+          <ellipse cx="36" cy="43" rx="4" ry="2.2" fill="rgba(244, 63, 94, 0.55)"/>
+          <ellipse cx="64" cy="43" rx="4" ry="2.2" fill="rgba(244, 63, 94, 0.55)"/>
+          <!-- Smiling mouth -->
+          <path d="M47 44 Q 50 48, 53 44" fill="none" stroke="#e11d48" stroke-width="2" stroke-linecap="round"/>
+          <!-- Designer Glasses -->
+          <rect x="34" y="32" width="14" height="12" rx="3" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <rect x="52" y="32" width="14" height="12" rx="3" fill="none" stroke="#3b82f6" stroke-width="2"/>
+          <line x1="48" y1="38" x2="52" y2="38" stroke="#3b82f6" stroke-width="2"/>
+        </svg>
+      </div>
+
+      <!-- Character Status Tag -->
+      <div class="chibi-name-tag">
+        <span class="status-dot-pulse"></span> ไกด์สายธาร
       </div>
     </div>
   </div>
