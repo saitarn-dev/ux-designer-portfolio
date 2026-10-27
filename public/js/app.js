@@ -706,51 +706,197 @@ function pokeAvatar() {
 }
 
 // ==========================================
-// PETALYX SAKURA FLOATING PETALS EFFECT
+// ADVENTURE MINIMAP (FLOATING TOUR NAVIGATOR)
 // ==========================================
-function initFloatingPetals() {
-  const petalsWrap = document.getElementById('petalsWrap');
-  if (!petalsWrap) return;
-  const count = 22;
-  for (let i = 0; i < count; i++) {
-    const petal = document.createElement('span');
-    petal.className = 'floating-petal';
-    petal.style.left = (Math.random() * 100).toFixed(2) + '%';
-    const dx = (Math.random() * 180 - 90).toFixed(1) + 'px';
-    petal.style.setProperty('--dx', dx);
-    const dur = (9 + Math.random() * 12).toFixed(1) + 's';
-    const delay = (-Math.random() * 16).toFixed(1) + 's';
-    const scale = (0.65 + Math.random() * 0.7).toFixed(2);
-    petal.style.setProperty('--scale', scale);
-    petal.style.animationDuration = dur;
-    petal.style.animationDelay = delay;
-    petalsWrap.appendChild(petal);
+function toggleMinimap() {
+  const minimap = document.getElementById('adventureMinimap');
+  const icon = document.getElementById('minimapToggleIcon');
+  if (!minimap) return;
+  minimap.classList.toggle('collapsed');
+  if (icon) {
+    icon.textContent = minimap.classList.contains('collapsed') ? '🗺️' : '−';
   }
 }
 
-// Click anywhere to spawn gentle floating petal bursts
-document.addEventListener('click', (e) => {
-  const wrap = document.getElementById('petalsWrap');
-  if (!wrap) return;
-  for (let i = 0; i < 3; i++) {
-    const burst = document.createElement('span');
-    burst.className = 'floating-petal';
-    burst.style.left = (e.clientX + (Math.random() * 40 - 20)) + 'px';
-    burst.style.top = (e.clientY + (Math.random() * 40 - 20)) + 'px';
-    burst.style.position = 'fixed';
-    const dx = (Math.random() * 120 - 60).toFixed(1) + 'px';
-    burst.style.setProperty('--dx', dx);
-    burst.style.animationDuration = (4.5 + Math.random() * 3).toFixed(1) + 's';
-    burst.style.setProperty('--scale', (0.8 + Math.random() * 0.5).toFixed(2));
-    wrap.appendChild(burst);
-    setTimeout(() => burst.remove(), 7000);
-  }
-});
+function handleMinimapClick(e, target) {
+  if (e) e.preventDefault();
+  GameAudio.playPop();
 
-// Initialize Petals
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initFloatingPetals);
-} else {
-  initFloatingPetals();
+  if (target === 'hero') {
+    const el = document.getElementById('hero');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (target === 'deck') {
+    const el = document.getElementById('deck');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (target === 'skills') {
+    const el = document.getElementById('resume');
+    if (typeof switchResumeTab === 'function') switchResumeTab('skills');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (target === 'experience') {
+    const el = document.getElementById('resume');
+    if (typeof switchResumeTab === 'function') switchResumeTab('experience');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else if (target === 'contact') {
+    const el = document.getElementById('contact');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function updateMinimapActiveState() {
+  const nodes = document.querySelectorAll('.minimap-node');
+  const scrollPos = window.scrollY + window.innerHeight * 0.35;
+
+  const heroSec = document.getElementById('hero');
+  const deckSec = document.getElementById('deck');
+  const resumeSec = document.getElementById('resume');
+  const contactSec = document.getElementById('contact');
+
+  let activeTarget = 'hero';
+
+  if (contactSec && scrollPos >= contactSec.offsetTop) {
+    activeTarget = 'contact';
+  } else if (resumeSec && scrollPos >= resumeSec.offsetTop) {
+    const activeTab = document.querySelector('.resume-tab-pane.active');
+    if (activeTab && activeTab.id === 'tab-skills') {
+      activeTarget = 'skills';
+    } else {
+      activeTarget = 'experience';
+    }
+  } else if (deckSec && scrollPos >= deckSec.offsetTop) {
+    activeTarget = 'deck';
+  } else {
+    activeTarget = 'hero';
+  }
+
+  nodes.forEach(node => {
+    node.classList.toggle('active', node.getAttribute('data-target') === activeTarget);
+  });
+}
+
+window.addEventListener('scroll', updateMinimapActiveState, { passive: true });
+
+// ==========================================
+// GUIDED TOUR SYSTEM
+// ==========================================
+const tourSteps = [
+  {
+    targetId: 'hero',
+    badge: '🚩 สถานีที่ 1 / 5 · จุดสตาร์ต',
+    title: 'ยินดีต้อนรับสู่ทัวร์ผลงานของสายธาร! 👋',
+    desc: 'สวัสดีค่ะ! จุดนี้คือภาพรวมโปรไฟล์และระดับประสบการณ์ ทำงานในตำแหน่ง UI/UX Designer & Developer ที่ Security Pitch มากว่า 5 ปี 9 เดือน',
+    btnLabel: 'ดูสำรับผลงานถัดไป ➔',
+    tab: null
+  },
+  {
+    targetId: 'deck',
+    badge: '🃏 สถานีที่ 2 / 5 · สำรับการ์ดเคสสตัดดี้',
+    title: 'สำรับการ์ดเคสสตัดดี้เด่น (Adventure Deck)',
+    desc: 'จุดนี้รวบรวมผลงานเด่น เช่น FlowPay FinTech (ลดขั้นตอน KYC สำเร็จ +38.4%) และ NovaCloud Enterprise ที่สายธารออกแบบ Design System ลองคลิกการ์ดเพื่อส่องดูได้เลยค่ะ',
+    btnLabel: 'ไปส่องคลังสกิล ➔',
+    tab: null
+  },
+  {
+    targetId: 'resume',
+    badge: '🛠️ สถานีที่ 3 / 5 · คลังอาวุธสกิล',
+    title: 'คลังอุปกรณ์ Figma, Ai, Pr & Dev',
+    desc: 'สายธารเชี่ยวชาญ Figma ระดับ Core Tool ทั้ง Tokens, Auto-Layout, Component Libraries และใช้ Adobe Ai, Pr รวมถึงเขียนโค้ด Front-End เชื่อมโยงงานดีไซน์กับ Developer ได้จริง',
+    btnLabel: 'ดูประวัติการทำงาน ➔',
+    tab: 'skills'
+  },
+  {
+    targetId: 'resume',
+    badge: '📜 สถานีที่ 4 / 5 · บันทึกการเดินทาง',
+    title: 'ประสบการณ์ทำงาน 5+ ปี & 4 องค์กรฝึกงาน',
+    desc: 'บันทึกการเดินทางจริง ทั้งงานประจำที่ Security Pitch และประวัติการฝึกงานตั้งแต่ กองปราบปราม, มูลนิธิ Connext ED, ThaiNews ไปจนถึง 7-Eleven ในระบบ PIM Work-based Learning',
+    btnLabel: 'สถานีสุดท้าย: ส่งสาร ➔',
+    tab: 'experience'
+  },
+  {
+    targetId: 'contact',
+    badge: '📬 สถานีที่ 5 / 5 · หอส่งสาร',
+    title: 'สิ้นสุดการทัวร์แล้ว ขอบคุณที่แวะมานะคะ! ✨',
+    desc: 'หวังว่าจะชอบการทัวร์ชมผลงานนี้นะคะ! หากต้องการพูดคุยโปรเจกต์ สอบถาม หรือนัดสัมภาษณ์ สามารถส่งข้อความผ่านกล่องนี้ได้เลยค่ะ ข้อความจะส่งตรงถึงสายธารทันที',
+    btnLabel: '🎉 จบการทัวร์',
+    tab: null
+  }
+];
+
+let currentTourStep = 0;
+let isTourActive = false;
+
+function startPortfolioTour() {
+  GameAudio.playPop();
+  isTourActive = true;
+  currentTourStep = 0;
+  const container = document.getElementById('tourGuideContainer');
+  if (container) container.style.display = 'block';
+  renderTourStep(currentTourStep);
+}
+
+function renderTourStep(index) {
+  if (index < 0 || index >= tourSteps.length) return;
+  const step = tourSteps[index];
+
+  // Remove previous highlights
+  document.querySelectorAll('.tour-target-highlight').forEach(el => el.classList.remove('tour-target-highlight'));
+
+  // Switch tab if step requires it
+  if (step.tab && typeof switchResumeTab === 'function') {
+    switchResumeTab(step.tab);
+  }
+
+  // Scroll to target element
+  const targetEl = document.getElementById(step.targetId);
+  if (targetEl) {
+    targetEl.classList.add('tour-target-highlight');
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Update Tour Card UI
+  const badgeEl = document.getElementById('tourStationBadge');
+  const titleEl = document.getElementById('tourStepTitle');
+  const descEl = document.getElementById('tourStepDesc');
+  const nextBtn = document.getElementById('tourNextBtn');
+  const prevBtn = document.getElementById('tourPrevBtn');
+  const dots = document.querySelectorAll('.tour-dot');
+
+  if (badgeEl) badgeEl.textContent = step.badge;
+  if (titleEl) titleEl.textContent = step.title;
+  if (descEl) descEl.textContent = step.desc;
+  if (nextBtn) nextBtn.textContent = step.btnLabel;
+  if (prevBtn) {
+    prevBtn.style.display = index === 0 ? 'none' : 'inline-flex';
+  }
+
+  // Update dots
+  dots.forEach((dot, dIdx) => {
+    dot.classList.toggle('active', dIdx === index);
+  });
+}
+
+function nextTourStep() {
+  GameAudio.playPop();
+  if (currentTourStep < tourSteps.length - 1) {
+    currentTourStep++;
+    renderTourStep(currentTourStep);
+  } else {
+    endPortfolioTour();
+  }
+}
+
+function prevTourStep() {
+  GameAudio.playPop();
+  if (currentTourStep > 0) {
+    currentTourStep--;
+    renderTourStep(currentTourStep);
+  }
+}
+
+function endPortfolioTour() {
+  GameAudio.playPop();
+  isTourActive = false;
+  document.querySelectorAll('.tour-target-highlight').forEach(el => el.classList.remove('tour-target-highlight'));
+  const container = document.getElementById('tourGuideContainer');
+  if (container) container.style.display = 'none';
 }
 

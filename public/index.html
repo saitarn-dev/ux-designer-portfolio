@@ -37,9 +37,6 @@
     </div>
   </div>
 
-  <!-- Petalyx Falling Petals (Anime Sakura Ambient) -->
-  <div class="floating-petals-wrap" id="petalsWrap"></div>
-
   <!-- TOP GAME HUD BAR (Kizupi Inspired Gamified Status) -->
   <div class="game-hud-bar">
     <div class="container hud-flex">
@@ -63,6 +60,9 @@
       </div>
 
       <div class="hud-actions" style="display:flex; align-items:center; gap:8px;">
+        <button type="button" class="sfx-toggle-btn start-tour-btn" onclick="startPortfolioTour()" title="เริ่มทัวร์ชมผลงานแบบมีไกด์นำทาง">
+          <span>🚀 เริ่มทัวร์ชมผลงาน</span>
+        </button>
         <a href="/petalyx" target="_blank" class="sfx-toggle-btn" title="เปิดดูเดโมหน้าเว็บ Petalyx (Anime-Watercolor SaaS Landing Page)" style="text-decoration:none; color:#2c3a10; background:#e7efcf; border-color:#b4cd52; font-weight:600;">
           <span>🌸 เดโม Petalyx</span>
         </a>
@@ -137,8 +137,9 @@
             </p>
             
             <div class="hero-buttons-natia">
-              <a href="#contact" class="btn btn-natia-primary" onclick="GameAudio.playPop()">ติดต่อร่วมงาน</a>
+              <button type="button" class="btn btn-natia-tour" onclick="startPortfolioTour()">🚀 เริ่มทัวร์ชมผลงาน (Guided Tour)</button>
               <a href="#deck" class="btn btn-natia-outline" onclick="GameAudio.playPop()">🃏 สำรวจสำรับผลงาน</a>
+              <a href="#contact" class="btn btn-natia-primary" onclick="GameAudio.playPop()">ติดต่อร่วมงาน</a>
             </div>
           </div>
 
@@ -1049,6 +1050,98 @@
       <div class="modal-content-body">
         <div id="messagesContainer">
           <!-- Loaded dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADVENTURE MINIMAP (FLOATING TOUR NAVIGATOR) -->
+  <aside class="adventure-minimap" id="adventureMinimap" aria-label="แผนที่นำทางผจญภัย">
+    <div class="minimap-header">
+      <span class="minimap-title">🗺️ แผนที่ทัวร์</span>
+      <button type="button" class="minimap-toggle-btn" id="minimapToggleBtn" onclick="toggleMinimap()" title="ย่อ/ขยายแผนที่">
+        <span id="minimapToggleIcon">−</span>
+      </button>
+    </div>
+    
+    <div class="minimap-body" id="minimapBody">
+      <div class="minimap-trail-line"></div>
+      
+      <!-- Checkpoint 1: Hero -->
+      <a href="#hero" class="minimap-node active" data-target="hero" onclick="handleMinimapClick(event, 'hero')">
+        <span class="node-pin">🚩</span>
+        <span class="node-label">จุดสตาร์ต</span>
+      </a>
+
+      <!-- Checkpoint 2: Adventure Deck -->
+      <a href="#deck" class="minimap-node" data-target="deck" onclick="handleMinimapClick(event, 'deck')">
+        <span class="node-pin">🃏</span>
+        <span class="node-label">สำรับผลงาน</span>
+      </a>
+
+      <!-- Checkpoint 3: Skills -->
+      <a href="#resume" class="minimap-node" data-target="skills" onclick="handleMinimapClick(event, 'skills')">
+        <span class="node-pin">🛠️</span>
+        <span class="node-label">คลังสกิล</span>
+      </a>
+
+      <!-- Checkpoint 4: Career / Experience -->
+      <a href="#resume" class="minimap-node" data-target="experience" onclick="handleMinimapClick(event, 'experience')">
+        <span class="node-pin">📜</span>
+        <span class="node-label">การเดินทาง</span>
+      </a>
+
+      <!-- Checkpoint 5: Contact -->
+      <a href="#contact" class="minimap-node" data-target="contact" onclick="handleMinimapClick(event, 'contact')">
+        <span class="node-pin">📬</span>
+        <span class="node-label">หอส่งสาร</span>
+      </a>
+
+      <!-- Quick Action: Start Tour -->
+      <div class="minimap-action-wrap">
+        <button type="button" class="minimap-tour-btn" onclick="startPortfolioTour()">
+          <span>🚀 เริ่มทัวร์ชม</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- GUIDED TOUR CONTROLLER & OVERLAY -->
+  <div class="tour-guide-container" id="tourGuideContainer" style="display: none;">
+    <div class="tour-guide-card">
+      <div class="tour-guide-header">
+        <div class="tour-station-badge" id="tourStationBadge">🚩 สถานีที่ 1/5 · จุดสตาร์ต</div>
+        <button type="button" class="tour-close-btn" onclick="endPortfolioTour()" title="ออกจากทัวร์">✕ ออกจากทัวร์</button>
+      </div>
+      
+      <div class="tour-guide-content">
+        <div class="tour-guide-avatar">
+          <img src="/assets/saitarn.jpg" alt="ไกด์สายธาร">
+          <span class="tour-guide-role">ไกด์สายธาร ✨</span>
+        </div>
+        <div class="tour-guide-text">
+          <h4 id="tourStepTitle">ยินดีต้อนรับสู่ทัวร์ผลงานของสายธาร! 👋</h4>
+          <p id="tourStepDesc">
+            สวัสดีค่ะ! จุดนี้คือภาพรวมโปรไฟล์และระดับประสบการณ์ ทำงานในตำแหน่ง UI/UX Designer & Developer ที่ Security Pitch มากว่า 5 ปี 9 เดือน
+          </p>
+        </div>
+      </div>
+
+      <div class="tour-guide-footer">
+        <div class="tour-step-dots" id="tourStepDots">
+          <span class="tour-dot active"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+          <span class="tour-dot"></span>
+        </div>
+        <div class="tour-btn-group">
+          <button type="button" class="tour-btn tour-btn-prev" id="tourPrevBtn" onclick="prevTourStep()" style="display: none;">
+            ⬅ ย้อนกลับ
+          </button>
+          <button type="button" class="tour-btn tour-btn-next" id="tourNextBtn" onclick="nextTourStep()">
+            สถานีถัดไป ➔
+          </button>
         </div>
       </div>
     </div>
