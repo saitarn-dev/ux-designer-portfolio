@@ -704,3 +704,53 @@ function pokeAvatar() {
   bubble.offsetHeight;
   bubble.style.animation = 'speechPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
 }
+
+// ==========================================
+// PETALYX SAKURA FLOATING PETALS EFFECT
+// ==========================================
+function initFloatingPetals() {
+  const petalsWrap = document.getElementById('petalsWrap');
+  if (!petalsWrap) return;
+  const count = 22;
+  for (let i = 0; i < count; i++) {
+    const petal = document.createElement('span');
+    petal.className = 'floating-petal';
+    petal.style.left = (Math.random() * 100).toFixed(2) + '%';
+    const dx = (Math.random() * 180 - 90).toFixed(1) + 'px';
+    petal.style.setProperty('--dx', dx);
+    const dur = (9 + Math.random() * 12).toFixed(1) + 's';
+    const delay = (-Math.random() * 16).toFixed(1) + 's';
+    const scale = (0.65 + Math.random() * 0.7).toFixed(2);
+    petal.style.setProperty('--scale', scale);
+    petal.style.animationDuration = dur;
+    petal.style.animationDelay = delay;
+    petalsWrap.appendChild(petal);
+  }
+}
+
+// Click anywhere to spawn gentle floating petal bursts
+document.addEventListener('click', (e) => {
+  const wrap = document.getElementById('petalsWrap');
+  if (!wrap) return;
+  for (let i = 0; i < 3; i++) {
+    const burst = document.createElement('span');
+    burst.className = 'floating-petal';
+    burst.style.left = (e.clientX + (Math.random() * 40 - 20)) + 'px';
+    burst.style.top = (e.clientY + (Math.random() * 40 - 20)) + 'px';
+    burst.style.position = 'fixed';
+    const dx = (Math.random() * 120 - 60).toFixed(1) + 'px';
+    burst.style.setProperty('--dx', dx);
+    burst.style.animationDuration = (4.5 + Math.random() * 3).toFixed(1) + 's';
+    burst.style.setProperty('--scale', (0.8 + Math.random() * 0.5).toFixed(2));
+    wrap.appendChild(burst);
+    setTimeout(() => burst.remove(), 7000);
+  }
+});
+
+// Initialize Petals
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFloatingPetals);
+} else {
+  initFloatingPetals();
+}
+
