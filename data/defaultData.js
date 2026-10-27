@@ -344,7 +344,7 @@ const caseStudiesData = [
 ];
 
 const profileData = {
-  name: 'สายธาร อาร์ตชมพู (Sai Tara)',
+  name: 'สายธาร อาจชมภู (Sai Tara)',
   roleTitle: 'Mid-Level UX/UI Designer & Researcher',
   tagline: 'ออกแบบดิจิทัลโปรดักต์ที่ใช้งานง่าย เข้าถึงใจผู้ใช้ ขับเคลื่อนผลลัพธ์ทางธุรกิจ และเป็นมิตรกับทีมเสมอ ✨',
   location: 'กรุงเทพฯ, ประเทศไทย (พร้อมทำงานแบบ Remote / Hybrid ได้ทั่วโลก)',
@@ -368,14 +368,14 @@ const profileData = {
       role: 'Mid-Level UX/UI Designer',
       company: 'OmniTech Solutions (FinTech & B2B SaaS)',
       description: 'ดูแลการออกแบบผลิตภัณฑ์แบบ End-to-End ตั้งแต่ค้นคว้าสัมภาษณ์ผู้ใช้ สร้างระบบ Figma Design System จนถึงส่งมอบงานให้ Developer ทำงานร่วมกับ 3 Product Managers และ 8 Software Engineers ช่วยลดอัตราการหลุดจากโฟลว์ลงได้ 42%',
-      skills: ['Figma Tokens', 'Usability Testing', 'Data Telemetry', 'WCAG 2.1 AA', 'Design Sprint']
+      skills: ['Figma (Core)', 'Adobe Illustrator (พื้นฐาน)', 'Adobe Premiere Pro (พื้นฐาน)', 'WCAG 2.1 AA', 'Design Sprint']
     },
     {
       period: '2564 - 2566 (Junior to Mid)',
       role: 'Associate UX/UI Designer',
       company: 'CreativePulse Digital Studio',
       description: 'สัมภาษณ์ผู้ใช้งานกว่า 35 ครั้ง จัดทำ Empathy Map และส่งมอบงาน UI คุณภาพสูงสำหรับแอปอีคอมเมิร์ซและระบบการแพทย์ชั้นนำในเอเชียตะวันออกเฉียงใต้',
-      skills: ['Interaction Design', 'Micro-interactions', 'Information Architecture', 'Framer / Webflow', 'A/B Testing']
+      skills: ['Figma Prototyping', 'Adobe Illustrator (Vector)', 'Information Architecture', 'User Research', 'A/B Testing']
     }
   ],
   education: [
