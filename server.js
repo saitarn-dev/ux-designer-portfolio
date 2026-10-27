@@ -184,6 +184,11 @@ app.get('/api/messages', async (req, res) => {
   }
 });
 
+// Petalyx Landing Page Route
+app.get('/petalyx', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'petalyx.html'));
+});
+
 // Fallback to index.html for SPA (Express 5 compatible)
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
