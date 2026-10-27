@@ -2063,3 +2063,473 @@ textarea.form-control {
   flex-shrink: 0;
 }
 
+/* ==========================================================
+   CARTOON & GAMIFIED ANIME STYLES (KIZUPI & GHIBLI INSPIRED)
+   ========================================================== */
+
+/* 1. TOP GAME HUD & STATUS BAR */
+.game-hud-bar {
+  background: rgba(10, 14, 26, 0.92);
+  border-bottom: 2px solid rgba(250, 204, 21, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  font-size: 0.82rem;
+}
+
+.hud-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.hud-stat-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hud-badge-lvl {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-hp-box, .hud-mp-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hud-bar-track {
+  width: 64px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-bar-fill.hp {
+  height: 100%;
+  background: linear-gradient(90deg, #ec4899, #f43f5e);
+  border-radius: 4px;
+  box-shadow: 0 0 6px #f43f5e;
+}
+
+.hud-bar-fill.mp {
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #3b82f6);
+  border-radius: 4px;
+  box-shadow: 0 0 6px #3b82f6;
+}
+
+.hud-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.hud-center-quest {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #cbd5e1;
+}
+
+.quest-label {
+  color: #fbbf24;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.quest-target {
+  color: #fff;
+  font-weight: 700;
+  background: rgba(74, 222, 128, 0.15);
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  font-size: 0.82rem;
+}
+
+.sfx-toggle-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.sfx-toggle-btn:hover {
+  background: rgba(250, 204, 21, 0.2);
+  border-color: #facc15;
+  transform: scale(1.05);
+}
+
+/* 2. CARTOON CLOUDS IN BACKGROUND */
+.cartoon-clouds-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+}
+
+.cartoon-cloud {
+  position: absolute;
+  fill: rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0 6px 12px rgba(162, 190, 240, 0.15));
+}
+
+.cloud-1 {
+  top: 40px;
+  left: -200px;
+  width: 180px;
+  animation: cloudDriftSlow 52s linear infinite;
+}
+
+.cloud-2 {
+  top: 140px;
+  left: -300px;
+  width: 260px;
+  animation: cloudDriftMedium 40s linear infinite 8s;
+}
+
+.cloud-3 {
+  top: 80px;
+  left: -150px;
+  width: 140px;
+  animation: cloudDriftFast 32s linear infinite 16s;
+}
+
+@keyframes cloudDriftSlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 400px)); }
+}
+
+@keyframes cloudDriftMedium {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 500px)); }
+}
+
+@keyframes cloudDriftFast {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 350px)); }
+}
+
+/* 3. ROUGH HIGHLIGHTER BRUSH SWIPES (SKYPROMPT & KIZUPI AESTHETIC) */
+.highlighter-brush {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+  padding: 0 8px;
+  color: #0f172a !important;
+  font-weight: 800;
+}
+
+.highlighter-brush::before {
+  content: '';
+  position: absolute;
+  inset: 12% -4px 4% -4px;
+  background: #fde047;
+  border-radius: 6px;
+  transform: rotate(-1.5deg) skewX(-3deg);
+  z-index: -1;
+  box-shadow: 0 0 16px rgba(253, 224, 71, 0.6);
+}
+
+.highlighter-brush.mint::before {
+  background: #4ade80;
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.55);
+  transform: rotate(1.2deg) skewX(2deg);
+}
+
+.highlighter-brush.coral::before {
+  background: #fb7185;
+  box-shadow: 0 0 16px rgba(251, 113, 133, 0.55);
+  transform: rotate(-1.2deg);
+}
+
+.highlighter-brush.sky::before {
+  background: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.55);
+  transform: rotate(1deg);
+}
+
+/* 4. CARTOON SPEECH BUBBLE OVER AVATAR */
+.avatar-speech-bubble {
+  position: absolute;
+  top: -65px;
+  right: -20px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 10px 18px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 0 2px #facc15;
+  font-size: 0.88rem;
+  font-weight: 700;
+  max-width: 280px;
+  line-height: 1.45;
+  z-index: 30;
+  animation: speechPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.avatar-speech-bubble .bubble-tail {
+  position: absolute;
+  bottom: -10px;
+  left: 32px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #ffffff;
+}
+
+@keyframes speechPop {
+  0% { transform: scale(0.6) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.poke-me-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #facc15;
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-top: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.poke-me-btn:hover {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+/* 5. INTERACTIVE FANNED ADVENTURE CARDS (SKYPROMPT & GAME STYLE) */
+.fanned-deck-section {
+  padding: 2.5rem 0 3.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-island-pedestal {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3.5rem;
+  background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0) 70%);
+}
+
+.deck-annotation {
+  position: absolute;
+  font-weight: 800;
+  font-size: 0.95rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.deck-annotation.left {
+  top: 15px;
+  left: 30px;
+  transform: rotate(-7deg);
+}
+
+.deck-annotation.right {
+  bottom: 20px;
+  right: 30px;
+  transform: rotate(5deg);
+}
+
+.annotation-badge {
+  background: #fde047;
+  color: #0f172a;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 16px rgba(253, 224, 71, 0.4);
+  font-size: 0.88rem;
+}
+
+.annotation-arrow-svg {
+  width: 48px;
+  height: 48px;
+  color: #fde047;
+}
+
+.fanned-cards-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 1.5rem;
+  perspective: 1200px;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 860px) {
+  .fanned-cards-wrap {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .deck-annotation {
+    display: none;
+  }
+}
+
+.fan-card-item {
+  width: 240px;
+  height: 330px;
+  background: #141b2a;
+  border: 3px solid #ffffff;
+  border-radius: 18px;
+  padding: 1.25rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  position: relative;
+  transform-origin: bottom center;
+}
+
+.fan-card-item:nth-child(1) {
+  transform: rotate(-10deg) translateY(14px);
+  z-index: 1;
+}
+
+.fan-card-item:nth-child(2) {
+  transform: rotate(-3deg) translateY(2px);
+  z-index: 2;
+}
+
+.fan-card-item:nth-child(3) {
+  transform: rotate(3deg) translateY(2px);
+  z-index: 3;
+}
+
+.fan-card-item:nth-child(4) {
+  transform: rotate(10deg) translateY(14px);
+  z-index: 4;
+}
+
+.fan-card-item:hover {
+  transform: translateY(-28px) scale(1.1) rotate(0deg) !important;
+  z-index: 20 !important;
+  border-color: #facc15;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7), 0 0 30px rgba(250, 204, 21, 0.45);
+}
+
+.fan-card-category {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #4ade80;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fan-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 6px 0;
+  line-height: 1.35;
+}
+
+.fan-card-metric {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.fan-card-btn {
+  margin-top: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+}
+
+.fan-card-item:hover .fan-card-btn {
+  background: #facc15;
+}
+
+/* 6. QUEST CLEAR STAMPS */
+.quest-clear-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border: 1.5px dashed #4ade80;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* 7. GAMIFIED INVENTORY EQUIPMENT SLOTS (SKILLS TAB) */
+.inventory-slot-tag {
+  font-size: 0.74rem;
+  color: #fbbf24;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+

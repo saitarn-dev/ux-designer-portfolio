@@ -9,19 +9,62 @@
   <meta name="description" content="พอร์ตโฟลิโอส่วนตัวของ สายธาร อาจชมภู UI/UX Designer & Developer ที่ Security Pitch สไตล์เป็นมิตร พร้อมแนวคิดการออกแบบที่ขับเคลื่อนธุรกิจ">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
 
-  <!-- Google Fonts: Prompt, Kanit, Plus Jakarta Sans, Inter -->
+  <!-- Google Fonts: Grandstander, Mali, Prompt, Kanit, Plus Jakarta Sans, Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@600;700;800;900&family=Mali:wght@400;500;600;700&family=Kanit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-  <!-- Ambient Glowing Blobs -->
+  <!-- Ambient Glowing Blobs & Cartoon Drifting Clouds -->
   <div class="bg-ambient">
     <div class="ambient-blob-1"></div>
     <div class="ambient-blob-2"></div>
+    
+    <!-- Cartoon Clouds (Meadowbell & Ghibli Style) -->
+    <div class="cartoon-clouds-wrap">
+      <svg class="cartoon-cloud cloud-1" viewBox="0 0 200 100">
+        <path d="M20 70 A25 25 0 0 1 45 45 A35 35 0 0 1 100 30 A40 40 0 0 1 160 45 A30 30 0 0 1 180 70 A20 20 0 0 1 160 90 L30 90 A20 20 0 0 1 20 70 Z"/>
+      </svg>
+      <svg class="cartoon-cloud cloud-2" viewBox="0 0 200 100">
+        <path d="M20 70 A25 25 0 0 1 45 45 A35 35 0 0 1 100 30 A40 40 0 0 1 160 45 A30 30 0 0 1 180 70 A20 20 0 0 1 160 90 L30 90 A20 20 0 0 1 20 70 Z"/>
+      </svg>
+      <svg class="cartoon-cloud cloud-3" viewBox="0 0 200 100">
+        <path d="M20 70 A25 25 0 0 1 45 45 A35 35 0 0 1 100 30 A40 40 0 0 1 160 45 A30 30 0 0 1 180 70 A20 20 0 0 1 160 90 L30 90 A20 20 0 0 1 20 70 Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- TOP GAME HUD BAR (Kizupi Inspired Gamified Status) -->
+  <div class="game-hud-bar">
+    <div class="container hud-flex">
+      <div class="hud-stat-group">
+        <span class="hud-badge-lvl">⭐ LV. 5+</span>
+        <div class="hud-hp-box" title="พลังชีวิตดีไซเนอร์">
+          <span class="hud-icon">💖 HP</span>
+          <div class="hud-bar-track"><div class="hud-bar-fill hp" style="width: 100%;"></div></div>
+          <span class="hud-num">100/100</span>
+        </div>
+        <div class="hud-mp-box" title="มานาความคิดสร้างสรรค์">
+          <span class="hud-icon">✨ MP</span>
+          <div class="hud-bar-track"><div class="hud-bar-fill mp" style="width: 100%;"></div></div>
+          <span class="hud-num">999/999</span>
+        </div>
+      </div>
+
+      <div class="hud-center-quest">
+        <span class="quest-label">⚔️ เควสต์ประจำการ:</span>
+        <strong class="quest-target">Security Pitch (5 ปี 9 เดือน)</strong>
+      </div>
+
+      <div class="hud-actions">
+        <button type="button" class="sfx-toggle-btn" id="sfxToggleBtn" onclick="toggleGameSFX()" title="เปิด/ปิดเสียงเอฟเฟกต์เกม">
+          <span id="sfxIcon">🔊</span> <span id="sfxLabel">SFX เปิด</span>
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Header / Navigation -->
@@ -38,6 +81,7 @@
       <nav>
         <ul class="nav-links">
           <li><a href="#hero" class="nav-link">หน้าแรก</a></li>
+          <li><a href="#deck" class="nav-link">สำรับการ์ด</a></li>
           <li><a href="#resume" class="nav-link">ประวัติและเรซูเม่</a></li>
           <li><a href="#work" class="nav-link">ผลงานและเคสสตัดดี้</a></li>
           <li><a href="#process" class="nav-link">กระบวนการ UX</a></li>
@@ -65,28 +109,30 @@
   </header>
 
   <main>
-    <!-- HERO SECTION (Natia Inspired Style) -->
+    <!-- HERO SECTION (Cartoon & Ghibli Inspired) -->
     <section class="hero-section" id="hero">
       <div class="container">
         <div class="natia-hero-wrap">
           
           <!-- Left Column: Intro & Call-to-actions -->
           <div class="natia-hero-content">
-            <span class="hero-expert-tag">✦ ผู้เชี่ยวชาญด้าน UI/UX Design & Development</span>
+            <span class="hero-expert-tag" style="background: rgba(250, 204, 21, 0.15); color: #facc15; border-color: rgba(250, 204, 21, 0.35);">
+              ✦ ผู้เชี่ยวชาญด้าน UI/UX Design & Development
+            </span>
             
-            <h1 class="hero-title-natia">
-              สวัสดีค่ะ, ฉันชื่อ <span class="highlight-name">สายธาร</span><br>
-              UI/UX Designer<br>
-              & Developer มืออาชีพ
+            <h1 class="hero-title-natia" style="line-height: 1.25;">
+              สวัสดีค่ะ, ฉันชื่อ <span class="highlighter-brush">สายธาร</span><br>
+              <span class="highlighter-brush mint" style="margin-top: 6px;">UI/UX Designer</span><br>
+              & Developer มืออาชีพ ✨
             </h1>
             
-            <p class="hero-desc-natia">
-              ปัจจุบันทำงานที่ <strong>Security Pitch</strong> ด้วยประสบการณ์ทำงานกว่า 5 ปี เชี่ยวชาญการออกแบบ UI/UX, วิจัยความต้องการผู้ใช้งาน และเชื่อมโยงสู่การพัฒนาระบบจริง
+            <p class="hero-desc-natia" style="font-size: 1.05rem;">
+              ปัจจุบันทำงานที่ <strong>Security Pitch</strong> ด้วยประสบการณ์ทำงานจริงกว่า <span class="highlighter-brush coral" style="color: #fff !important; font-weight: 700;">5+ ปี</span> เชี่ยวชาญการออกแบบ UI/UX, วิจัยความต้องการผู้ใช้งาน และเชื่อมโยงสู่การพัฒนาระบบจริง
             </p>
             
             <div class="hero-buttons-natia">
-              <a href="#contact" class="btn btn-natia-primary">ติดต่อร่วมงาน</a>
-              <a href="#resume" class="btn btn-natia-outline">ดูประวัติการทำงาน</a>
+              <a href="#contact" class="btn btn-natia-primary" onclick="GameAudio.playPop()">ติดต่อร่วมงาน</a>
+              <a href="#deck" class="btn btn-natia-outline" onclick="GameAudio.playPop()">🃏 สำรวจสำรับผลงาน</a>
             </div>
           </div>
 
@@ -94,8 +140,20 @@
           <div class="natia-hero-image-wrap">
             <div class="hero-avatar-glow"></div>
             
-            <div class="hero-avatar-card">
+            <!-- Cartoon Speech Bubble (Pops when avatar is clicked) -->
+            <div class="avatar-speech-bubble" id="avatarSpeechBubble" onclick="pokeAvatar()">
+              <span class="bubble-tail"></span>
+              <span id="bubbleText">สวัสดีค่า! ฉันชื่อสายธาร ยินดีที่ได้พบกันนะคะ 💖 (คลิกฉันอีกทีสิคะ)</span>
+            </div>
+
+            <div class="hero-avatar-card" onclick="pokeAvatar()" style="cursor: pointer;" title="คลิกเพื่อทักทายสายธาร!">
               <img src="/assets/saitarn.jpg" alt="สายธาร อาจชมภู - UI/UX Designer & Developer" class="hero-avatar-img">
+            </div>
+
+            <div style="text-align: center; margin-top: 10px;">
+              <button type="button" class="poke-me-btn" onclick="pokeAvatar()">
+                <span>💬 คลิกเพื่อทักทายสายธาร!</span>
+              </button>
             </div>
 
             <!-- Floating Badge: Experience -->
@@ -119,6 +177,110 @@
           </div>
 
         </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE FANNED ADVENTURE CARDS (SKYPROMPT & KIZUPI AESTHETIC) -->
+    <section class="fanned-deck-section" id="deck">
+      <div class="container">
+        
+        <div class="deck-island-pedestal">
+          <!-- Hand-drawn Annotation Left -->
+          <div class="deck-annotation left">
+            <span class="annotation-badge">✨ เริ่มจากศูนย์ (UX Research)</span>
+            <svg class="annotation-arrow-svg" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M10 15 C 25 15, 38 28, 42 42 M 30 40 L 42 42 L 40 30"/>
+            </svg>
+          </div>
+
+          <!-- Section Heading -->
+          <div style="margin-bottom: 1.5rem;">
+            <span class="section-tag" style="background: rgba(250, 204, 21, 0.15); color: #facc15; border-color: rgba(250, 204, 21, 0.35);">
+              🎮 สำรับการ์ดเคสสตัดดี้ (Adventure Deck)
+            </span>
+            <h2 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin-top: 8px;">
+              เลือกการ์ดผลงานเพื่อเริ่มสำรวจ 🃏
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 8px auto 0;">
+              คลิกหรือชี้ที่การ์ดเพื่อส่องความสำเร็จด้านธุรกิจและวิธีคิด UX Process ของแต่ละเคส
+            </p>
+          </div>
+
+          <!-- Hand-drawn Annotation Right -->
+          <div class="deck-annotation right">
+            <svg class="annotation-arrow-svg" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M40 38 C 25 35, 12 25, 8 10 M 20 12 L 8 10 L 10 22"/>
+            </svg>
+            <span class="annotation-badge">📈 ผลลัพธ์ธุรกิจจริง (+38.4%)</span>
+          </div>
+
+          <!-- 4 Tilted Fanned Cards -->
+          <div class="fanned-cards-wrap">
+            
+            <!-- Card 1 (-10deg) -->
+            <div class="fan-card-item" onclick="openCaseStudyModal('flowpay-fintech-onboarding')">
+              <div>
+                <span class="fan-card-category">📱 แอปมือถือ / FinTech</span>
+                <h3 class="fan-card-title">FlowPay FinTech</h3>
+                <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
+                  รีดีไซน์โฟลว์ยืนยันตัวตน KYC 12 สเต็ปให้เหลือ 4 สเต็ปที่น่ารัก
+                </p>
+              </div>
+              <div>
+                <div class="fan-card-metric">📈 ผ่าน KYC สำเร็จ +38.4%</div>
+                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+              </div>
+            </div>
+
+            <!-- Card 2 (-3deg) -->
+            <div class="fan-card-item" onclick="openCaseStudyModal('novacloud-enterprise-saas-design-system')">
+              <div>
+                <span class="fan-card-category">💻 B2B SaaS / System</span>
+                <h3 class="fan-card-title">NovaCloud SaaS</h3>
+                <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
+                  สร้างระบบ Figma Design Tokens ครอบคลุมแดชบอร์ด 14 โมดูล
+                </p>
+              </div>
+              <div>
+                <div class="fan-card-metric">⚡ Dev ส่งงานไวขึ้น 2.4 เท่า</div>
+                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+              </div>
+            </div>
+
+            <!-- Card 3 (3deg) -->
+            <div class="fan-card-item" onclick="openCaseStudyModal('shopvibe-social-commerce-redesign')">
+              <div>
+                <span class="fan-card-category">🛍️ อีคอมเมิร์ซ</span>
+                <h3 class="fan-card-title">ShopVibe Checkout</h3>
+                <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
+                  หน้าชำระเงิน One-Page ลดเวลาสั่งซื้อเหลือ 45 วินาที
+                </p>
+              </div>
+              <div>
+                <div class="fan-card-metric">💰 ดันยอดขายเพิ่มขึ้น +28%</div>
+                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+              </div>
+            </div>
+
+            <!-- Card 4 (10deg) -->
+            <div class="fan-card-item" onclick="openCaseStudyModal('medicare-accessible-health-companion')">
+              <div>
+                <span class="fan-card-category">💊 สุขภาพ / Inclusive</span>
+                <h3 class="fan-card-title">MediCare Companion</h3>
+                <p style="font-size: 0.82rem; color: var(--text-dim); line-height: 1.4;">
+                  ออกแบบแอปเตือนทานยาสำหรับผู้สูงอายุ มาตรฐาน WCAG 2.1 AA
+                </p>
+              </div>
+              <div>
+                <div class="fan-card-metric">⭐ คะแนน SUS สูงถึง 94/100</div>
+                <div class="fan-card-btn">เปิดดูการ์ดใบนี้ ➔</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
     </section>
 
@@ -355,7 +517,10 @@
 
           <div class="resume-cards-grid">
             <div class="resume-card-item">
-              <div class="card-date-badge">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 · 2 เดือน</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
+                <div class="card-date-badge">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 · 2 เดือน</div>
+                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+              </div>
               <h3 class="card-item-title">นักศึกษาฝึกงาน-content Online</h3>
               <div class="card-item-subtitle">กองปราบปราม</div>
               <p class="card-item-desc">
@@ -364,7 +529,10 @@
             </div>
 
             <div class="resume-card-item">
-              <div class="card-date-badge">📅 20 พ.ค. 2018 - 3 ส.ค. 2018 · 2 เดือน</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
+                <div class="card-date-badge">📅 20 พ.ค. 2018 - 3 ส.ค. 2018 · 2 เดือน</div>
+                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+              </div>
               <h3 class="card-item-title">นักศึกษาฝึกงาน</h3>
               <div class="card-item-subtitle">มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)</div>
               <p class="card-item-desc">
@@ -373,7 +541,10 @@
             </div>
 
             <div class="resume-card-item">
-              <div class="card-date-badge">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 · 2 เดือน</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
+                <div class="card-date-badge">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 · 2 เดือน</div>
+                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+              </div>
               <h3 class="card-item-title">นักศึกษาฝึกงาน</h3>
               <div class="card-item-subtitle">ThaiNews – ไทยนิวส์</div>
               <p class="card-item-desc">
@@ -382,7 +553,10 @@
             </div>
 
             <div class="resume-card-item">
-              <div class="card-date-badge">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 · 2 เดือน</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 6px;">
+                <div class="card-date-badge">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 · 2 เดือน</div>
+                <span class="quest-clear-badge">✦ QUEST CLEAR! ✨</span>
+              </div>
               <h3 class="card-item-title">พนักงานแคชเชียร์และบริการ (Cashier)</h3>
               <div class="card-item-subtitle">7-ELEVEN</div>
               <p class="card-item-desc">
@@ -416,12 +590,13 @@
           </div>
         </div>
 
-        <!-- Tab 4: ทักษะและความเชี่ยวชาญ (พร้อมไอคอนให้อ่านง่าย) -->
+        <!-- Tab 4: ทักษะและความเชี่ยวชาญ (คลังอุปกรณ์เกม & ทักษะ) -->
         <div class="resume-tab-pane" id="tab-skills">
           <div class="skill-cards-grid">
             
             <!-- Skill 1: Figma (เครื่องมือหลัก) -->
             <div class="skill-card-modern skill-card-figma-highlight">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">🗡️ อาวุธหลัก · PRIMARY WEAPON</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-figma" title="Figma">
                   <svg width="28" height="28" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -433,7 +608,7 @@
                   </svg>
                 </div>
                 <div class="skill-meta-info">
-                  <div class="skill-title-text">Figma</div>
+                  <div class="skill-title-text">Figma (LV. MAX)</div>
                   <span class="skill-level-badge level-core">⭐ เครื่องมือเชี่ยวชาญหลัก (Core Tool)</span>
                 </div>
               </div>
@@ -447,6 +622,7 @@
 
             <!-- Skill 2: Adobe Illustrator (Ai) -->
             <div class="skill-card-modern">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">🎨 อุปกรณ์คราฟต์ · CRAFT TOOL</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-ai" title="Adobe Illustrator">
                   Ai
@@ -465,6 +641,7 @@
 
             <!-- Skill 3: Adobe Premiere Pro (Pr) -->
             <div class="skill-card-modern">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">🎬 ม้วนฟิล์มเรื่องราว · STORY REEL</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-pr" title="Adobe Premiere Pro">
                   Pr
@@ -483,6 +660,7 @@
 
             <!-- Skill 4: UI & Web Development -->
             <div class="skill-card-modern">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">🛡️ เกราะโค้ดระบบ · DEV SHIELD</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-dev" title="Web & Development">
                   💻
@@ -501,6 +679,7 @@
 
             <!-- Skill 5: UX Research & Strategy -->
             <div class="skill-card-modern">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">📜 คัมภีร์วิจัยผู้ใช้ · RESEARCH SCROLL</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-research" title="UX Research">
                   🔍
@@ -519,6 +698,7 @@
 
             <!-- Skill 6: Design Systems & Collaboration -->
             <div class="skill-card-modern">
+              <div class="inventory-slot-tag" style="margin-bottom: 6px;">🧩 รูนระบบดีไซน์ · SYSTEM RUNE</div>
               <div class="skill-top-bar">
                 <div class="skill-icon-wrapper skill-icon-system" title="Design Systems">
                   📐

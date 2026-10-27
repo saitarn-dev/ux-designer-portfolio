@@ -156,6 +156,7 @@ function renderCaseStudies(items) {
 
 // Open In-Depth Case Study Modal
 function openCaseStudyModal(slug) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playChime();
   const study = caseStudies.find(s => s.slug === slug);
   if (!study) return;
 
@@ -401,12 +402,14 @@ function showToast(message) {
 
 // Resume Preview Modal Trigger
 function openResumeModal() {
+  if (typeof GameAudio !== 'undefined') GameAudio.playChime();
   document.getElementById('resumeModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
 // Recruiter Messages / Admin Modal Trigger
 async function openMessagesModal() {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
   const container = document.getElementById('messagesContainer');
   if (!container) return;
 
@@ -477,6 +480,7 @@ async function checkDatabaseHealth() {
 
 // Switch Natia Resume Tabs (About Me, Experience, Education, Skills)
 function switchResumeTab(tabName) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
   const buttons = document.querySelectorAll('.resume-tab-btn');
   buttons.forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
@@ -586,4 +590,117 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+// ==========================================
+// GAME AUDIO & CARTOON INTERACTION ENGINE
+// ==========================================
+
+const GameAudio = {
+  ctx: null,
+  muted: false,
+  init() {
+    if (!this.ctx && typeof AudioContext !== 'undefined') {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  },
+  playPop() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, this.ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.09);
+    } catch(e) {}
+  },
+  playChime() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        const startTime = this.ctx.currentTime + idx * 0.06;
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.1, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.2);
+      });
+    } catch(e) {}
+  },
+  playBoing() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(260, this.ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(580, this.ctx.currentTime + 0.12);
+      osc.frequency.linearRampToValueAtTime(440, this.ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.18, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.22);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.23);
+    } catch(e) {}
+  }
+};
+
+function toggleGameSFX() {
+  GameAudio.muted = !GameAudio.muted;
+  const icon = document.getElementById('sfxIcon');
+  const label = document.getElementById('sfxLabel');
+  if (icon && label) {
+    icon.textContent = GameAudio.muted ? '🔇' : '🔊';
+    label.textContent = GameAudio.muted ? 'SFX ปิด' : 'SFX เปิด';
+  }
+  if (!GameAudio.muted) {
+    GameAudio.playPop();
+  }
+}
+
+// Cartoon Avatar Speech Dialogue
+const avatarDialogue = [
+  "สวัสดีค่า! ฉันชื่อสายธาร ยินดีที่ได้พบกันนะคะ 💖",
+  "ปัจจุบันประจำการอยู่ที่ Security Pitch ค่ะ! 🛡️",
+  "สะสมประสบการณ์ UI/UX & Code มากว่า 5 ปีแล้วน้า ⚔️",
+  "Figma คืออาวุธหลักขั้นเทพที่ฉันรักที่สุดเลยค่ะ! 🎨",
+  "สามารถคลิกดูสำรับผลงานและ Case Studies ได้เลยนะค้า ✨",
+  "พร้อมตอบรับโอกาสและคุยโปรเจกต์ใหม่เสมอค่ะ! 🚀"
+];
+let currentDialogueIdx = 0;
+
+function pokeAvatar() {
+  GameAudio.playBoing();
+  const bubble = document.getElementById('avatarSpeechBubble');
+  const textEl = document.getElementById('bubbleText');
+  if (!bubble || !textEl) return;
+
+  currentDialogueIdx = (currentDialogueIdx + 1) % avatarDialogue.length;
+  textEl.textContent = avatarDialogue[currentDialogueIdx];
+  bubble.style.display = 'block';
+  bubble.style.animation = 'none';
+  bubble.offsetHeight;
+  bubble.style.animation = 'speechPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)';
 }
