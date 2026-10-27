@@ -2618,10 +2618,16 @@ textarea.form-control {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
 }
 
 .adventure-minimap.collapsed .minimap-title {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.adventure-minimap.collapsed .minimap-title-label {
+  display: none !important;
 }
 
 .adventure-minimap.collapsed .minimap-body,
@@ -3709,4 +3715,109 @@ textarea.form-control {
     padding: 8px 16px;
     font-size: 0.82rem;
   }
+}
+
+/* ==========================================================
+   CHIBI TOGGLE & MINIMAP REOPEN CONTROLS
+   ========================================================== */
+.chibi-close-pill {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(250, 204, 21, 0.4);
+  color: #facc15;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.chibi-close-pill:hover {
+  background: #facc15;
+  color: #0f172a;
+  transform: scale(1.05);
+}
+
+.bubble-close-x {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.bubble-close-x:hover {
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.15);
+}
+
+/* Floating Minimized Pill when Chibi is hidden */
+.chibi-minimized-pill {
+  position: fixed;
+  bottom: 24px;
+  left: 28px;
+  z-index: 9990;
+  background: rgba(15, 23, 42, 0.92);
+  border: 2px solid #facc15;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(250, 204, 21, 0.25);
+  backdrop-filter: blur(12px);
+  animation: pillBounce 2.5s infinite ease-in-out;
+  transition: all 0.25s ease;
+}
+
+.chibi-minimized-pill:hover {
+  background: #facc15;
+  color: #0f172a;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(250, 204, 21, 0.45);
+}
+
+@keyframes pillBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Minimap Collapsed State Clickable Polish */
+.adventure-minimap.collapsed {
+  cursor: pointer !important;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 0 8px 24px rgba(0,0,0,0.5) !important;
+  animation: minimapPulse 2.5s infinite ease-in-out;
+}
+
+.adventure-minimap.collapsed:hover {
+  transform: translateY(-50%) scale(1.15) !important;
+  border-color: #facc15 !important;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.6), 0 10px 30px rgba(0,0,0,0.6) !important;
+}
+
+@keyframes minimapPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3), 0 8px 24px rgba(0,0,0,0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(250, 204, 21, 0.1), 0 12px 28px rgba(0,0,0,0.6); }
+}
+
+/* Cute squishy bounce for town map landmarks */
+.map-landmark:hover {
+  transform: translateY(-8px) scale(1.04) !important;
+  filter: drop-shadow(0 14px 20px rgba(15, 23, 42, 0.25)) drop-shadow(0 0 18px rgba(250, 204, 21, 0.6)) !important;
 }

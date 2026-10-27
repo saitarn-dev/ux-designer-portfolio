@@ -1201,3 +1201,74 @@ function walkMapToCoord(x, y) {
 function resetMapCharacter() {
   selectMapLandmark('security-pitch', 480, 150);
 }
+
+// ==========================================================
+// CHIBI COMPANION SHOW / HIDE TOGGLE SYSTEM
+// ==========================================================
+function toggleChibiCompanion(show) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const companion = document.getElementById('chibiCompanion');
+  const pill = document.getElementById('chibiMinimizedPill');
+
+  if (typeof show === 'undefined') {
+    // If not specified, toggle current state
+    show = companion && companion.style.display === 'none';
+  }
+
+  if (show) {
+    if (companion) {
+      companion.style.display = 'flex';
+      companion.style.opacity = '1';
+    }
+    if (pill) pill.style.display = 'none';
+    pokeChibi();
+  } else {
+    if (companion) {
+      companion.style.display = 'none';
+    }
+    if (pill) pill.style.display = 'inline-flex';
+  }
+}
+
+function closeChibiBubble(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const bubble = document.getElementById('chibiBubble');
+  if (bubble) bubble.style.display = 'none';
+}
+
+// Override summonChibiCompanion to toggle
+function summonChibiCompanion() {
+  const companion = document.getElementById('chibiCompanion');
+  if (!companion || companion.style.display === 'none') {
+    toggleChibiCompanion(true);
+  } else {
+    pokeChibi();
+  }
+}
+
+// ==========================================================
+// ADVENTURE MINIMAP REOPEN FIX
+// ==========================================================
+function handleMinimapContainerClick(e) {
+  const minimap = document.getElementById('adventureMinimap');
+  // If clicked while collapsed, expand it!
+  if (minimap && minimap.classList.contains('collapsed')) {
+    toggleMinimap(e);
+  }
+}
+
+// Enhanced toggleMinimap with sound & clean icon state
+function toggleMinimap(e) {
+  if (e) e.stopPropagation();
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const minimap = document.getElementById('adventureMinimap');
+  const icon = document.getElementById('minimapToggleIcon');
+  if (!minimap) return;
+
+  const isNowCollapsed = minimap.classList.toggle('collapsed');
+  if (icon) {
+    icon.textContent = isNowCollapsed ? '🗺️' : '−';
+  }
+  minimap.setAttribute('title', isNowCollapsed ? 'คลิกเพื่อเปิดแผนที่ทัวร์ 🗺️' : 'ย่อแผนที่');
+}
