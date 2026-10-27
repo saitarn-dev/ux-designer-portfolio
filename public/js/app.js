@@ -202,6 +202,23 @@ function openCaseStudyModal(slug) {
       `).join('')}
     </div>
 
+    ${study.liveUrl ? `
+      <!-- Embedded Live Interactive App Viewer -->
+      <div style="margin-bottom: 1.5rem; background: #070d18; border: 2px solid #10b981; border-radius: 16px; padding: 14px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-weight: 800; color: #4ade80; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
+            <span class="status-dot-pulse"></span> 📱 ทดลองเล่นแอปจริง (Live App Interactive Simulator)
+          </span>
+          <a href="${study.liveUrl}" target="_blank" rel="noopener noreferrer" style="color: #facc15; font-size: 0.85rem; font-weight: 700; text-decoration: underline;">
+            เปิดแอปเต็มจอในแท็บใหม่ ➔
+          </a>
+        </div>
+        <div style="width: 100%; height: 520px; border-radius: 12px; overflow: hidden; background: #fff;">
+          <iframe src="${study.liveUrl}" style="width: 100%; height: 100%; border: none;" title="Live Interactive App" loading="lazy" allow="geolocation"></iframe>
+        </div>
+      </div>
+    ` : ''}
+
     <!-- Section 1: สรุปเร็ว 60 วินาที -->
     <div class="cs-section" style="background: rgba(34, 197, 94, 0.06); border: 1.5px solid rgba(34, 197, 94, 0.25); border-radius: var(--radius-md); padding: 1.35rem;">
       <h4 style="color: #4ade80; font-size: 1rem; font-weight: 800; margin-bottom: 8px;">
@@ -1272,3 +1289,172 @@ function toggleMinimap(e) {
   }
   minimap.setAttribute('title', isNowCollapsed ? 'คลิกเพื่อเปิดแผนที่ทัวร์ 🗺️' : 'ย่อแผนที่');
 }
+
+// ==========================================================
+// 3-WAY VIEW SWITCHER (LOCALROUTE SIMULATOR / MAP / DECK)
+// ==========================================================
+function switchDeckView(mode) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  const simWrap = document.getElementById('localrouteViewWrap');
+  const mapWrap = document.getElementById('mapViewWrap');
+  const deckWrap = document.getElementById('deckViewWrap');
+
+  const btnSim = document.getElementById('btnSwitchLocalRoute');
+  const btnMap = document.getElementById('btnSwitchMap');
+  const btnDeck = document.getElementById('btnSwitchDeck');
+
+  if (mode === 'localroute') {
+    if (simWrap) simWrap.style.display = 'block';
+    if (mapWrap) mapWrap.style.display = 'none';
+    if (deckWrap) deckWrap.style.display = 'none';
+
+    if (btnSim) btnSim.classList.add('active');
+    if (btnMap) btnMap.classList.remove('active');
+    if (btnDeck) btnDeck.classList.remove('active');
+  } else if (mode === 'map') {
+    if (simWrap) simWrap.style.display = 'none';
+    if (mapWrap) mapWrap.style.display = 'block';
+    if (deckWrap) deckWrap.style.display = 'none';
+
+    if (btnMap) btnMap.classList.add('active');
+    if (btnSim) btnSim.classList.remove('active');
+    if (btnDeck) btnDeck.classList.remove('active');
+  } else {
+    if (simWrap) simWrap.style.display = 'none';
+    if (mapWrap) mapWrap.style.display = 'none';
+    if (deckWrap) deckWrap.style.display = 'flex';
+
+    if (btnDeck) btnDeck.classList.add('active');
+    if (btnSim) btnSim.classList.remove('active');
+    if (btnMap) btnMap.classList.remove('active');
+  }
+}
+
+function setSimDeviceMode(mode) {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const frame = document.getElementById('phoneDeviceFrame');
+  const btnMobile = document.getElementById('btnSimMobile');
+  const btnWide = document.getElementById('btnSimWide');
+
+  if (mode === 'wide') {
+    if (frame) frame.classList.add('wide-mode');
+    if (btnWide) btnWide.classList.add('active');
+    if (btnMobile) btnMobile.classList.remove('active');
+  } else {
+    if (frame) frame.classList.remove('wide-mode');
+    if (btnMobile) btnMobile.classList.add('active');
+    if (btnWide) btnWide.classList.remove('active');
+  }
+}
+
+// Global active HUD state
+let currentHudSlug = 'security-pitch';
+
+function handleHudActionClick() {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const insight = projectInsights[currentHudSlug];
+  if (!insight) return;
+
+  if (insight.slug === 'localroute-transit-travel-hub') {
+    switchDeckView('localroute');
+    const sim = document.getElementById('localrouteViewWrap');
+    if (sim) sim.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (insight.isCareer) {
+    switchResumeTab('experience');
+    const jobCard = document.querySelector('.featured-current-job');
+    if (jobCard) jobCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (insight.isEducation) {
+    switchResumeTab('education');
+    const resumeSec = document.getElementById('resume');
+    if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (insight.isInternship) {
+    switchResumeTab('experience');
+    const resumeSec = document.getElementById('resume');
+    if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    openCaseStudyModal(insight.slug);
+  }
+}
+
+// Expand projectInsights with LocalRoute
+if (typeof projectInsights !== 'undefined') {
+  projectInsights['localroute-transit-travel-hub'] = {
+    title: 'LocalRoute Transit & Travel Hub',
+    badge: '🗺️ แอปแผนที่ขนส่งไทย / Live Vercel',
+    msg: 'ยินดีต้อนรับสู่สถานี LocalRoute! 🚊 แอปนำทางรถสองแถวแดง & ขนส่งสาธารณะไทย พร้อมแผนที่ Leaflet และตัวช่วยนักท่องเที่ยว ลองเล่นแอปจริงได้เลยนะคะ!',
+    slug: 'localroute-transit-travel-hub',
+    icon: '🚊',
+    actionText: '🎮 สลับไปเล่นแอปตัวเต็ม ➔'
+  };
+}
+
+// Enhanced selectMapLandmark to update Map Avatar + Station HUD
+const originalSelectMapLandmark = selectMapLandmark;
+selectMapLandmark = function(slug, x, y) {
+  currentHudSlug = slug;
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+
+  // 1. Move Avatar Pin on SVG map
+  const avatarPin = document.getElementById('mapAvatarPin');
+  if (avatarPin) {
+    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+  }
+
+  const insight = projectInsights[slug] || {
+    title: slug,
+    msg: 'ยินดีต้อนรับสู่สถานีผลงานของสายธารค่ะ!',
+    slug: slug,
+    icon: '📍'
+  };
+
+  // 2. Update Map Station HUD
+  const hudIcon = document.getElementById('hudStationIcon');
+  const hudTitle = document.getElementById('hudStationTitle');
+  const hudDesc = document.getElementById('hudStationDesc');
+  const hudBtn = document.getElementById('hudActionBtn');
+
+  if (hudIcon) hudIcon.textContent = insight.icon || (insight.badge ? insight.badge.split(' ')[0] : '📍');
+  if (hudTitle) hudTitle.textContent = insight.title;
+  if (hudDesc) hudDesc.textContent = insight.msg;
+
+  if (hudBtn) {
+    if (insight.slug === 'localroute-transit-travel-hub') {
+      hudBtn.textContent = '🎮 สลับไปเล่นแอปตัวเต็ม ➔';
+    } else if (insight.isCareer) {
+      hudBtn.textContent = '🏢 ดูประวัติ Security Pitch ➔';
+    } else if (insight.isEducation) {
+      hudBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
+    } else if (insight.isInternship) {
+      hudBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
+    } else {
+      hudBtn.textContent = '📖 เปิดเคสสตัดดี้ฉบับเต็ม ➔';
+    }
+  }
+
+  // 3. Update Chibi Companion Bubble
+  const bubble = document.getElementById('chibiBubble');
+  const bubbleText = document.getElementById('chibiBubbleText');
+  const bubbleActions = document.getElementById('chibiBubbleActions');
+  const deepDiveBtn = document.getElementById('chibiDeepDiveBtn');
+
+  if (bubbleText) bubbleText.textContent = insight.msg;
+  if (bubbleActions) bubbleActions.style.display = 'block';
+  if (deepDiveBtn) {
+    deepDiveBtn.onclick = (e) => {
+      e.stopPropagation();
+      handleHudActionClick();
+    };
+  }
+
+  if (bubble) {
+    bubble.style.display = 'block';
+    bubble.classList.remove('pop');
+    void bubble.offsetWidth;
+    bubble.classList.add('pop');
+  }
+
+  if (typeof GameAudio !== 'undefined') {
+    setTimeout(() => GameAudio.playBoing(), 300);
+  }
+};

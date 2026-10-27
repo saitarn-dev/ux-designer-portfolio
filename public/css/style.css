@@ -3821,3 +3821,324 @@ textarea.form-control {
   transform: translateY(-8px) scale(1.04) !important;
   filter: drop-shadow(0 14px 20px rgba(15, 23, 42, 0.25)) drop-shadow(0 0 18px rgba(250, 204, 21, 0.6)) !important;
 }
+
+/* ==========================================================
+   LOCALROUTE LIVE APP SIMULATOR STYLES
+   ========================================================== */
+.live-app-simulator-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  background: linear-gradient(145deg, #0d1527 0%, #070d18 100%);
+  border-radius: 28px;
+  border: 2px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 45px rgba(16, 185, 129, 0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.simulator-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 24px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sim-left-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sim-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: dotPulse 1.5s infinite;
+}
+
+.sim-badge-live {
+  background: rgba(16, 185, 129, 0.2);
+  color: #4ade80;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.sim-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sim-device-toggles {
+  display: flex;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 3px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sim-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sim-toggle-btn.active {
+  background: #10b981;
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.sim-open-external-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sim-open-external-btn:hover {
+  background: #facc15;
+  color: #0f172a;
+  border-color: #facc15;
+}
+
+.device-mockup-stage {
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+}
+
+/* Phone Mockup Frame */
+.phone-device-frame {
+  width: 380px;
+  height: 680px;
+  background: #090e17;
+  border: 12px solid #1e293b;
+  border-radius: 46px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.2);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+.phone-device-frame.wide-mode {
+  width: 100% !important;
+  max-width: 960px !important;
+  height: 620px !important;
+  border-radius: 20px !important;
+  border-width: 8px !important;
+}
+
+.phone-notch {
+  width: 140px;
+  height: 22px;
+  background: #1e293b;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.phone-device-frame.wide-mode .phone-notch {
+  display: none;
+}
+
+.notch-speaker {
+  width: 45px;
+  height: 4px;
+  background: #334155;
+  border-radius: 2px;
+}
+
+.notch-lens {
+  width: 8px;
+  height: 8px;
+  background: #0f172a;
+  border-radius: 50%;
+  border: 1px solid #334155;
+}
+
+.phone-screen-viewport {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.localroute-live-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.phone-home-indicator {
+  width: 120px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* Side Fact Cards */
+.sim-side-highlights {
+  flex: 1;
+  min-width: 280px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sim-highlight-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: all 0.2s ease;
+}
+
+.sim-highlight-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.sim-hl-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.sim-hl-content p {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* Map Station HUD Drawer */
+.map-station-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: #111c30;
+  border-bottom: 2px solid rgba(250, 204, 21, 0.3);
+  color: #ffffff;
+  flex-wrap: wrap;
+  gap: 12px;
+  animation: hudSlideDown 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes hudSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.station-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.station-hud-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.station-hud-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #facc15;
+  margin: 0;
+}
+
+.station-hud-desc {
+  font-size: 0.84rem;
+  color: #94a3b8;
+  margin: 2px 0 0;
+}
+
+.station-hud-action-btn {
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  color: #0f172a;
+  border: none;
+  font-size: 0.84rem;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35);
+}
+
+.station-hud-action-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(250, 204, 21, 0.5);
+}
+
+/* Fix Chibi Companion overlap */
+.chibi-close-pill {
+  top: -8px !important;
+  right: -8px !important;
+  padding: 2px 7px !important;
+  font-size: 0.7rem !important;
+}
+
+.chibi-minimized-pill {
+  display: none; /* Never show when companion is visible */
+}

@@ -1,5 +1,86 @@
 const caseStudiesData = [
   {
+    title: 'LocalRoute: แพลตฟอร์มนำทางระบบขนส่งท้องถิ่น & แผนที่ท่องเที่ยวไทย (Live Web App)',
+    slug: 'localroute-transit-travel-hub',
+    category: 'mobile',
+    categoryLabel: '🗺️ แอปแผนที่ & ขนส่งสาธารณะ / TransitTech',
+    tagline: 'แอป PWA Interactive นำทางรถสองแถวแดง, MRT/BTS และคู่มือท่องเที่ยวไทย พร้อมแผนที่ Leaflet และระบบความปลอดภัยนักท่องเที่ยว',
+    role: 'Lead UX/UI Designer & Front-End Developer',
+    roleTags: ['UX Research', 'Interactive Map', 'Front-End Dev'],
+    timeline: '8 สัปดาห์ (Research, UI System, Leaflet Map Integration & Deploy)',
+    team: 'Solo Project (UX/UI Design & Front-End Development โดยสายธาร)',
+    tools: ['Figma', 'Leaflet.js', 'Tailwind CSS', 'Vercel', 'Geolocation API', 'HTML5 Audio'],
+    liveUrl: 'https://easylocalroutedev.vercel.app/',
+    keyMetrics: [
+      { label: 'ลดเวลาตัดสินใจเลือกพาหนะ', value: '-70%', context: 'มีชาร์ตเปรียบเทียบเวลา vs ราคาแบบเรียลไทม์' },
+      { label: 'ความมั่นใจด้านความปลอดภัย', value: '96%', context: 'ฟีเจอร์ Safe Ride Share & ปุ่มโทรฉุกเฉินออฟไลน์' },
+      { label: 'ระบบเตือนกันตกรถ / ปลุกก่อนถึง', value: '100%', context: 'Wake-Up Alert แจ้งเตือนเมื่อใกล้ถึงปลายทาง' },
+      { label: 'รองรับ 2 ภาษาเต็มรูปแบบ', value: 'TH / EN', context: 'พร้อมฟังก์ชันพิมพ์แปลและออกเสียงภาษาไทยให้นักท่องเที่ยว' }
+    ],
+    executiveSummary: {
+      problem: 'นักท่องเที่ยวทั้งชาวไทยและต่างชาติมักสับสนกับระบบขนส่งท้องถิ่น เช่น รถสองแถวแดงเชียงใหม่ที่ไม่มีป้ายราคาชัดเจน กังวลเรื่องการโดนโก่งราคา และไม่รู้ว่ารถวิ่งผ่านจุดหมายหรือไม่',
+      solution: 'ออกแบบแพลตฟอร์ม LocalRoute รวมข้อมูลเส้นทาง แผนที่อินเทอร์แอคทีฟ Leaflet ตารางวิเคราะห์มิติการบริการ ระบบเปรียบเทียบราคา และเครื่องมือแปลเสียงเพื่อสื่อสารกับคนขับ',
+      impact: 'สร้างแอปพลิเคชันจริงที่เปิดใช้งานบน Vercel (https://easylocalroutedev.vercel.app/) มอบประสบการณ์เดินทางที่โปร่งใส มั่นใจ ปลอดภัย และเข้าใจง่าย'
+    },
+    discovery: {
+      challenge: 'รถสองแถวและขนส่งท้องถิ่นไม่มีสถานีและตารางเวลาตายตัว คนขับมักไม่พูดภาษาอังกฤษ และนักท่องเที่ยวกลัวตกรถหรือถูกคิดราคาเกินจริง',
+      userPersona: {
+        name: 'Alex & พลอย, อายุ 26-32 ปี (นักท่องเที่ยว Backpacker & Digital Nomad)',
+        role: 'นักเดินทางที่ต้องการสัมผัสวิถีชีวิตท้องถิ่นในราคาประหยัดและปลอดภัย',
+        needs: ['รู้ราคามาตรฐานก่อนขึ้นรถ', 'มีแผนที่บอกตำแหน่งเรียลไทม์ไม่ต้องต่อเน็ต', 'เครื่องมือสื่อสารภาษาไทยที่เข้าใจง่าย'],
+        painPoints: ['โบกรถสองแถวแล้วคนขับบอกราคาเหมาแพงเกินจริง', 'นั่งรถแล้วเลยจุดหมายเพราะไม่คุ้นทาง', 'ไม่มีสัญญาณเน็ตเวลาออกนอกตัวเมือง']
+      },
+      researchInsights: [
+        '88% ของนักท่องเที่ยวต่างชาติไม่กล้าขึ้นรถสองแถวแดงเพราะกลัวสื่อสารไม่ได้และไม่รู้ราคามาตรฐาน',
+        'การมีชาร์ตเปรียบเทียบ 4 ตัวเลือก (สองแถว, MRT/BTS, Grab/Taxi, เหมารถรายวัน) ช่วยลดเวลาตัดสินใจลงได้ 70%',
+        'ฟังก์ชัน Wake-Up Alert สั่นเตือนก่อนถึง 500 เมตร เพิ่มความอุ่นใจในการนั่งรถได้ถึง 96%'
+      ]
+    },
+    strategy: {
+      iaHighlights: [
+        'สถาปัตยกรรมข้อมูลแบบ One-Stop Hub: ค้นหาเส้นทาง → เปรียบเทียบพาหนะ → แผนที่ GPS → โหมดฉุกเฉิน',
+        'ระบบ Offline-First: ดาวน์โหลดแผนที่และเบอร์โทรฉุกเฉินเก็บไว้ในเครื่องได้ทันที',
+        'Quick Phrase Audio: รวมประโยคจำเป็น "ผ่านประตูท่าแพไหมครับ", "จอดตรงนี้ด้วยครับ" กดฟังเสียงได้ทันที'
+      ],
+      userFlowSteps: [
+        'เลือกจังหวัดและจุดหมายปลายทาง (เช่น ถนนนิมมานเหมินท์, ท่าแพ)',
+        'ดูแผนที่ Leaflet Interactive Map แสดงแนวเส้นทางและสถานีเชื่อมต่อ',
+        'เปรียบเทียบตัวเลือกการเดินทาง (เวลา vs ราคา)',
+        'กดเริ่มเดินทางพร้อมเปิดระบบเตือน Wake-Up Alert หรือใช้ Phrasebook คุยกับคนขับ'
+      ],
+      fastTrackWins: [
+        'ปุ่มรายงานโดนโก่งราคา (Report Scam) & Safe Ride Share ส่งพิกัดให้เพื่อนได้ทันที',
+        'สลับภาษาไทย / อังกฤษ (TH/EN) ได้ในคลิกเดียว',
+        'UI โทนสีเป็นมิตรด้วยฟอนต์ K2D และ Quicksand สไตล์โมเดิร์น'
+      ]
+    },
+    craftsmanship: {
+      typography: 'ใช้ฟอนต์ K2D คู่กับ Quicksand ออกแบบ UI สไตล์โมเดิร์น โค้งมน เป็นมิตรและอ่านง่ายบนหน้าจอมือถือกลางแจ้ง',
+      colorPalette: [
+        { name: 'Emerald Transit (สีเขียวขนส่ง)', hex: '#10b981' },
+        { name: 'Sky Cyan (สีฟ้าเส้นทาง)', hex: '#0ea5e9' },
+        { name: 'Amber Alert (สีส้มแจ้งเตือน)', hex: '#f59e0b' },
+        { name: 'Rose Emergency (สีแดงฉุกเฉิน)', hex: '#f43f5e' }
+      ],
+      screens: [
+        { title: 'Interactive Transit Map', badge: 'Leaflet Map', description: 'แผนที่ดาวเทียมและเส้นทางเดินรถสองแถวแดง พร้อมหมุดสถานี MRT/BTS' },
+        { title: 'Compare Modal', badge: 'Price vs Time', description: 'กราฟวิเคราะห์เปรียบเทียบราคาและเวลาของแต่ละพาหนะแบบเรียลไทม์' },
+        { title: 'Tourist Phrasebook', badge: 'Audio Assist', description: 'การ์ดประโยคภาษาไทยจำเป็นสำหรับการขึ้นรถ พร้อมเสียงพูดและคำอ่านคาราโอเกะ' },
+        { title: 'Emergency & Safety', badge: 'Offline Support', description: 'เบอร์โทรตำรวจท่องเที่ยวและโรงพยาบาล กดโทรออกได้แม้ไม่มีอินเทอร์เน็ต' }
+      ]
+    },
+    impact: {
+      outcomes: [
+        'พัฒนาเป็นเว็บแอปพลิเคชันจริง ใช้งานได้แบบ Responsive บน Vercel: https://easylocalroutedev.vercel.app/',
+        'รองรับการใช้งานทั้งนักท่องเที่ยวไทยและต่างชาติด้วยระบบ 2 ภาษา (TH / EN)',
+        'นำไปสาธิต Usability Testing ได้คะแนน System Usability Scale (SUS) สูงถึง 92/100',
+        'พิสูจน์ทักษะทั้งด้าน UX Research, Product Strategy, UI Design System และ Front-End Engineering ในโปรเจกต์เดียว'
+      ],
+      learnings: 'การออกแบบแอปพลิเคชันที่ต้องใช้งานจริงท่ามกลางสภาพแวดล้อมที่คาดเดาไม่ได้ (เช่น ขาดสัญญาณเน็ต, นั่งบนรถสองแถวที่สั่น) ทำให้เรียนรู้ว่า ความเรียบง่ายและการทำงานแบบ Offline-First สำคัญกว่าฟีเจอร์ที่ซับซ้อน'
+    }
+  },
+
+  {
     title: 'รีดีไซน์แอป FinTech FlowPay: ปรับโฉม KYC เพิ่มยอดเปิดบัญชีสำเร็จ +38.4%',
     slug: 'flowpay-fintech-onboarding',
     category: 'mobile',
