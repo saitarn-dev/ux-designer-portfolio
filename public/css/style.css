@@ -5294,3 +5294,214 @@ to { opacity: 1; transform: translateY(0); }
     max-width: none;
   }
 }
+
+
+/* ==========================================================
+   GAMIFIED PROGRESS MAP & CONSOLE (CANDY CRUSH / DUOLINGO STYLE)
+   ========================================================== */
+.adventure-town-map-container.gamified-progress-map {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto 2.5rem;
+  background: #0f172a;
+  border-radius: 28px;
+  border: 3px solid #0f172a;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 35px rgba(250, 204, 21, 0.15);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.gamified-svg-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+}
+
+.game-stage-node {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
+  transform-origin: center bottom;
+}
+
+.game-stage-node:hover {
+  transform: translateY(-8px) scale(1.06);
+}
+
+.game-stage-node.active {
+  filter: drop-shadow(0 0 16px rgba(250, 204, 21, 0.6));
+}
+
+.game-stepping-stone {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.game-stepping-stone:hover {
+  transform: scale(1.3);
+}
+
+/* GAMIFIED BOTTOM CONSOLE (DOCKED DECK) */
+.gamified-map-bottom-console {
+  position: relative;
+  background: #0f172a;
+  border-top: 2px solid rgba(250, 204, 21, 0.3);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.game-hud-progress-strip {
+  width: 100%;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.game-hud-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #facc15 0%, #f59e0b 100%);
+  transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px #facc15;
+}
+
+.game-hud-main-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 22px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.game-hud-stage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 280px;
+  text-align: left;
+}
+
+.game-stage-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #facc15;
+  background: rgba(250, 204, 21, 0.12);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  display: inline-block;
+  width: fit-content;
+  letter-spacing: 0.5px;
+}
+
+.game-stage-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.game-stage-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 8px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.game-stage-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.game-stage-desc {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  margin: 3px 0 0;
+  line-height: 1.45;
+}
+
+.game-stage-desc strong {
+  color: #facc15;
+}
+
+.game-hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.game-nav-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.game-nav-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.game-nav-btn:hover:not(:disabled) {
+  background: #facc15;
+  color: #0f172a;
+  border-color: #facc15;
+  transform: translateY(-1px);
+}
+
+.game-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.game-action-cta-btn {
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  color: #0f172a;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 9px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35);
+  white-space: nowrap;
+}
+
+.game-action-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(250, 204, 21, 0.5);
+}
+
+@media (max-width: 768px) {
+  .game-hud-main-strip {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .game-hud-controls {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .game-action-cta-btn {
+    flex: 1;
+    text-align: center;
+  }
+}

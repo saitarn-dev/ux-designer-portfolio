@@ -1239,125 +1239,197 @@ function _oldCloseHud(e) {
   if (hud) hud.style.display = 'none';
 }
 
-// Global active HUD state
+// ==========================================
+// GAMIFIED ADVENTURE PROGRESS MAP CONTROLLERS
+// (Candy Crush / Duolingo Style Stage Progression)
+// ==========================================
+const gameStages = [
+  {
+    index: 0,
+    slug: 'pim-education',
+    stageNum: '01',
+    badge: '🚩 STAGE 01 / 06 • ORIGIN & FOUNDATION',
+    icon: '🎓',
+    title: 'PIM Academy — รากฐานการศึกษาและ Work-based Learning',
+    result: 'คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ • ผ่านการฝึกงานจริง 4 องค์กรชั้นนำ',
+    skills: 'Brand Strategy, Tone of Voice, Work-based Learning, EXP +350',
+    ctaText: '🎓 ดูประวัติการศึกษา PIM ➔',
+    x: 170,
+    y: 490
+  },
+  {
+    index: 1,
+    slug: 'flowpay-fintech-onboarding',
+    stageNum: '02',
+    badge: '⚔️ STAGE 02 / 06 • FINTECH QUEST',
+    icon: '💳',
+    title: 'FlowPay FinTech — รีดีไซน์โฟลว์ยืนยันตัวตน KYC',
+    result: 'ลดสเต็ป 12 เหลือ 4 ขั้นตอน • อัตราผ่าน KYC สำเร็จพุ่งขึ้น +38.4%',
+    skills: 'User Flow Mapping, Usability Testing, Heuristic Audit, EXP +500',
+    ctaText: '📖 ส่องเคสสตัดดี้ FlowPay ➔',
+    x: 410,
+    y: 420
+  },
+  {
+    index: 2,
+    slug: 'shopvibe-social-commerce-redesign',
+    stageNum: '03',
+    badge: '🛍️ STAGE 03 / 06 • E-COMMERCE QUEST',
+    icon: '🛍️',
+    title: 'ShopVibe Commerce — ปรับโฉม One-Page Checkout',
+    result: 'ลดเวลาสั่งซื้อเหลือ 45 วินาที • ดันยอดขายรวมของแพลตฟอร์มเพิ่มขึ้น +28%',
+    skills: 'Checkout Optimization, Micro-interactions, A/B Testing, EXP +450',
+    ctaText: '📖 ส่องเคสสตัดดี้ ShopVibe ➔',
+    x: 680,
+    y: 390
+  },
+  {
+    index: 3,
+    slug: 'medicare-accessible-health-companion',
+    stageNum: '04',
+    badge: '💊 STAGE 04 / 06 • INCLUSIVE DESIGN QUEST',
+    icon: '🩺',
+    title: 'MediCare Health — แอปเตือนทานยาเพื่อผู้สูงอายุ',
+    result: 'ผ่านมาตรฐาน WCAG 2.1 AAA • คะแนนความพึงพอใจการใช้งาน SUS สูงถึง 94/100',
+    skills: 'Accessible UI, High Contrast, Inclusive Heuristics, EXP +600',
+    ctaText: '📖 ส่องเคสสตัดดี้ MediCare ➔',
+    x: 350,
+    y: 240
+  },
+  {
+    index: 4,
+    slug: 'localroute-transit-travel-hub',
+    stageNum: '05',
+    badge: '🚊 STAGE 05 / 06 • LIVE WEB APP QUEST',
+    icon: '🚊',
+    title: 'LocalRoute Transit — แอปนำทางขนส่งท้องถิ่นไทย',
+    result: 'ลดเวลาตัดสินใจพาหนะ -70% • แอปใช้งานจริงบน Vercel พร้อม Leaflet GPS และเสียงพากย์ไทย',
+    skills: 'Leaflet GPS, Real-time PWA, Front-End Code, EXP +800',
+    ctaText: '🚀 เปิดแอป LocalRoute (Live Vercel) ➔',
+    x: 650,
+    y: 190
+  },
+  {
+    index: 5,
+    slug: 'security-pitch',
+    stageNum: '06',
+    badge: '👑 STAGE 06 / 06 • CURRENT BASE (5+ ปี)',
+    icon: '🛡️',
+    title: 'Security Pitch HQ — ฐานทัพปฏิบัติการหลัก 5+ ปี 9 เดือน',
+    result: 'ดูแลระบบ Enterprise SaaS 14+ โมดูล • สร้าง Figma Design Tokens ช่วย Dev ไวขึ้น 2.4 เท่า',
+    skills: 'Design System Architecture, B2B SaaS, Front-End Dev, EXP MAX',
+    ctaText: '🏢 ดูประวัติ Security Pitch ➔',
+    x: 500,
+    y: 70
+  }
+];
+
+let currentGameStageIdx = 5; // Default to final stage (Security Pitch)
 let currentHudSlug = 'security-pitch';
 
-function handleHudActionClick() {
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-  const insight = projectInsights[currentHudSlug];
-  if (!insight) return;
+function selectGameStage(idx) {
+  if (idx < 0 || idx >= gameStages.length) return;
+  currentGameStageIdx = idx;
+  const stage = gameStages[idx];
+  currentHudSlug = stage.slug;
 
-  if (insight.slug === 'localroute-transit-travel-hub') {
-    window.open('https://easylocalroutedev.vercel.app/', '_blank');
-  } else if (insight.isCareer) {
-    switchResumeTab('experience');
-    const jobCard = document.querySelector('.featured-current-job');
-    if (jobCard) jobCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } else if (insight.isEducation) {
-    switchResumeTab('education');
-    const resumeSec = document.getElementById('resume');
-    if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } else if (insight.isInternship) {
-    switchResumeTab('experience');
-    const resumeSec = document.getElementById('resume');
-    if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  } else {
-    openCaseStudyModal(insight.slug);
-  }
-}
-
-function selectMapLandmark(slug, x, y) {
-  currentHudSlug = slug;
-  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  if (typeof GameAudio !== 'undefined') GameAudio.playBoing();
 
   // 1. Move Avatar Pin on SVG map
   const avatarPin = document.getElementById('mapAvatarPin');
   if (avatarPin) {
-    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+    avatarPin.setAttribute('transform', `translate(${stage.x}, ${stage.y})`);
   }
 
-  const insight = projectInsights[slug] || {
-    title: slug,
-    msg: 'ยินดีต้อนรับสู่สถานีผลงานของสายธารค่ะ!',
-    slug: slug,
-    icon: '📍'
-  };
-
-  // 2. Update Map Station HUD (Floating Bottom Sheet Overlay)
-  const hud = document.getElementById('mapStationHud');
-  const hudIcon = document.getElementById('hudStationIcon');
-  const hudTitle = document.getElementById('hudStationTitle');
-  const hudDesc = document.getElementById('hudStationDesc');
-  const hudBtn = document.getElementById('hudActionBtn');
-
-  if (hud) {
-    hud.style.display = 'flex';
-    hud.classList.remove('hud-pulse');
-    void hud.offsetWidth;
-    hud.classList.add('hud-pulse');
+  // 2. Highlight active stage node on map
+  document.querySelectorAll('.game-stage-node').forEach(node => {
+    node.classList.remove('active');
+  });
+  const activeNode = document.getElementById(`stageNode_${idx}`);
+  if (activeNode) {
+    activeNode.classList.add('active');
   }
 
-  if (hudIcon) hudIcon.textContent = insight.icon || (insight.badge ? insight.badge.split(' ')[0] : '📍');
-  if (hudTitle) hudTitle.textContent = insight.title;
-  if (hudDesc) hudDesc.textContent = insight.msg;
+  // 3. Update Bottom Stage Console
+  const badgeEl = document.getElementById('hudStageBadge');
+  const iconEl = document.getElementById('hudStationIcon');
+  const titleEl = document.getElementById('hudStationTitle');
+  const descEl = document.getElementById('hudStationDesc');
+  const btnEl = document.getElementById('hudActionBtn');
+  const progressFill = document.getElementById('hudProgressFill');
+  const btnPrev = document.getElementById('btnPrevStage');
+  const btnNext = document.getElementById('btnNextStage');
 
-  if (hudBtn) {
-    hudBtn.onclick = handleHudActionClick;
-    if (insight.slug === 'localroute-transit-travel-hub') {
-      hudBtn.textContent = '🚀 เปิดแอป LocalRoute (Live Vercel) ➔';
-    } else if (insight.isCareer) {
-      hudBtn.textContent = '🏢 ดูประวัติ Security Pitch ➔';
-    } else if (insight.isEducation) {
-      hudBtn.textContent = '🎓 ดูประวัติการศึกษา PIM ➔';
-    } else if (insight.isInternship) {
-      hudBtn.textContent = '👮‍♂️ ดูประวัติฝึกงาน ➔';
-    } else {
-      hudBtn.textContent = '📖 เปิดเคสสตัดดี้ฉบับเต็ม ➔';
-    }
+  if (badgeEl) badgeEl.textContent = stage.badge;
+  if (iconEl) iconEl.textContent = stage.icon;
+  if (titleEl) titleEl.textContent = stage.title;
+  if (descEl) {
+    descEl.innerHTML = `<strong>ความสำเร็จ:</strong> ${stage.result} &bull; <strong>ทักษะ:</strong> ${stage.skills}`;
+  }
+  if (btnEl) {
+    btnEl.textContent = stage.ctaText;
+  }
+  if (progressFill) {
+    progressFill.style.width = `${((idx + 1) / gameStages.length) * 100}%`;
   }
 
-  // 3. Keep bottom-left floating chibi completely hidden during map tour
+  if (btnPrev) btnPrev.disabled = (idx === 0);
+  if (btnNext) btnNext.disabled = (idx === gameStages.length - 1);
+
+  // 4. Ensure bottom-left floating chibi is kept hidden in map mode
   const companion = document.getElementById('chibiCompanion');
   const pill = document.getElementById('chibiMinimizedPill');
   const bubble = document.getElementById('chibiBubble');
   if (companion) companion.style.display = 'none';
   if (pill) pill.style.display = 'none';
   if (bubble) bubble.style.display = 'none';
+}
 
-  if (typeof GameAudio !== 'undefined') {
-    setTimeout(() => GameAudio.playBoing(), 250);
+function navigateGameStage(delta) {
+  selectGameStage(currentGameStageIdx + delta);
+}
+
+// Action button click handler
+function handleHudActionClick() {
+  if (typeof GameAudio !== 'undefined') GameAudio.playPop();
+  const stage = gameStages[currentGameStageIdx];
+  if (!stage) return;
+
+  if (stage.slug === 'localroute-transit-travel-hub') {
+    window.open('https://easylocalroutedev.vercel.app/', '_blank');
+  } else if (stage.slug === 'security-pitch') {
+    switchResumeTab('experience');
+    const jobCard = document.querySelector('.sc-header-card') || document.querySelector('.featured-current-job');
+    if (jobCard) jobCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else if (stage.slug === 'pim-education') {
+    switchResumeTab('education');
+    const resumeSec = document.getElementById('resume');
+    if (resumeSec) resumeSec.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    openCaseStudyModal(stage.slug);
+  }
+}
+
+// Backward compatibility adapter
+function selectMapLandmark(slug, x, y) {
+  const matchIdx = gameStages.findIndex(s => s.slug === slug);
+  if (matchIdx !== -1) {
+    selectGameStage(matchIdx);
+  } else {
+    selectGameStage(5);
   }
 }
 
 function walkMapToCoord(x, y) {
   if (typeof GameAudio !== 'undefined') GameAudio.playPop();
-
   const avatarPin = document.getElementById('mapAvatarPin');
   if (avatarPin) {
-    avatarPin.setAttribute('transform', 'translate(' + x + ', ' + y + ')');
+    avatarPin.setAttribute('transform', `translate(${x}, ${y})`);
   }
-
-  const hud = document.getElementById('mapStationHud');
-  const hudIcon = document.getElementById('hudStationIcon');
-  const hudTitle = document.getElementById('hudStationTitle');
-  const hudDesc = document.getElementById('hudStationDesc');
-  const hudBtn = document.getElementById('hudActionBtn');
-
-  if (hud) hud.style.display = 'flex';
-  if (hudIcon) hudIcon.textContent = '⭐';
-  if (hudTitle) hudTitle.textContent = 'จุดพักตรวจเช็ก UX Flow & Design Tokens';
-  if (hudDesc) hudDesc.textContent = 'เดินมาถึงจุดแวะพักตรวจเช็ก UX Flow แล้วค่ะ! คลิกที่ตึกหรือสถานีรอบข้างเพื่อเดินทางต่อนะคะ';
-  if (hudBtn) {
-    hudBtn.textContent = '🏠 กลับฐานทัพ Security Pitch';
-    hudBtn.onclick = resetMapCharacter;
-  }
-
-  const bubble = document.getElementById('chibiBubble');
-  if (bubble) bubble.style.display = 'none';
 }
 
 function resetMapCharacter() {
-  selectMapLandmark('security-pitch', 480, 195);
+  selectGameStage(5);
 }
 
 // ==========================================
