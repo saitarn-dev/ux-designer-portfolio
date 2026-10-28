@@ -248,262 +248,380 @@
 
             <!-- SVG Gamified Adventure Path Viewport -->
             <div class="map-svg-viewport">
-              <svg viewBox="0 0 1000 580" class="town-map-svg gamified-svg-canvas" id="townMapSvg" xmlns="http://www.w3.org/2000/svg">
+              <svg viewBox="0 0 1000 640" class="town-map-svg gamified-svg-canvas" id="townMapSvg" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <filter id="cuteShadow" x="-20%" y="-20%" width="140%" height="140%">
                     <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="rgba(15,23,42,0.18)"/>
                   </filter>
-                  <filter id="islandShadow" x="-25%" y="-25%" width="150%" height="150%">
-                    <feDropShadow dx="3" dy="6" stdDeviation="5" flood-color="rgba(15,23,42,0.22)"/>
+                  <filter id="islandShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="rgba(15,23,42,0.22)"/>
                   </filter>
                   <filter id="glowGold" x="-30%" y="-30%" width="160%" height="160%">
-                    <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#facc15" flood-opacity="0.6"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#facc15" flood-opacity="0.7"/>
+                  </filter>
+                  <filter id="badgeGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.25)"/>
                   </filter>
 
-                  <!-- Gradients for Terrain & River -->
-                  <linearGradient id="pastelGroundGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fffdf8"/>
-                    <stop offset="45%" stop-color="#fbf5e8"/>
-                    <stop offset="100%" stop-color="#f5ecda"/>
-                  </linearGradient>
-                  
-                  <linearGradient id="candyRiverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#7dd3fc"/>
-                    <stop offset="50%" stop-color="#38bdf8"/>
-                    <stop offset="100%" stop-color="#0284c7"/>
+                  <!-- Gradients for Terrain & Candy Elements -->
+                  <linearGradient id="candySkyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fefce8"/>
+                    <stop offset="45%" stop-color="#ecfdf5"/>
+                    <stop offset="100%" stop-color="#f0fdfa"/>
                   </linearGradient>
 
-                  <!-- Candy Crush Style Golden Path Gradient -->
                   <linearGradient id="pathGoldGrad" x1="0%" y1="100%" x2="100%" y2="0%">
                     <stop offset="0%" stop-color="#fef08a"/>
                     <stop offset="50%" stop-color="#fde047"/>
                     <stop offset="100%" stop-color="#facc15"/>
                   </linearGradient>
 
-                  <linearGradient id="castleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#bfdbfe"/>
-                    <stop offset="100%" stop-color="#60a5fa"/>
+                  <!-- Island Gradients -->
+                  <linearGradient id="greenIslandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#a7f3d0"/>
+                    <stop offset="100%" stop-color="#34d399"/>
+                  </linearGradient>
+                  
+                  <linearGradient id="blueIslandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#bae6fd"/>
+                    <stop offset="100%" stop-color="#38bdf8"/>
+                  </linearGradient>
+
+                  <linearGradient id="orangeIslandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fed7aa"/>
+                    <stop offset="100%" stop-color="#fb923c"/>
+                  </linearGradient>
+
+                  <linearGradient id="purpleIslandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ddd6fe"/>
+                    <stop offset="100%" stop-color="#a855f7"/>
+                  </linearGradient>
+
+                  <linearGradient id="tealIslandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#99f6e4"/>
+                    <stop offset="100%" stop-color="#14b8a6"/>
+                  </linearGradient>
+
+                  <linearGradient id="goldCastleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#fef08a"/>
+                    <stop offset="100%" stop-color="#f59e0b"/>
                   </linearGradient>
                 </defs>
 
-                <!-- 1. BASE TERRAIN (Pastel Green Grassland) -->
-                <rect width="1000" height="580" fill="url(#pastelGroundGrad)"/>
+                <!-- 1. BASE BACKGROUND & SOFT ROLLING HILLS -->
+                <rect width="1000" height="640" fill="url(#candySkyGrad)"/>
 
-                <!-- Pastel Green Hills Backdrops -->
-                <path d="M-20,40 Q160,-10 320,40 Q480,90 640,30 Q800,-30 920,20 L920,0 L-20,0 Z" fill="#ecfdf5" opacity="0.85"/>
-                <path d="M-20,160 Q120,110 260,150 Q400,190 540,130 Q680,70 820,140" fill="none" stroke="#e2d8c3" stroke-width="2.5" stroke-dasharray="6,8" opacity="0.5"/>
-                <path d="M-20,360 Q180,300 360,350 Q540,400 720,330 T920,360" fill="none" stroke="#e2d8c3" stroke-width="2.5" stroke-dasharray="6,8" opacity="0.5"/>
+                <!-- Pastel Hills & Clouds in Background -->
+                <path d="M-20,90 Q180,40 360,95 Q540,150 720,80 Q900,20 1020,70 L1020,0 L-20,0 Z" fill="#e0f2fe" opacity="0.6"/>
+                <path d="M-20,220 Q200,160 420,230 Q640,300 850,210 Q940,170 1020,200 L1020,0 L-20,0 Z" fill="#ecfdf5" opacity="0.75"/>
 
-                <!-- Cute Forest Trees around the valley -->
-                <g font-size="14" opacity="0.85">
-                  <text x="60" y="90">🌲</text>
-                  <text x="90" y="80">🌳</text>
-                  <text x="70" y="120">🌲</text>
+                <!-- Cute Floating Candy Clouds -->
+                <g opacity="0.85">
+                  <ellipse cx="140" cy="110" rx="35" ry="14" fill="#ffffff" filter="url(#cuteShadow)"/>
+                  <ellipse cx="160" cy="100" rx="22" ry="18" fill="#ffffff"/>
+                  <ellipse cx="125" cy="102" rx="18" ry="15" fill="#ffffff"/>
+
+                  <ellipse cx="860" cy="130" rx="40" ry="15" fill="#ffffff" filter="url(#cuteShadow)"/>
+                  <ellipse cx="885" cy="120" rx="25" ry="20" fill="#ffffff"/>
+                  <ellipse cx="840" cy="122" rx="20" ry="16" fill="#ffffff"/>
+
+                  <ellipse cx="500" cy="40" rx="55" ry="18" fill="#ffffff" filter="url(#cuteShadow)"/>
+                  <ellipse cx="525" cy="28" rx="30" ry="24" fill="#ffffff"/>
+                  <ellipse cx="475" cy="30" rx="28" ry="20" fill="#ffffff"/>
+                </g>
+
+                <!-- 2. S-CURVE GOLDEN CANDY TRAIL -->
+                <!-- Base Trail Shadow -->
+                <path d="M 160,520 C 240,520 280,455 380,435 C 490,415 610,435 720,395 C 820,355 420,310 290,260 C 180,220 580,230 720,195 C 830,175 620,120 500,85"
+                      fill="none" stroke="rgba(15, 23, 42, 0.15)" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" filter="url(#cuteShadow)"/>
+                <!-- Gold Ribbon Path -->
+                <path d="M 160,520 C 240,520 280,455 380,435 C 490,415 610,435 720,395 C 820,355 420,310 290,260 C 180,220 580,230 720,195 C 830,175 620,120 500,85"
+                      fill="none" stroke="url(#pathGoldGrad)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- White Dashed Track in Middle -->
+                <path d="M 160,520 C 240,520 280,455 380,435 C 490,415 610,435 720,395 C 820,355 420,310 290,260 C 180,220 580,230 720,195 C 830,175 620,120 500,85"
+                      fill="none" stroke="#ffffff" stroke-width="5" stroke-dasharray="10,12" stroke-linecap="round"/>
+
+                <!-- Stepping Stone Stars on turns -->
+                <g font-size="14" text-anchor="middle">
+                  <text x="260" y="482">⭐</text>
+                  <text x="550" y="418">⭐</text>
+                  <text x="510" y="325">⭐</text>
+                  <text x="500" y="230">⭐</text>
+                  <text x="620" y="140">⭐</text>
+                </g>
+
+                <!-- 3. THE 6 CANDY STAGE ISLANDS -->
+
+                <!-- STAGE 0 (Index 0): PIM ACADEMY START ISLAND (x:160, y:520) -->
+                <g class="game-stage-node" id="stageNode_0" onclick="selectGameStage(0)" cursor="pointer">
+                  <!-- Island base & soil layers -->
+                  <ellipse cx="160" cy="552" rx="96" ry="38" fill="#d97706" opacity="0.35" filter="url(#islandShadow)"/>
+                  <ellipse cx="160" cy="546" rx="92" ry="34" fill="#b45309"/>
+                  <ellipse cx="160" cy="538" rx="88" ry="30" fill="url(#greenIslandGrad)" stroke="#059669" stroke-width="2.5"/>
                   
-                  <text x="60" y="320">🌳</text>
-                  <text x="85" y="340">🌲</text>
+                  <!-- Daisies on grass -->
+                  <circle cx="95" cy="535" r="4" fill="#ffffff"/><circle cx="95" cy="535" r="1.5" fill="#facc15"/>
+                  <circle cx="225" cy="540" r="4" fill="#ffffff"/><circle cx="225" cy="540" r="1.5" fill="#facc15"/>
 
-                  <text x="260" y="100">🌲</text>
-                  <text x="290" y="115">🌳</text>
-
-                  <text x="730" y="90">🌳</text>
-                  <text x="755" y="110">🌲</text>
-
-                  <text x="470" y="370">🌸</text>
-                  <text x="560" y="470">🌼</text>
-                  <text x="280" y="440">🌷</text>
-                  <text x="780" y="460">🍀</text>
-                </g>
-
-                <!-- 2. DESIGN RIVER ON THE RIGHT (With Sailboat, Ripples & Ducks) -->
-                <path d="M820,-10 C795,130 860,250 810,380 C770,470 820,540 840,590 L1010,590 L1010,-10 Z" fill="url(#candyRiverGrad)" stroke="#0f172a" stroke-width="3"/>
-                <path d="M816,-10 C791,130 856,250 806,380 C766,470 816,540 836,590" fill="none" stroke="#6ee7b7" stroke-width="8" opacity="0.6"/>
-                <g stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75">
-                  <path d="M860,60 Q875,53 890,60"/>
-                  <path d="M910,130 Q925,123 940,130"/>
-                  <path d="M850,260 Q865,253 880,260"/>
-                  <path d="M900,380 Q915,373 930,380"/>
-                  <path d="M860,490 Q875,483 890,490"/>
-                </g>
-
-                <!-- Cute Sailboat on River -->
-                <g transform="translate(895, 420) rotate(-8)">
-                  <polygon points="0,14 36,14 30,26 6,26" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
-                  <polygon points="18,14 18,-10 32,14" fill="#fda4af" stroke="#0f172a" stroke-width="2"/>
-                </g>
-
-                <!-- Mother Duck & Duckling -->
-                <g transform="translate(880, 180)">
-                  <ellipse cx="0" cy="0" rx="9" ry="6" fill="#fef08a" stroke="#0f172a" stroke-width="1.8"/>
-                  <circle cx="7" cy="-4" r="5" fill="#fef08a" stroke="#0f172a" stroke-width="1.8"/>
-                  <polygon points="12,-4 17,-3 12,-1" fill="#f97316"/>
-                  <circle cx="8" cy="-5" r="1" fill="#0f172a"/>
-                  <circle cx="-14" cy="2" r="3.5" fill="#fef08a" stroke="#0f172a" stroke-width="1.2"/>
-                  <circle cx="-25" cy="4" r="3.5" fill="#fef08a" stroke="#0f172a" stroke-width="1.2"/>
-                </g>
-
-                <!-- 3. THE WINDING GAMIFIED PATH (CANDY CRUSH / DUOLINGO PROGRESS ROAD) -->
-                <!-- Base Outer Border of Road -->
-                <path d="M 170,490 C 260,490 320,440 410,420 C 510,400 590,410 680,390 C 760,370 650,280 500,300 C 400,310 270,290 350,240 C 420,190 550,230 650,190 C 720,160 620,100 500,70" 
-                      fill="none" stroke="#0f172a" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
-                
-                <!-- Vibrant Golden Path -->
-                <path d="M 170,490 C 260,490 320,440 410,420 C 510,400 590,410 680,390 C 760,370 650,280 500,300 C 400,310 270,290 350,240 C 420,190 550,230 650,190 C 720,160 620,100 500,70" 
-                      fill="none" stroke="url(#pathGoldGrad)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
-                
-                <!-- Inner Cobblestone Dashed Road -->
-                <path d="M 170,490 C 260,490 320,440 410,420 C 510,400 590,410 680,390 C 760,370 650,280 500,300 C 400,310 270,290 350,240 C 420,190 550,230 650,190 C 720,160 620,100 500,70" 
-                      fill="none" stroke="#b45309" stroke-width="4.5" stroke-dasharray="10,14" stroke-linecap="round" opacity="0.6"/>
-
-                <!-- Stepping Stone Waypoint Stars along the curve -->
-                <g class="game-stepping-stone" onclick="selectGameStage(0)" style="cursor:pointer;" title="จุดเริ่มต้นด่านที่ 1">
-                  <circle cx="280" cy="465" r="11" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
-                  <text x="280" y="469" font-size="9" text-anchor="middle">⭐</text>
-                </g>
-                <g class="game-stepping-stone" onclick="selectGameStage(1)" style="cursor:pointer;" title="ทางเชื่อมไปด่านที่ 2">
-                  <circle cx="540" cy="405" r="11" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
-                  <text x="540" y="409" font-size="9" text-anchor="middle">⭐</text>
-                </g>
-                <g class="game-stepping-stone" onclick="selectGameStage(2)" style="cursor:pointer;" title="โค้งหักศอกเชื่อมด่านที่ 3">
-                  <circle cx="580" cy="325" r="11" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
-                  <text x="580" y="329" font-size="9" text-anchor="middle">⭐</text>
-                </g>
-                <g class="game-stepping-stone" onclick="selectGameStage(3)" style="cursor:pointer;" title="ทางเชื่อมไปด่านที่ 4">
-                  <circle cx="430" cy="285" r="11" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
-                  <text x="430" y="289" font-size="9" text-anchor="middle">⭐</text>
-                </g>
-                <g class="game-stepping-stone" onclick="selectGameStage(4)" style="cursor:pointer;" title="ทางขึ้นสู่ยอดเขาด่านที่ 5">
-                  <circle cx="550" cy="180" r="11" fill="#ffffff" stroke="#b45309" stroke-width="2"/>
-                  <text x="550" y="184" font-size="9" text-anchor="middle">⭐</text>
-                </g>
-
-                <!-- 4. CHECKPOINT ISLANDS & STAGES (CLICKABLE GAME NODES) -->
-
-                <!-- STAGE 1 (START): PIM ACADEMY & FOUNDATION -->
-                <g class="game-stage-node" id="stageNode_0" onclick="selectGameStage(0)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Base Pedestal -->
-                  <ellipse cx="170" cy="505" rx="55" ry="24" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Campus Building -->
-                  <rect x="135" y="445" width="70" height="38" rx="6" fill="#fff7ed" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="125,445 170,415 215,445" fill="#f97316" stroke="#0f172a" stroke-width="2.5"/>
-                  <!-- Door & Graduation Cap -->
-                  <rect x="160" y="460" width="20" height="23" rx="3" fill="#ea580c"/>
-                  <circle cx="170" cy="415" r="13" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
-                  <text x="170" y="420" font-size="12" text-anchor="middle">🎓</text>
-                  <!-- START Banner Flag -->
-                  <g transform="translate(115, 415)">
-                    <rect x="0" y="0" width="4" height="24" fill="#0f172a"/>
-                    <polygon points="4,2 34,9 4,16" fill="#ef4444" stroke="#0f172a" stroke-width="1.5"/>
-                    <text x="15" y="11" font-size="7" font-weight="900" fill="#ffffff" text-anchor="middle">START</text>
+                  <!-- Cute PIM Schoolhouse -->
+                  <g transform="translate(160, 495)">
+                    <!-- Shadow -->
+                    <ellipse cx="0" cy="22" rx="34" ry="9" fill="rgba(15,23,42,0.2)"/>
+                    <!-- Main School Wall -->
+                    <rect x="-26" y="-8" width="52" height="30" rx="5" fill="#fef08a" stroke="#0f172a" stroke-width="2.5"/>
+                    <rect x="-8" y="7" width="16" height="15" rx="3" fill="#0f172a"/>
+                    <!-- Windows -->
+                    <rect x="-20" y="2" width="8" height="8" rx="2" fill="#38bdf8" stroke="#0f172a" stroke-width="1.5"/>
+                    <rect x="12" y="2" width="8" height="8" rx="2" fill="#38bdf8" stroke="#0f172a" stroke-width="1.5"/>
+                    <!-- Roof -->
+                    <polygon points="-32,-8 32,-8 0,-26" fill="#ef4444" stroke="#0f172a" stroke-width="2.5"/>
+                    <!-- Graduation Cap Icon -->
+                    <circle cx="0" cy="-32" r="11" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
+                    <text x="0" y="-28" font-size="12" text-anchor="middle">🎓</text>
+                    <!-- Red START Flag -->
+                    <line x1="28" y1="-8" x2="28" y2="-38" stroke="#0f172a" stroke-width="2.5"/>
+                    <polygon points="28,-38 52,-30 28,-22" fill="#ef4444" stroke="#0f172a" stroke-width="1.8"/>
+                    <text x="38" y="-28" fill="#ffffff" font-size="7.5" font-weight="900">START</text>
                   </g>
+
+                  <!-- Numbered Badge Circle: 1 -->
+                  <g transform="translate(110, 480)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="15" fill="#10b981" stroke="#ffffff" stroke-width="2.5"/>
+                    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="900" text-anchor="middle">1</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(170, 520)">
-                    <rect x="-70" y="-11" width="140" height="22" rx="11" fill="#0f172a" stroke="#f97316" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="900" fill="#fdba74">🚩 01. PIM ACADEMY</text>
+                  <g transform="translate(160, 578)">
+                    <rect x="-70" y="-12" width="140" height="24" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">🌱 1. PIM Academy</text>
                   </g>
                 </g>
 
-                <!-- STAGE 2: FLOWPAY FINTECH (KYC ONBOARDING) -->
-                <g class="game-stage-node" id="stageNode_1" onclick="selectGameStage(1)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Base Pedestal -->
-                  <ellipse cx="410" cy="435" rx="55" ry="24" fill="#e9d5ff" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Bank / Vault -->
-                  <rect x="375" y="375" width="70" height="40" rx="6" fill="#f3e8ff" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="365,375 410,345 455,375" fill="#9333ea" stroke="#0f172a" stroke-width="2.5"/>
-                  <!-- Vault Door & Floating Card -->
-                  <circle cx="410" cy="395" r="12" fill="#c084fc" stroke="#0f172a" stroke-width="1.8"/>
-                  <circle cx="410" cy="345" r="14" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
-                  <text x="410" y="350" font-size="12" text-anchor="middle">💳</text>
+                <!-- STAGE 1 (Index 1): FLOWPAY KYC FINTECH (x:380, y:435) -->
+                <g class="game-stage-node" id="stageNode_1" onclick="selectGameStage(1)" cursor="pointer">
+                  <!-- Island base -->
+                  <ellipse cx="380" cy="465" rx="84" ry="34" fill="#0369a1" opacity="0.3" filter="url(#islandShadow)"/>
+                  <ellipse cx="380" cy="460" rx="80" ry="30" fill="#0284c7"/>
+                  <ellipse cx="380" cy="452" rx="76" ry="26" fill="url(#blueIslandGrad)" stroke="#0284c7" stroke-width="2.5"/>
+
+                  <!-- Gold Coin / Vault Landmark -->
+                  <g transform="translate(380, 415)">
+                    <ellipse cx="0" cy="20" rx="28" ry="8" fill="rgba(15,23,42,0.2)"/>
+                    <!-- Vault Safe Chest -->
+                    <rect x="-22" y="-4" width="44" height="24" rx="6" fill="#1e293b" stroke="#0f172a" stroke-width="2.5"/>
+                    <circle cx="0" cy="8" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.8"/>
+                    <!-- Credit card -->
+                    <rect x="-14" y="-18" width="28" height="18" rx="3" fill="#3b82f6" stroke="#0f172a" stroke-width="2" transform="rotate(-12)"/>
+                    <line x1="-12" y1="-10" x2="12" y2="-10" stroke="#facc15" stroke-width="2" transform="rotate(-12)"/>
+                    <!-- Floating Gold Coins -->
+                    <circle cx="20" cy="-6" r="8" fill="#facc15" stroke="#0f172a" stroke-width="1.8"/>
+                    <text x="20" y="-3" font-size="8" font-weight="900" text-anchor="middle" fill="#78350f">฿</text>
+                    <text x="-24" y="-6" font-size="12">✨</text>
+                  </g>
+
+                  <!-- Numbered Badge Circle: 2 -->
+                  <g transform="translate(330, 400)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="15" fill="#0ea5e9" stroke="#ffffff" stroke-width="2.5"/>
+                    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="900" text-anchor="middle">2</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(410, 450)">
-                    <rect x="-75" y="-11" width="150" height="22" rx="11" fill="#0f172a" stroke="#a855f7" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="900" fill="#d8b4fe">⭐ 02. FLOWPAY (+38%)</text>
+                  <g transform="translate(380, 488)">
+                    <rect x="-74" y="-12" width="148" height="24" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">💳 2. FlowPay KYC (+38%)</text>
                   </g>
                 </g>
 
-                <!-- STAGE 3: SHOPVIBE COMMERCE (ONE-PAGE CHECKOUT) -->
-                <g class="game-stage-node" id="stageNode_2" onclick="selectGameStage(2)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Base Pedestal -->
-                  <ellipse cx="680" cy="405" rx="55" ry="24" fill="#ffe4e6" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Boutique Shop -->
-                  <rect x="645" y="348" width="70" height="38" rx="6" fill="#fff1f2" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="635,348 725,348 718,362 642,362" fill="#f43f5e" stroke="#0f172a" stroke-width="2"/>
-                  <!-- Shopping Bag Icon -->
-                  <circle cx="680" cy="335" r="13" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
-                  <text x="680" y="340" font-size="12" text-anchor="middle">🛍️</text>
+                <!-- STAGE 2 (Index 2): SHOPVIBE COMMERCE (x:720, y:395) -->
+                <g class="game-stage-node" id="stageNode_2" onclick="selectGameStage(2)" cursor="pointer">
+                  <!-- Island base -->
+                  <ellipse cx="720" cy="425" rx="90" ry="35" fill="#c2410c" opacity="0.3" filter="url(#islandShadow)"/>
+                  <ellipse cx="720" cy="420" rx="86" ry="31" fill="#ea580c"/>
+                  <ellipse cx="720" cy="412" rx="82" ry="27" fill="url(#orangeIslandGrad)" stroke="#c2410c" stroke-width="2.5"/>
+
+                  <!-- Cute Shop with Striped Awning -->
+                  <g transform="translate(720, 375)">
+                    <ellipse cx="0" cy="22" rx="30" ry="8" fill="rgba(15,23,42,0.2)"/>
+                    <!-- Storefront -->
+                    <rect x="-24" y="-2" width="48" height="24" rx="4" fill="#fff7ed" stroke="#0f172a" stroke-width="2.5"/>
+                    <rect x="-8" y="7" width="16" height="15" fill="#0f172a"/>
+                    <!-- Striped Awning -->
+                    <polygon points="-28,-2 28,-2 24,-14 -24,-14" fill="#f97316" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="-12" y1="-14" x2="-14" y2="-2" stroke="#ffffff" stroke-width="3"/>
+                    <line x1="0" y1="-14" x2="0" y2="-2" stroke="#ffffff" stroke-width="3"/>
+                    <line x1="12" y1="-14" x2="14" y2="-2" stroke="#ffffff" stroke-width="3"/>
+                    <!-- Shopping Bags & 45s Tag -->
+                    <text x="24" y="2" font-size="14">🛍️</text>
+                    <g transform="translate(0, -22)">
+                      <rect x="-16" y="-8" width="32" height="14" rx="7" fill="#facc15" stroke="#0f172a" stroke-width="1.8"/>
+                      <text x="0" y="2" font-size="8.5" font-weight="900" text-anchor="middle" fill="#0f172a">⚡ 45s</text>
+                    </g>
+                  </g>
+
+                  <!-- Numbered Badge Circle: 3 -->
+                  <g transform="translate(670, 360)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="15" fill="#f97316" stroke="#ffffff" stroke-width="2.5"/>
+                    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="900" text-anchor="middle">3</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(680, 420)">
-                    <rect x="-75" y="-11" width="150" height="22" rx="11" fill="#0f172a" stroke="#f43f5e" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="900" fill="#fda4af">🛍️ 03. SHOPVIBE (+28%)</text>
+                  <g transform="translate(720, 448)">
+                    <rect x="-76" y="-12" width="152" height="24" rx="12" fill="#0f172a" stroke="#fb923c" stroke-width="2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">🛍️ 3. ShopVibe (45s Pay)</text>
                   </g>
                 </g>
 
-                <!-- STAGE 4: MEDICARE COMPANION (INCLUSIVE HEALTH) -->
-                <g class="game-stage-node" id="stageNode_3" onclick="selectGameStage(3)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Base Pedestal -->
-                  <ellipse cx="350" cy="255" rx="55" ry="24" fill="#d1fae5" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Mint Clinic Building -->
-                  <rect x="315" y="198" width="70" height="38" rx="6" fill="#ecfdf5" stroke="#0f172a" stroke-width="2.5"/>
-                  <path d="M320,198 Q350,175 380,198 Z" fill="#10b981" stroke="#0f172a" stroke-width="2.5"/>
-                  <!-- Medical Heart Icon -->
-                  <circle cx="350" cy="180" r="13" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
-                  <text x="350" y="185" font-size="12" text-anchor="middle">🩺</text>
+                <!-- STAGE 3 (Index 3): MEDICARE ACCESSIBLE HEALTH (x:290, y:260) -->
+                <g class="game-stage-node" id="stageNode_3" onclick="selectGameStage(3)" cursor="pointer">
+                  <!-- Island base -->
+                  <ellipse cx="290" cy="290" rx="88" ry="34" fill="#7e22ce" opacity="0.3" filter="url(#islandShadow)"/>
+                  <ellipse cx="290" cy="285" rx="84" ry="30" fill="#9333ea"/>
+                  <ellipse cx="290" cy="277" rx="80" ry="26" fill="url(#purpleIslandGrad)" stroke="#7e22ce" stroke-width="2.5"/>
+
+                  <!-- Cute Health Clinic & Heart Capsule -->
+                  <g transform="translate(290, 240)">
+                    <ellipse cx="0" cy="22" rx="28" ry="8" fill="rgba(15,23,42,0.2)"/>
+                    <!-- Clinic Building -->
+                    <rect x="-24" y="-4" width="48" height="26" rx="6" fill="#fdf4ff" stroke="#0f172a" stroke-width="2.5"/>
+                    <!-- Red Cross Pill -->
+                    <rect x="-10" y="0" width="20" height="6" fill="#ef4444" rx="2"/>
+                    <rect x="-3" y="-7" width="6" height="20" fill="#ef4444" rx="2"/>
+                    <!-- Roof Heart Badge -->
+                    <g transform="translate(0, -18)">
+                      <circle cx="0" cy="0" r="11" fill="#ec4899" stroke="#0f172a" stroke-width="2"/>
+                      <text x="0" y="4" font-size="10" text-anchor="middle">💖</text>
+                    </g>
+                    <!-- WCAG AAA Star -->
+                    <g transform="translate(25, -10)">
+                      <rect x="-14" y="-7" width="28" height="14" rx="4" fill="#a855f7" stroke="#ffffff" stroke-width="1.5"/>
+                      <text x="0" y="3" font-size="7.5" font-weight="900" fill="#ffffff" text-anchor="middle">AAA</text>
+                    </g>
+                  </g>
+
+                  <!-- Numbered Badge Circle: 4 -->
+                  <g transform="translate(240, 225)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="15" fill="#a855f7" stroke="#ffffff" stroke-width="2.5"/>
+                    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="900" text-anchor="middle">4</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(350, 270)">
-                    <rect x="-75" y="-11" width="150" height="22" rx="11" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="900" fill="#6ee7b7">💊 04. MEDICARE (SUS 94)</text>
+                  <g transform="translate(290, 312)">
+                    <rect x="-76" y="-12" width="152" height="24" rx="12" fill="#0f172a" stroke="#c084fc" stroke-width="2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">🩺 4. MediCare (SUS 94)</text>
                   </g>
                 </g>
 
-                <!-- STAGE 5: LOCALROUTE TRANSIT HUB (LIVE APP QUEST) -->
-                <g class="game-stage-node" id="stageNode_4" onclick="selectGameStage(4)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Base Pedestal -->
-                  <ellipse cx="650" cy="205" rx="58" ry="25" fill="#ccfbf1" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Train Terminal & Songthaew Station -->
-                  <rect x="615" y="148" width="70" height="38" rx="6" fill="#f0fdfa" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="605,148 650,122 695,148" fill="#0d9488" stroke="#0f172a" stroke-width="2.5"/>
-                  <circle cx="650" cy="125" r="14" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
-                  <text x="650" y="130" font-size="12" text-anchor="middle">🚊</text>
-                  <!-- Live Indicator Pulse -->
-                  <circle cx="682" cy="120" r="4" fill="#22c55e">
-                    <animate attributeName="r" values="3;6;3" dur="1.5s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite"/>
-                  </circle>
+                <!-- STAGE 4 (Index 4): LOCALROUTE TRANSIT LIVE HUB (x:720, y:195) -->
+                <g class="game-stage-node" id="stageNode_4" onclick="selectGameStage(4)" cursor="pointer">
+                  <!-- Island base -->
+                  <ellipse cx="720" cy="225" rx="98" ry="36" fill="#0f766e" opacity="0.3" filter="url(#islandShadow)"/>
+                  <ellipse cx="720" cy="220" rx="94" ry="32" fill="#0d9488"/>
+                  <ellipse cx="720" cy="212" rx="90" ry="28" fill="url(#tealIslandGrad)" stroke="#0f766e" stroke-width="2.5"/>
+
+                  <!-- Red Songthaew Truck & Live GPS Pin -->
+                  <g transform="translate(720, 175)">
+                    <ellipse cx="0" cy="24" rx="34" ry="8" fill="rgba(15,23,42,0.2)"/>
+                    <!-- Red Songthaew Bus Body -->
+                    <rect x="-24" y="-6" width="48" height="24" rx="5" fill="#dc2626" stroke="#0f172a" stroke-width="2.5"/>
+                    <!-- Passenger Canopy Bars -->
+                    <rect x="-20" y="-14" width="30" height="9" rx="2" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="-12" y1="-14" x2="-12" y2="-5" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="-4" y1="-14" x2="-4" y2="-5" stroke="#0f172a" stroke-width="2"/>
+                    <!-- Cabin Windshield -->
+                    <rect x="10" y="-10" width="12" height="12" rx="2" fill="#38bdf8" stroke="#0f172a" stroke-width="1.8"/>
+                    <!-- Wheels -->
+                    <circle cx="-14" cy="18" r="6" fill="#1e293b" stroke="#ffffff" stroke-width="1.8"/>
+                    <circle cx="14" cy="18" r="6" fill="#1e293b" stroke="#ffffff" stroke-width="1.8"/>
+                    <!-- Live GPS Pin -->
+                    <g transform="translate(-25, -20)">
+                      <circle cx="0" cy="0" r="10" fill="#10b981" stroke="#ffffff" stroke-width="2"/>
+                      <text x="0" y="3" font-size="9" text-anchor="middle">📍</text>
+                    </g>
+                    <!-- Live Pulsing Tag -->
+                    <g transform="translate(24, -22)">
+                      <rect x="-14" y="-7" width="28" height="14" rx="7" fill="#10b981" stroke="#0f172a" stroke-width="1.8"/>
+                      <text x="0" y="3" font-size="7.5" font-weight="900" fill="#ffffff" text-anchor="middle">LIVE</text>
+                    </g>
+                  </g>
+
+                  <!-- Numbered Badge Circle: 5 -->
+                  <g transform="translate(670, 160)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="15" fill="#14b8a6" stroke="#ffffff" stroke-width="2.5"/>
+                    <text x="0" y="5" fill="#ffffff" font-size="13" font-weight="900" text-anchor="middle">5</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(650, 220)">
-                    <rect x="-80" y="-11" width="160" height="22" rx="11" fill="#0f172a" stroke="#14b8a6" stroke-width="2"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="900" fill="#5eead4">🚊 05. LOCALROUTE (LIVE)</text>
+                  <g transform="translate(720, 248)">
+                    <rect x="-80" y="-12" width="160" height="24" rx="12" fill="#0f172a" stroke="#2dd4bf" stroke-width="2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="4" fill="#ffffff" font-size="11" font-weight="800" text-anchor="middle">🚀 5. LocalRoute (Live PWA)</text>
                   </g>
                 </g>
 
-                <!-- STAGE 6 (GRAND FINAL BASE): SECURITY PITCH CASTLE (5+ YEARS) -->
-                <g class="game-stage-node active" id="stageNode_5" onclick="selectGameStage(5)" filter="url(#islandShadow)" style="cursor:pointer;">
-                  <!-- Castle Pedestal with Gold Rim -->
-                  <ellipse cx="500" cy="85" rx="75" ry="30" fill="#bfdbfe" stroke="#0f172a" stroke-width="3.5"/>
-                  <!-- Grand Castle Towers -->
-                  <rect x="445" y="25" width="110" height="46" rx="6" fill="#eff6ff" stroke="#0f172a" stroke-width="3"/>
-                  <!-- Side Watchtowers -->
-                  <rect x="435" y="15" width="22" height="56" rx="4" fill="#dbeafe" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="432,15 446,-2 460,15" fill="#3b82f6" stroke="#0f172a" stroke-width="2"/>
-                  <rect x="543" y="15" width="22" height="56" rx="4" fill="#dbeafe" stroke="#0f172a" stroke-width="2.5"/>
-                  <polygon points="540,15 554,-2 568,15" fill="#3b82f6" stroke="#0f172a" stroke-width="2"/>
-                  <!-- Main Spire & Crown -->
-                  <polygon points="455,25 500,-15 545,25" fill="#2563eb" stroke="#0f172a" stroke-width="3"/>
-                  <circle cx="500" cy="-15" r="16" fill="#facc15" stroke="#0f172a" stroke-width="2.5"/>
-                  <text x="500" y="-10" font-size="14" text-anchor="middle">🛡️</text>
-                  <!-- Crown / Boss Star -->
-                  <text x="500" y="-34" font-size="16" text-anchor="middle" filter="url(#glowGold)">👑</text>
+                <!-- STAGE 5 (Index 5): SECURITY PITCH SKY CASTLE (x:500, y:85) -->
+                <g class="game-stage-node active" id="stageNode_5" onclick="selectGameStage(5)" cursor="pointer">
+                  <!-- Puffy Cloud Base Foundation -->
+                  <g transform="translate(500, 115)" filter="url(#islandShadow)">
+                    <ellipse cx="0" cy="8" rx="120" ry="26" fill="#1e293b" opacity="0.3"/>
+                    <ellipse cx="0" cy="0" rx="115" ry="22" fill="#f8fafc"/>
+                    <circle cx="-65" cy="-6" r="22" fill="#f8fafc"/>
+                    <circle cx="-25" cy="-12" r="26" fill="#f8fafc"/>
+                    <circle cx="25" cy="-12" r="26" fill="#f8fafc"/>
+                    <circle cx="65" cy="-6" r="22" fill="#f8fafc"/>
+                  </g>
+
+                  <!-- Fairytale Sky Castle Landmark -->
+                  <g transform="translate(500, 68)">
+                    <!-- Central Castle Keep -->
+                    <rect x="-30" y="-10" width="60" height="34" rx="4" fill="#1e3a8a" stroke="#0f172a" stroke-width="2.5"/>
+                    <rect x="-10" y="6" width="20" height="18" rx="4" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
+                    <!-- Castle Windows -->
+                    <rect x="-24" y="-2" width="8" height="10" rx="3" fill="#60a5fa"/>
+                    <rect x="16" y="-2" width="8" height="10" rx="3" fill="#60a5fa"/>
+                    
+                    <!-- Left Turret -->
+                    <rect x="-48" y="-20" width="20" height="42" rx="3" fill="#2563eb" stroke="#0f172a" stroke-width="2.5"/>
+                    <polygon points="-52,-20 -24,-20 -38,-42" fill="#3b82f6" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="-38" y1="-42" x2="-38" y2="-50" stroke="#facc15" stroke-width="2"/>
+                    <polygon points="-38,-50 -26,-46 -38,-42" fill="#ef4444"/>
+
+                    <!-- Right Turret -->
+                    <rect x="28" y="-20" width="20" height="42" rx="3" fill="#2563eb" stroke="#0f172a" stroke-width="2.5"/>
+                    <polygon points="24,-20 52,-20 38,-42" fill="#3b82f6" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="38" y1="-42" x2="38" y2="-50" stroke="#facc15" stroke-width="2"/>
+                    <polygon points="38,-50 50,-46 38,-42" fill="#ef4444"/>
+
+                    <!-- Central High Spire & Royal Crown -->
+                    <polygon points="-24,-10 24,-10 0,-40" fill="#1d4ed8" stroke="#0f172a" stroke-width="2.5"/>
+                    <g transform="translate(0, -44)">
+                      <!-- Golden Crown -->
+                      <circle cx="0" cy="-6" r="14" fill="#facc15" stroke="#0f172a" stroke-width="2" filter="url(#glowGold)"/>
+                      <text x="0" y="-1" font-size="13" text-anchor="middle">👑</text>
+                    </g>
+
+                    <!-- Security Pitch Golden Shield -->
+                    <g transform="translate(0, 0)">
+                      <circle cx="0" cy="0" r="12" fill="#0f172a" stroke="#facc15" stroke-width="2.2"/>
+                      <text x="0" y="4" font-size="12" text-anchor="middle">🛡️</text>
+                    </g>
+                  </g>
+
+                  <!-- Numbered Badge Circle: 6 / Pinnacle -->
+                  <g transform="translate(435, 30)" filter="url(#badgeGlow)">
+                    <circle cx="0" cy="0" r="17" fill="url(#goldCastleGrad)" stroke="#ffffff" stroke-width="3" filter="url(#glowGold)"/>
+                    <text x="0" y="6" fill="#0f172a" font-size="13" font-weight="900" text-anchor="middle">6</text>
+                  </g>
+
                   <!-- Stage Label Pill -->
-                  <g transform="translate(500, 102)">
-                    <rect x="-95" y="-12" width="190" height="24" rx="12" fill="#0f172a" stroke="#facc15" stroke-width="2.5"/>
-                    <text x="0" y="4" text-anchor="middle" font-size="10" font-weight="900" fill="#facc15">👑 06. SECURITY PITCH (5+ ปี)</text>
+                  <g transform="translate(500, 140)">
+                    <rect x="-95" y="-13" width="190" height="26" rx="13" fill="#0f172a" stroke="#facc15" stroke-width="2.2" filter="url(#cuteShadow)"/>
+                    <text x="0" y="5" fill="#facc15" font-size="11.5" font-weight="900" text-anchor="middle">👑 6. Security Pitch (5+ ปี)</text>
                   </g>
                 </g>
 
-                <!-- ANIMATED CHIBI TRAVELER ON MAP (Hops along the progress path) -->
-                <g id="mapAvatarPin" transform="translate(500, 70)" style="transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1); cursor: pointer;">
-                  <!-- Bouncing Shadow -->
-                  <ellipse cx="0" cy="5" rx="18" ry="7" fill="rgba(15,23,42,0.3)"/>
+                <!-- 4. CHIBI SAITARN AVATAR PIN (Smooth Jumping Token) -->
+                <g id="mapAvatarPin" class="map-chibi-token" transform="translate(500, 85)" style="transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none;">
+                  <!-- Avatar shadow -->
+                  <ellipse cx="0" cy="22" rx="16" ry="6" fill="rgba(15,23,42,0.35)"/>
                   <!-- Glowing Halo Ring -->
                   <circle cx="0" cy="-14" r="22" fill="#facc15" opacity="0.35">
                     <animate attributeName="r" values="18;26;18" dur="1.8s" repeatCount="indefinite"/>
@@ -516,13 +634,15 @@
                   <!-- Glasses -->
                   <rect x="-10" y="-24" width="8" height="6" rx="2" fill="none" stroke="#3b82f6" stroke-width="1.8"/>
                   <rect x="2" y="-24" width="8" height="6" rx="2" fill="none" stroke="#3b82f6" stroke-width="1.8"/>
+                  <!-- Smiling Mouth -->
+                  <path d="M-4,-14 Q0,-10 4,-14" fill="none" stroke="#ef4444" stroke-width="1.5"/>
                   <!-- Body & Blue Shirt -->
                   <rect x="-8" y="-9" width="16" height="14" rx="4" fill="#38bdf8" stroke="#0f172a" stroke-width="2"/>
                   <!-- Running Legs -->
                   <rect x="-6" y="5" width="4" height="6" fill="#1e293b"/>
                   <rect x="2" y="5" width="4" height="6" fill="#1e293b"/>
                   <!-- Pin Indicator Arrow -->
-                  <polygon points="-5,11 5,11 0,16" fill="#facc15" stroke="#0f172a" stroke-width="1.5"/>
+                  <polygon points="-5,13 5,13 0,19" fill="#facc15" stroke="#0f172a" stroke-width="1.5"/>
                 </g>
               </svg>
             </div>
@@ -551,10 +671,20 @@
 
                 <!-- Right: Navigator & Action CTA -->
                 <div class="game-hud-controls">
+                  <!-- Direct Stage Number Jump Dots (1-6) -->
+                  <div class="game-stage-jump-strip">
+                    <button type="button" class="stage-jump-dot" id="stageJump0" onclick="selectGameStage(0)" title="ด่าน 1: PIM Academy">1</button>
+                    <button type="button" class="stage-jump-dot" id="stageJump1" onclick="selectGameStage(1)" title="ด่าน 2: FlowPay KYC">2</button>
+                    <button type="button" class="stage-jump-dot" id="stageJump2" onclick="selectGameStage(2)" title="ด่าน 3: ShopVibe Commerce">3</button>
+                    <button type="button" class="stage-jump-dot" id="stageJump3" onclick="selectGameStage(3)" title="ด่าน 4: MediCare Health">4</button>
+                    <button type="button" class="stage-jump-dot" id="stageJump4" onclick="selectGameStage(4)" title="ด่าน 5: LocalRoute Transit">5</button>
+                    <button type="button" class="stage-jump-dot active" id="stageJump5" onclick="selectGameStage(5)" title="ด่าน 6: Security Pitch HQ">6 👑</button>
+                  </div>
+
                   <!-- Stepper Buttons (Candy Crush Next/Prev) -->
                   <div class="game-nav-buttons">
-                    <button type="button" class="game-nav-btn" id="btnPrevStage" onclick="navigateGameStage(-1)" title="ด่านก่อนหน้า">◀ ด่านก่อน</button>
-                    <button type="button" class="game-nav-btn" id="btnNextStage" onclick="navigateGameStage(1)" title="ด่านถัดไป" disabled>ด่านถัดไป ▶</button>
+                    <button type="button" class="game-nav-btn" id="btnPrevStage" onclick="navigateGameStage(-1)" title="ด่านก่อนหน้า">◀ ก่อนหน้า</button>
+                    <button type="button" class="game-nav-btn" id="btnNextStage" onclick="navigateGameStage(1)" title="ด่านถัดไป" disabled>ถัดไป ▶</button>
                   </div>
 
                   <!-- Action CTA Button -->
@@ -703,14 +833,11 @@
 
             <!-- Action Buttons -->
             <div class="flagship-actions-row">
-              <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-3d-primary" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
-                🚀 เปิดใช้งานแอปจริง (Live Vercel) ➔
+              <a href="https://easylocalroutedev.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-3d-primary" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); font-weight: 800;">
+                🚀 เปิดใช้งานแอปจริง (Live Vercel) ↗
               </a>
-              <button type="button" class="btn btn-3d-secondary" onclick="openLiveAppModal()" style="border-color: #10b981; color: #4ade80;">
-                📱 ทดลองเล่นแอป (Live Demo Modal)
-              </button>
-              <button type="button" class="btn btn-3d-secondary" onclick="openCaseStudyModal('localroute-transit-travel-hub')">
-                📖 ส่องกระบวนการคิด UX Process
+              <button type="button" class="btn btn-3d-secondary" onclick="openCaseStudyModal('localroute-transit-travel-hub')" style="border-color: rgba(255,255,255,0.25); color: #ffffff;">
+                📖 ส่องกระบวนการคิด UX Process ➔
               </button>
             </div>
           </div>
@@ -730,10 +857,10 @@
               <div class="flagship-visual-content">
                 <div class="screen-preview-grid">
                   <!-- MOCKUP 1: INTERACTIVE MAP (LEAFLET + สองแถวแดง) -->
-                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองเล่นใน Live Demo Modal">
+                  <div class="screen-shot-card interactive-preview-card" onclick="window.open('https://easylocalroutedev.vercel.app/', '_blank')" title="คลิกเปิดใช้งานแอปจริงบน Vercel (แท็บใหม่) ↗">
                     <div class="ss-card-header">
                       <span class="ss-tag">🗺️ Interactive Map (Leaflet)</span>
-                      <span class="ss-click-hint">ลองเล่นสด ➔</span>
+                      <span class="ss-click-hint">เปิดแอปจริง ↗</span>
                     </div>
                     <div class="mini-ui-canvas map-canvas">
                       <svg viewBox="0 0 340 100" class="mini-map-svg" xmlns="http://www.w3.org/2000/svg">
@@ -766,10 +893,10 @@
                   </div>
 
                   <!-- MOCKUP 2: TRANSPORT COMPARE MODAL -->
-                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองเปรียบเทียบในแอปจริง">
+                  <div class="screen-shot-card interactive-preview-card" onclick="window.open('https://easylocalroutedev.vercel.app/', '_blank')" title="คลิกเปิดใช้งานแอปจริงบน Vercel (แท็บใหม่) ↗">
                     <div class="ss-card-header">
                       <span class="ss-tag">📊 Compare Modal (เวลา vs ราคา)</span>
-                      <span class="ss-click-hint">4 ตัวเลือก ➔</span>
+                      <span class="ss-click-hint">เปิดแอปจริง ↗</span>
                     </div>
                     <div class="mini-ui-canvas compare-canvas">
                       <div class="compare-row best-value">
@@ -803,7 +930,7 @@
                   </div>
 
                   <!-- MOCKUP 3: VOICE AUDIO PHRASEBOOK -->
-                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองฟังเสียงในแอปจริง">
+                  <div class="screen-shot-card interactive-preview-card" onclick="window.open('https://easylocalroutedev.vercel.app/', '_blank')" title="คลิกเพื่อทดลองฟังเสียงในแอปจริง">
                     <div class="ss-card-header">
                       <span class="ss-tag">🗣️ Audio Phrasebook (ช่วยสื่อสาร)</span>
                       <span class="ss-click-hint">แตะฟังเสียง ➔</span>
@@ -834,7 +961,7 @@
                   </div>
 
                   <!-- MOCKUP 4: OFFLINE SOS & SAFE RIDE SHARE -->
-                  <div class="screen-shot-card interactive-preview-card" onclick="openLiveAppModal()" title="คลิกเพื่อทดลองดูระบบความปลอดภัย">
+                  <div class="screen-shot-card interactive-preview-card" onclick="window.open('https://easylocalroutedev.vercel.app/', '_blank')" title="คลิกเพื่อทดลองดูระบบความปลอดภัย">
                     <div class="ss-card-header">
                       <span class="ss-tag">🚨 Offline Support & SOS</span>
                       <span class="ss-click-hint">ปลอดภัย ➔</span>
@@ -855,7 +982,7 @@
                     </div>
                   </div>
                 </div>
-              </div></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1154,209 +1281,214 @@
           </div>
         </div>
 
-        </div>
-        </div>
-
         <!-- Tab 3: ประวัติการศึกษา (Education & Academic Background) -->
         <div class="resume-tab-pane" id="tab-education">
-          <div class="education-showcase-grid">
+          <div class="education-split-layout">
             
-            <!-- Degree Card: PIM Faculty of Communication Arts (Honors) -->
-            <div class="education-card-hero">
-              <div class="edu-hero-badge-row">
-                <span class="edu-level-pill">🎓 ปริญญาตรี · นิเทศศาสตรบัณฑิต</span>
-                
-                <span class="edu-wbl-tag">💼 Work-based Learning</span>
-              </div>
-
-              <h3 class="edu-major-title">คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</h3>
-              <div class="edu-institution-name">สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</div>
-
-              <p class="edu-desc-lead">
-                สำเร็จการศึกษาจาก <strong>คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong> โดดเด่นด้วยหลักสูตรการเรียนรู้แบบ <strong>Work-based Learning</strong> ที่ผสานองค์ความรู้ด้าน <strong>การสื่อสารภาพลักษณ์แบรนด์ (Brand Communication)</strong> เข้ากับการปฏิบัติงานจริงใน 4 องค์กรชั้นนำ เป็นรากฐานสำคัญที่ส่งเสริมให้เข้าใจผู้บริโภค พฤติกรรมผู้ใช้ และบริบททางธุรกิจได้อย่างรอบด้าน
-              </p>
-
-              <div class="edu-synergy-header">
-                <span class="synergy-tag">✨ ทำไม "นิเทศศาสตร์ & แบรนด์" จึงเป็นจุดแข็งสำคัญของ UI/UX Designer สายธาร?</span>
-              </div>
-
-              <div class="edu-highlights-grid">
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🎯</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Brand Strategy x User Experience</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เข้าใจหลักจิตวิทยาการสื่อสารแบรนด์ ออกแบบ Product Interface ที่ไม่เพียงแค่สวยงาม แต่ยังสะท้อน DNA และคุณค่าของธุรกิจได้อย่างหนักแน่น</p>
-                  </div>
+            <!-- Left Column: Degree & Strategic Brand-UX Synergy -->
+            <div class="edu-split-col edu-col-left">
+              <!-- Degree Card: PIM Faculty of Communication Arts -->
+              <div class="education-card-hero">
+                <div class="edu-hero-badge-row">
+                  <span class="edu-level-pill">🎓 ปริญญาตรี · นิเทศศาสตรบัณฑิต</span>
+                  <span class="edu-wbl-tag">💼 Work-based Learning</span>
                 </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">✍️</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">UX Copywriting & Tone of Voice</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เชี่ยวชาญการเขียนข้อความในระบบ (Microcopy, Error States, CTA) ให้กระชับ สื่อสารตรงประเด็น และสร้างความรู้สึกเป็นมิตรแก่ผู้ใช้</p>
-                  </div>
-                </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🧩</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Design Systems & Brand Consistency</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">นำระเบียบ Brand Guidelines มาพัฒนาระบบ Figma Design Tokens, Color Palettes และ Component Libraries ให้มีความเป็นหนึ่งเดียวกัน 100%</p>
-                  </div>
-                </div>
-                <div class="edu-point-item">
-                  <span class="edu-point-icon">🤝</span>
-                  <div>
-                    <strong style="color:#ffffff; font-size:0.92rem;">Cross-Functional Alignment</strong>
-                    <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">สื่อสารแนวคิดดีไซน์ รับฟังโจทย์ธุรกิจจากผู้บริหาร และทำงานประสานความต้องการร่วมกับทีม Developer ได้อย่างราบรื่นไร้รอยต่อ</p>
-                  </div>
-                </div>
-              </div>
-            </d
 
-            <!-- เส้นทางฝึกประสบการณ์วิชาชีพ 4 องค์กรในหลักสูตร Work-based Learning (PIM Journey) -->
-            <div class="internships-sub-header" style="margin-top: 2rem;">
-              <span class="tag">🌱 ประสบการณ์การเรียนรู้และการฝึกงานจริง (Work-based Learning)</span>
-              <h4>เส้นทางฝึกปฏิบัติวิชาชีพ 4 องค์กรชั้นนำ จากรั้ว PIM</h4>
-              <p style="color: #94a3b8; font-size: 0.88rem; margin: 4px 0 0;">
-                หลักสูตร PIM บ่มเพาะทักษะการทำงานจริงอย่างเข้มข้น ผ่านการฝึกปฏิบัติงานจริงในองค์กรที่หลากหลายตั้งแต่ยังเป็นนักศึกษา สร้างพื้นฐานความเข้าใจผู้ใช้งานและการสื่อสารอย่างลึกซึ้ง
-              </p>
-            </div>
+                <h3 class="edu-major-title">คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</h3>
+                <div class="edu-institution-name">สถาบันการจัดการปัญญาภิวัฒน์ (Panyapiwat Institute of Management - PIM)</div>
 
-            <div class="career-journey-timeline">
-            <!-- Milestone 4: กองปราบปราม -->
-            <div class="journey-item">
-              <div class="journey-node">
-                <span class="journey-icon">👮‍♂️</span>
-                <div class="journey-line"></div>
-              </div>
-              <div class="journey-content-card">
-                <div class="journey-header">
-                  <div>
-                    <h4 class="journey-title">กองปราบปราม (Crime Suppression Division)</h4>
-                    <span class="journey-role">นักศึกษาฝึกงาน — Content Online & สื่อสารประชาสัมพันธ์</span>
-                  </div>
-                  <span class="journey-date">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 (2 เดือน)</span>
-                </div>
-                <p class="journey-desc">
-                  จัดทำคอนเทนต์ออนไลน์ ผลิตสื่ออินโฟกราฟิกและภาพกราฟิกเตือนภัยประชาชน ออกแบบการนำเสนอข้อมูลกฎหมายและข้อมูลสำคัญให้เข้าใจง่าย เข้าถึงประชาชนทุกช่วงวัยอย่างมีประสิทธิภาพ
+                <p class="edu-desc-lead">
+                  สำเร็จการศึกษาจาก <strong>คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์</strong> โดดเด่นด้วยหลักสูตรการเรียนรู้แบบ <strong>Work-based Learning</strong> ที่ผสานองค์ความรู้ด้าน <strong>การสื่อสารภาพลักษณ์แบรนด์ (Brand Communication)</strong> เข้ากับการปฏิบัติงานจริงใน 4 องค์กรชั้นนำ เป็นรากฐานสำคัญที่ส่งเสริมให้เข้าใจผู้บริโภค พฤติกรรมผู้ใช้ และบริบททางธุรกิจได้อย่างรอบด้าน
                 </p>
-                <div class="journey-tags">
-                  <span class="journey-tag">Information Design</span>
-                  <span class="journey-tag">Infographics</span>
-                  <span class="journey-tag">Public Communication</span>
-                  <span class="journey-tag">Content Strategy</span>
-                </div>
-              </div>
-            </div>
 
-            <!-- Milestone 3: CONNEXT ED -->
-            <div class="journey-item">
-              <div class="journey-node">
-                <span class="journey-icon">🎓</span>
-                <div class="journey-line"></div>
-              </div>
-              <div class="journey-content-card">
-                <div class="journey-header">
-                  <div>
-                    <h4 class="journey-title">มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)</h4>
-                    <span class="journey-role">นักศึกษาฝึกงาน — โครงการพัฒนาการศึกษาและการสื่อสารองค์กร</span>
+                <div class="edu-synergy-header">
+                  <span class="synergy-tag">✨ ทำไม "นิเทศศาสตร์ & แบรนด์" จึงเป็นจุดแข็งสำคัญของ UX Designer สายธาร?</span>
+                </div>
+
+                <div class="edu-highlights-grid">
+                  <div class="edu-point-item">
+                    <span class="edu-point-icon">🎯</span>
+                    <div>
+                      <strong style="color:#ffffff; font-size:0.92rem;">Brand Strategy x User Experience</strong>
+                      <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เข้าใจหลักจิตวิทยาการสื่อสารแบรนด์ ออกแบบ Product Interface ที่ไม่เพียงแค่สวยงาม แต่ยังสะท้อน DNA และคุณค่าของธุรกิจได้อย่างหนักแน่น</p>
+                    </div>
                   </div>
-                  <span class="journey-date">📅 20 พ.ค. 2018 - 3 ส.ค. 2018 (2 เดือน)</span>
-                </div>
-                <p class="journey-desc">
-                  ร่วมดำเนินงานโครงการด้านการศึกษาระดับประเทศ ประสานงานสื่อสารองค์กรระหว่างภาคีเครือข่ายธุรกิจและโรงเรียน พร้อมจัดทำสื่อสื่อสารความคืบหน้าโครงการเพื่อยกระดับคุณภาพการศึกษาไทย
-                </p>
-                <div class="journey-tags">
-                  <span class="journey-tag">Corporate Communication</span>
-                  <span class="journey-tag">Project Coordination</span>
-                  <span class="journey-tag">Stakeholder Relations</span>
-                  <span class="journey-tag">Brand Materials</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Milestone 2: ThaiNews -->
-            <div class="journey-item">
-              <div class="journey-node">
-                <span class="journey-icon">📰</span>
-                <div class="journey-line"></div>
-              </div>
-              <div class="journey-content-card">
-                <div class="journey-header">
-                  <div>
-                    <h4 class="journey-title">ThaiNews — ไทยนิวส์</h4>
-                    <span class="journey-role">นักศึกษาฝึกงาน — ข่าวออนไลน์และสื่อดิจิทัล</span>
+                  <div class="edu-point-item">
+                    <span class="edu-point-icon">✍️</span>
+                    <div>
+                      <strong style="color:#ffffff; font-size:0.92rem;">UX Copywriting & Tone of Voice</strong>
+                      <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">เชี่ยวชาญการเขียนข้อความในระบบ (Microcopy, Error States, CTA) ให้กระชับ สื่อสารตรงประเด็น และสร้างความรู้สึกเป็นมิตรแก่ผู้ใช้</p>
+                    </div>
                   </div>
-                  <span class="journey-date">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 (2 เดือน)</span>
-                </div>
-                <p class="journey-desc">
-                  สร้างสรรค์เนื้อหาข่าวออนไลน์ ออกแบบภาพประกอบและกราฟิกสำหรับสื่อดิจิทัล ฝึกฝนการเล่าเรื่อง (Visual Storytelling) ภายใต้เงื่อนไขเวลาที่กระชับและทันต่อสถานการณ์
-                </p>
-                <div class="journey-tags">
-                  <span class="journey-tag">Digital Media</span>
-                  <span class="journey-tag">Visual Storytelling</span>
-                  <span class="journey-tag">Graphic Production</span>
-                  <span class="journey-tag">Fast Execution</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Milestone 1: 7-ELEVEN -->
-            <div class="journey-item">
-              <div class="journey-node">
-                <span class="journey-icon">🏪</span>
-              </div>
-              <div class="journey-content-card">
-                <div class="journey-header">
-                  <div>
-                    <h4 class="journey-title">7-ELEVEN (CP ALL)</h4>
-                    <span class="journey-role">พนักงานบริการลูกค้าและแคชเชียร์ (Work-based Learning)</span>
+                  <div class="edu-point-item">
+                    <span class="edu-point-icon">🧩</span>
+                    <div>
+                      <strong style="color:#ffffff; font-size:0.92rem;">Design Systems & Brand Consistency</strong>
+                      <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">นำระเบียบ Brand Guidelines มาพัฒนาระบบ Figma Design Tokens, Color Palettes และ Component Libraries ให้มีความเป็นหนึ่งเดียวกัน 100%</p>
+                    </div>
                   </div>
-                  <span class="journey-date">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 (2 เดือน)</span>
-                </div>
-                <p class="journey-desc">
-                  เรียนรู้ Customer Journey และพฤติกรรมลูกค้าหน้างานจริง ฝึกฝน Empathy การสื่อสารเพื่อแก้ไขปัญหาเฉพาะหน้า และเข้าใจการทำงานของระบบแคชเชียร์/สต็อกสินค้าหน้าร้านอย่างถ่องแท้
-                </p>
-                <div class="journey-tags">
-                  <span class="journey-tag">Customer Empathy</span>
-                  <span class="journey-tag">Frontline Operations</span>
-                  <span class="journey-tag">Work-Based Learning</span>
-                  <span class="journey-tag">Service Mind</span>
+                  <div class="edu-point-item">
+                    <span class="edu-point-icon">🤝</span>
+                    <div>
+                      <strong style="color:#ffffff; font-size:0.92rem;">Cross-Functional Alignment</strong>
+                      <p style="color:#94a3b8; font-size:0.82rem; margin:2px 0 0; line-height:1.45;">สื่อสารแนวคิดดีไซน์ รับฟังโจทย์ธุรกิจจากผู้บริหาร และทำงานประสานความต้องการร่วมกับทีม Developer ได้อย่างราบรื่นไร้รอยต่อ</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          iv>
 
-            <!-- Specialized Continuous Learning Card -->
-            <div class="education-card-secondary">
-              <div class="edu-hero-badge-row">
-                <span class="edu-level-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.35);">⚡ การพัฒนาทักษะวิชาชีพเฉพาะทาง</span>
-                <span class="edu-level-pill" style="background: rgba(16, 185, 129, 0.15); color: #4ade80; border-color: rgba(16, 185, 129, 0.35);">🎨 Professional Specialization</span>
-              </div>
-              <h3 class="edu-major-title" style="font-size: 1.35rem;">UI/UX Design, Figma & Front-End Development</h3>
-              <div class="edu-institution-name">การเรียนรู้และพัฒนาตนเองอย่างต่อเนื่อง (Continuous Professional Growth)</div>
+            <!-- Right Column: Work-based Learning (PIM Journey 4 Milestones) & Continuous Growth -->
+            <div class="edu-split-col edu-col-right">
               
-              <p class="edu-desc-lead">
-                ต่อยอดรากฐานการสื่อสารแบรนด์ สู่การออกแบบผลิตภัณฑ์ดิจิทัลและการเขียนโปรแกรม Front-End เพื่อสร้างประสบการณ์ใช้งานที่สมบูรณ์แบบ:
-              </p>
+              <!-- Header for 4 Internships -->
+              <div class="internships-sub-header">
+                <span class="tag">🌱 ประสบการณ์การเรียนรู้และการฝึกงานจริง (Work-based Learning)</span>
+                <h4>เส้นทางฝึกปฏิบัติวิชาชีพ 4 องค์กรชั้นนำ จากรั้ว PIM</h4>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 4px 0 0; line-height: 1.5;">
+                  หลักสูตร PIM บ่มเพาะทักษะการทำงานจริงอย่างเข้มข้น ผ่านการฝึกปฏิบัติงานจริงในองค์กรที่หลากหลาย สร้างพื้นฐานความเข้าใจผู้ใช้งานและการสื่อสารอย่างลึกซึ้ง
+                </p>
+              </div>
 
-              <div class="edu-spec-list">
-                <div class="spec-list-item">
-                  <span class="check-icon">✓</span>
-                  <div><strong>Human-Centered UX Research:</strong> การวิเคราะห์ User Persona, User Journey, Heuristic Evaluation และ Usability Testing (คะแนน SUS สูง 94/100)</div>
+              <!-- Stepper of 4 Milestones -->
+              <div class="career-journey-timeline">
+                <!-- Milestone 4: กองปราบปราม -->
+                <div class="journey-item">
+                  <div class="journey-node">
+                    <span class="journey-icon">👮‍♂️</span>
+                    <div class="journey-line"></div>
+                  </div>
+                  <div class="journey-content-card">
+                    <div class="journey-header">
+                      <div>
+                        <h4 class="journey-title">กองปราบปราม (Crime Suppression Division)</h4>
+                        <span class="journey-role">นักศึกษาฝึกงาน — Content Online & สื่อสารประชาสัมพันธ์</span>
+                      </div>
+                      <span class="journey-date">📅 19 พ.ย. 2018 - 2 ก.พ. 2019 (2 เดือน)</span>
+                    </div>
+                    <p class="journey-desc">
+                      จัดทำคอนเทนต์ออนไลน์ ผลิตสื่ออินโฟกราฟิกและภาพกราฟิกเตือนภัยประชาชน ออกแบบการนำเสนอข้อมูลกฎหมายและข้อมูลสำคัญให้เข้าใจง่าย เข้าถึงประชาชนทุกช่วงวัยอย่างมีประสิทธิภาพ
+                    </p>
+                    <div class="journey-tags">
+                      <span class="journey-tag">Information Design</span>
+                      <span class="journey-tag">Infographics</span>
+                      <span class="journey-tag">Public Communication</span>
+                      <span class="journey-tag">Content Strategy</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="spec-list-item">
-                  <span class="check-icon">✓</span>
-                  <div><strong>Advanced Figma Systems:</strong> เชี่ยวชาญ Auto-Layout, Variables, Responsive Tokens, Component Sets และ Interactive Prototyping</div>
+
+                <!-- Milestone 3: CONNEXT ED -->
+                <div class="journey-item">
+                  <div class="journey-node">
+                    <span class="journey-icon">🎓</span>
+                    <div class="journey-line"></div>
+                  </div>
+                  <div class="journey-content-card">
+                    <div class="journey-header">
+                      <div>
+                        <h4 class="journey-title">มูลนิธิสานอนาคตการศึกษา คอนเน็กซ์อีดี (CONNEXT ED)</h4>
+                        <span class="journey-role">นักศึกษาฝึกงาน — ประสานงานโครงการ & สื่อสารองค์กร</span>
+                      </div>
+                      <span class="journey-date">📅 11 มิ.ย. 2018 - 3 ส.ค. 2018 (2 เดือน)</span>
+                    </div>
+                    <p class="journey-desc">
+                      ประสานงานโครงการพัฒนาการศึกษา ร่วมจัดทำสื่อสารสนเทศและประชาสัมพันธ์โครงการ ยกระดับความร่วมมือระหว่างภาครัฐ เอกชน และประชาสังคม เข้าใจบริบทผู้มีส่วนได้ส่วนเสียหลากหลายกลุ่ม
+                    </p>
+                    <div class="journey-tags">
+                      <span class="journey-tag">Stakeholder Alignment</span>
+                      <span class="journey-tag">Public Relations</span>
+                      <span class="journey-tag">Education Tech</span>
+                      <span class="journey-tag">Coordination</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="spec-list-item">
-                  <span class="check-icon">✓</span>
-                  <div><strong>Front-End Engineering:</strong> HTML5, CSS3/Tailwind, JavaScript และการประสานงาน Dev Specs Handoff ให้ได้ผลงานจริงตรงตามแบบ</div>
+
+                <!-- Milestone 2: ThaiNews -->
+                <div class="journey-item">
+                  <div class="journey-node">
+                    <span class="journey-icon">📰</span>
+                    <div class="journey-line"></div>
+                  </div>
+                  <div class="journey-content-card">
+                    <div class="journey-header">
+                      <div>
+                        <h4 class="journey-title">ThaiNews — ไทยนิวส์</h4>
+                        <span class="journey-role">นักศึกษาฝึกงาน — ข่าวออนไลน์และสื่อดิจิทัล</span>
+                      </div>
+                      <span class="journey-date">📅 19 พ.ย. 2017 - 1 ก.พ. 2018 (2 เดือน)</span>
+                    </div>
+                    <p class="journey-desc">
+                      สร้างสรรค์เนื้อหาข่าวออนไลน์ ออกแบบภาพประกอบและกราฟิกสำหรับสื่อดิจิทัล ฝึกฝนการเล่าเรื่อง (Visual Storytelling) ภายใต้เงื่อนไขเวลาที่กระชับและทันต่อสถานการณ์
+                    </p>
+                    <div class="journey-tags">
+                      <span class="journey-tag">Digital Media</span>
+                      <span class="journey-tag">Visual Storytelling</span>
+                      <span class="journey-tag">Graphic Production</span>
+                      <span class="journey-tag">Fast Execution</span>
+                    </div>
+                  </div>
                 </div>
-                <div class="spec-list-item">
-                  <span class="check-icon">✓</span>
-                  <div><strong>Web Accessibility:</strong> ออกแบบให้ทุกคนเข้าถึงได้ตามมาตรฐานสากล WCAG 2.1 AA เพื่อสร้าง Inclusive Digital Experience</div>
+
+                <!-- Milestone 1: 7-ELEVEN -->
+                <div class="journey-item">
+                  <div class="journey-node">
+                    <span class="journey-icon">🏪</span>
+                  </div>
+                  <div class="journey-content-card">
+                    <div class="journey-header">
+                      <div>
+                        <h4 class="journey-title">7-ELEVEN (CP ALL)</h4>
+                        <span class="journey-role">พนักงานบริการลูกค้าและแคชเชียร์ (Work-based Learning)</span>
+                      </div>
+                      <span class="journey-date">📅 31 พ.ค. 2017 - 20 ส.ค. 2017 (2 เดือน)</span>
+                    </div>
+                    <p class="journey-desc">
+                      เรียนรู้ Customer Journey และพฤติกรรมลูกค้าหน้างานจริง ฝึกฝน Empathy การสื่อสารเพื่อแก้ไขปัญหาเฉพาะหน้า และเข้าใจการทำงานของระบบแคชเชียร์/สต็อกสินค้าหน้าร้านอย่างถ่องแท้
+                    </p>
+                    <div class="journey-tags">
+                      <span class="journey-tag">Customer Empathy</span>
+                      <span class="journey-tag">Frontline Operations</span>
+                      <span class="journey-tag">Work-Based Learning</span>
+                      <span class="journey-tag">Service Mind</span>
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              <!-- Specialized Continuous Learning Card -->
+              <div class="education-card-secondary" style="margin-top: 1.5rem;">
+                <div class="edu-hero-badge-row">
+                  <span class="edu-level-pill" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.35);">⚡ การพัฒนาทักษะวิชาชีพเฉพาะทาง</span>
+                  <span class="edu-level-pill" style="background: rgba(16, 185, 129, 0.15); color: #4ade80; border-color: rgba(16, 185, 129, 0.35);">🎨 Professional Specialization</span>
+                </div>
+                <h3 class="edu-major-title" style="font-size: 1.2rem;">UI/UX Design, Figma & Front-End Development</h3>
+                <div class="edu-institution-name">การเรียนรู้และพัฒนาตนเองอย่างต่อเนื่อง (Continuous Professional Growth)</div>
+                
+                <p class="edu-desc-lead" style="font-size: 0.88rem;">
+                  ต่อยอดรากฐานการสื่อสารแบรนด์ สู่การออกแบบผลิตภัณฑ์ดิจิทัลและการเขียนโปรแกรม Front-End เพื่อสร้างประสบการณ์ใช้งานที่สมบูรณ์แบบ:
+                </p>
+
+                <div class="edu-spec-list">
+                  <div class="spec-list-item">
+                    <span class="check-icon">✓</span>
+                    <div><strong>Human-Centered UX Research:</strong> วิเคราะห์ User Persona, User Journey, Heuristic Evaluation และ Usability Testing (SUS 94/100)</div>
+                  </div>
+                  <div class="spec-list-item">
+                    <span class="check-icon">✓</span>
+                    <div><strong>Advanced Figma Systems:</strong> เชี่ยวชาญ Auto-Layout, Variables, Responsive Tokens, Component Sets และ Prototyping</div>
+                  </div>
+                  <div class="spec-list-item">
+                    <span class="check-icon">✓</span>
+                    <div><strong>Front-End Engineering:</strong> HTML5, CSS3, JavaScript และ Dev Specs Handoff ให้ได้ผลงานจริงตรงตามแบบ</div>
+                  </div>
+                  <div class="spec-list-item">
+                    <span class="check-icon">✓</span>
+                    <div><strong>Web Accessibility:</strong> ออกแบบให้ทุกคนเข้าถึงได้ตามมาตรฐานสากล WCAG 2.1 AA เพื่อสร้าง Inclusive Experience</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
           </div>

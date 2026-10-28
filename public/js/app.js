@@ -1254,8 +1254,8 @@ const gameStages = [
     result: 'คณะนิเทศศาสตร์ สาขาการสื่อสารองค์กรและแบรนด์ • ผ่านการฝึกงานจริง 4 องค์กรชั้นนำ',
     skills: 'Brand Strategy, Tone of Voice, Work-based Learning, EXP +350',
     ctaText: '🎓 ดูประวัติการศึกษา PIM ➔',
-    x: 170,
-    y: 490
+    x: 160,
+    y: 520
   },
   {
     index: 1,
@@ -1267,8 +1267,8 @@ const gameStages = [
     result: 'ลดสเต็ป 12 เหลือ 4 ขั้นตอน • อัตราผ่าน KYC สำเร็จพุ่งขึ้น +38.4%',
     skills: 'User Flow Mapping, Usability Testing, Heuristic Audit, EXP +500',
     ctaText: '📖 ส่องเคสสตัดดี้ FlowPay ➔',
-    x: 410,
-    y: 420
+    x: 380,
+    y: 435
   },
   {
     index: 2,
@@ -1280,8 +1280,8 @@ const gameStages = [
     result: 'ลดเวลาสั่งซื้อเหลือ 45 วินาที • ดันยอดขายรวมของแพลตฟอร์มเพิ่มขึ้น +28%',
     skills: 'Checkout Optimization, Micro-interactions, A/B Testing, EXP +450',
     ctaText: '📖 ส่องเคสสตัดดี้ ShopVibe ➔',
-    x: 680,
-    y: 390
+    x: 720,
+    y: 395
   },
   {
     index: 3,
@@ -1293,8 +1293,8 @@ const gameStages = [
     result: 'ผ่านมาตรฐาน WCAG 2.1 AAA • คะแนนความพึงพอใจการใช้งาน SUS สูงถึง 94/100',
     skills: 'Accessible UI, High Contrast, Inclusive Heuristics, EXP +600',
     ctaText: '📖 ส่องเคสสตัดดี้ MediCare ➔',
-    x: 350,
-    y: 240
+    x: 290,
+    y: 260
   },
   {
     index: 4,
@@ -1306,8 +1306,8 @@ const gameStages = [
     result: 'ลดเวลาตัดสินใจพาหนะ -70% • แอปใช้งานจริงบน Vercel พร้อม Leaflet GPS และเสียงพากย์ไทย',
     skills: 'Leaflet GPS, Real-time PWA, Front-End Code, EXP +800',
     ctaText: '🚀 เปิดแอป LocalRoute (Live Vercel) ➔',
-    x: 650,
-    y: 190
+    x: 720,
+    y: 195
   },
   {
     index: 5,
@@ -1320,7 +1320,7 @@ const gameStages = [
     skills: 'Design System Architecture, B2B SaaS, Front-End Dev, EXP MAX',
     ctaText: '🏢 ดูประวัติ Security Pitch ➔',
     x: 500,
-    y: 70
+    y: 85
   }
 ];
 
@@ -1375,6 +1375,13 @@ function selectGameStage(idx) {
 
   if (btnPrev) btnPrev.disabled = (idx === 0);
   if (btnNext) btnNext.disabled = (idx === gameStages.length - 1);
+
+
+  // Update stageJump dots (1-6)
+  for (let i = 0; i < gameStages.length; i++) {
+    const dot = document.getElementById(`stageJump${i}`);
+    if (dot) dot.classList.toggle('active', i === idx);
+  }
 
   // 4. Ensure bottom-left floating chibi is kept hidden in map mode
   const companion = document.getElementById('chibiCompanion');
